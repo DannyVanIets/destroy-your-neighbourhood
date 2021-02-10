@@ -17,12 +17,16 @@ document.body.appendChild(renderer.domElement);
 
 // Create a house model.
 const basegeometry = new THREE.CylinderGeometry(0.3, 0.5, 10, 50);
-const basematerial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+const basematerial = new THREE.MeshBasicMaterial({ color: 0x9c9c9c });
 const basecylinder = new THREE.Mesh(basegeometry, basematerial);
 scene.add(basecylinder);
 
 const headgeometry = new THREE.CylinderGeometry(1, 0.4, 0.6, 50);
-const headmaterial = new THREE.MeshBasicMaterial({ color: 0xff230a });
+const headmaterial = new THREE.MeshBasicMaterial({
+  color: 0x9f978d,
+  transparent: true,
+  opacity: 0.7,
+});
 const headcylinder = new THREE.Mesh(headgeometry, headmaterial);
 scene.add(headcylinder);
 
