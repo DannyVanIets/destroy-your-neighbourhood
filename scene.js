@@ -35,7 +35,20 @@ scene.add(topcylinder);
 
 topcylinder.position.y = 5.4;
 
-console.log(headcylinder.geometry.parameters);
+const treetrunkgeometry = new THREE.CylinderGeometry(0.5, 1, 10, 50);
+const treetrunkmaterial = new THREE.MeshBasicMaterial({ color: 0x00a100 });
+const treetrunkcylinder = new THREE.Mesh(treetrunkgeometry, treetrunkmaterial);
+scene.add(treetrunkcylinder);
+
+treetrunkcylinder.position.x = 5;
+
+const treetopgeometry = new THREE.ConeGeometry(3.5, 10, 10);
+const treetopmaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+const treetopcone = new THREE.Mesh(treetopgeometry, treetopmaterial);
+scene.add(treetopcone);
+
+treetopcone.position.x = 5;
+treetopcone.position.y = 5;
 
 // Move camera from center
 camera.position.x = 2; // Move right from center of scene
