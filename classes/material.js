@@ -8,7 +8,7 @@ class Material {
 
     create(){
         // Only used for testing.
-        // Every geometry does need to get at least a color!
+        // Every geometry does need to get at least a color and a texture!
         return new THREE.MeshNormalMaterial({});
     }
 
