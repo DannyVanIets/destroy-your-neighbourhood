@@ -23,6 +23,23 @@ var material = new THREE.MeshNormalMaterial();
 var house1 = new THREE.Mesh(geometry, material);
 scene.add(house1);
 
+//Skybox
+var directions  = ["right.bmp", "left.bmp", "top.bmp", "bottom.bmp", "front.bmp", "back.bmp"];
+var materialArray = [];
+for (var i = 0; i < 6; i++)
+{
+    materialArray.push(
+        new THREE.MeshBasicMaterial({
+            map: THREE.ImageUtils.loadTexture(`./assets/skybox/${directions[i]}`), 
+            side: THREE.BackSide})
+    );
+}
+    
+var skyGeometry = new THREE.CubeGeometry(5000, 5000, 5000);    
+var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
+var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+scene.add(skyBox);
+
 // Move camera from center
 camera.position.x = 2;  // Move right from center of scene
 camera.position.y = 1;  // Move up from center of scene
