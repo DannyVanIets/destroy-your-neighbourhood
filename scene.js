@@ -19,17 +19,7 @@ var grassTexture = "./textures/grass-texture.jpg";
 var doorTexture = "./textures/door-texture.png";
 var roadTexture = "./textures/road-texture.jpeg";
 
-// Floor.
-/*var floor = new Plane().createMash(1000, 1000, 10, grassTexture);
-scene.add(floor);
-floor.rotation.x = Math.PI / 2;
-floor.position.y = -5;
-
-// Road.
-var road = new Box().createMash(600, 1, 35, roadTexture,true);
-scene.add(road);
-road.position.y = -5.4;*/
-// Add the road and a floor.
+// Add a floor and a road.
 new Floors(grassTexture, roadTexture).addFloors(scene);
 
 // Create houses.
