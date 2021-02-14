@@ -14,69 +14,51 @@ var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-//Floor model.
+// Textures
+var grassTexture = "./textures/grass-texture.jpg";
+var doorTexture = "./textures/door-texture.png";
+var roadTexture = "./textures/road-texture.jpeg";
 
+// Floor.
+var floor = new Plane().createMash(1000, 1000, 10, grassTexture);
+scene.add(floor);
+floor.rotation.x = Math.PI / 2;
+floor.position.y = -5;
 
-// Create a square model.
-var box1Geometry = new THREE.BoxGeometry(8.35, 10, 5); // width, height and depth.
-var material = new THREE.MeshNormalMaterial();
-var box1 = new THREE.Mesh(box1Geometry, material);
+// Road.
+var road = new Box().createMash(600, 1, 35, roadTexture,true);
+scene.add(road);
+road.position.y = -5.4;
 
-// Create a cylinder model, for on top of the square.
-const radius =  5.0;
-const height = 10.0;
-const radialSegments =  4;
-const heightSegments =  1;
-const openEnded = false;
-const thetaStart = Math.PI * 0.325;
-const thetaLength = Math.PI * 1.35;
-const roof1 = new THREE.CylinderGeometry(
-    radius, radius, height,
-    radialSegments, heightSegments,
-    openEnded,
-    thetaStart, thetaLength);
+// Glass to house.
+var glass = new Box().createMash(5, 5, 1, false, false, 0xffffff, true);
+scene.add(glass);
+glass.position.set(-30, 0, -20.4); //x, y, z
 
-//Combine them both into a house.
-box1.updateMatrix();
-roof1.merge(box1.geometry, box1.matrix);
-var house1 = new THREE.Mesh(roof1, material);
-house1.rotation.x = Math.PI / 2;
-scene.add(house1);
-house1.position.set(20, 0, -20); //x, y, z
+// Door.
+var door = new Box().createMash(5, 10, 1, doorTexture);
+scene.add(door);
+door.position.set(-20, 0, -20.4); //x, y, z
 
-// Create square2 once model.
-var box2Width = 17.25;
-var box2Height = 10;
-var box2Depth = 10;
-var box2Geometry = new THREE.BoxGeometry(box2Width, box2Height, box2Depth); // width, height and depth.
-var box2 = new THREE.Mesh(box2Geometry, material);
+// Create a square model for a house and place it.
+var house1Square = new Box().createMash(17.25, 10, 10);
+scene.add(house1Square);
+var positionHouse1 = -25;
+house1Square.position.x = positionHouse1;
+house1Square.position.z = positionHouse1;
 
-// Place the square2 somewhere.
-scene.add(box2);
-var positionBox2 = -25;
-box2.position.x = positionBox2;
-box2.position.z = positionBox2;
+// Create a cylinder model.
+var roof = new Cylinder().createMash(8.63, 8.63, 10, 5, 1, false, Math.PI * 1, Math.PI * 1);
 
-// Create a cilinder2 model.
-const radius2 =  8.63;
-const radialSegments2 =  5;
-const thetaStart2 = Math.PI * 1;
-const thetaLength2 = Math.PI * 1;
-const Cylinder2Geometry = new THREE.CylinderGeometry(
-    radius2, radius2, height,
-    radialSegments2, heightSegments,
-    openEnded, thetaStart2, thetaStart2);
-var roof2 = new THREE.Mesh(Cylinder2Geometry, material);
+// Rotate the cylinder, so that it can be placed above a house.
+roof.rotation.x = Math.PI / 2;
+roof.rotation.y = Math.PI / 0.6666;
 
-// Rotate the cilinder, so that it can be placed above a box.
-roof2.rotation.x = Math.PI / 2;
-roof2.rotation.y = Math.PI / 0.6666;
-
-// Place the roof2 above the previous box.
-scene.add(roof2);
-roof2.position.x = positionBox2;
-roof2.position.y = box2Height / 2;
-roof2.position.z = positionBox2;
+// Place the roof above house1.
+scene.add(roof);
+roof.position.x = positionHouse1;
+roof.position.y = 10 / 2;
+roof.position.z = positionHouse1;
 
 // Move camera from center
 camera.position.x = 1;  // Move right from center of scene
@@ -89,9 +71,7 @@ controls = new THREE.OrbitControls(camera);
 
 var render = function() {
     requestAnimationFrame(render);
-
     controls.update();
-
     renderer.render(scene, camera);
 };
 
