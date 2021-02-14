@@ -45,15 +45,16 @@ function GenerateTree(
   radius,
   height,
   radialsegments,
-  color,
   amount,
   yoffset = 0,
   xoffset = 0,
-  radiusoffset = 0
+  radiusoffset = 0,
+  treetrunkcolor = 0x2c3125,
+  treetopcolor = 0x788a36,
 ) {
   //Tree model
   const treetrunkgeometry = new THREE.CylinderGeometry(0.3, 1, 10, 50);
-  const treetrunkmaterial = new THREE.MeshBasicMaterial({ color: 0x00a100 });
+  const treetrunkmaterial = new THREE.MeshBasicMaterial({ color: treetrunkcolor });
   const treetrunkcylinder = new THREE.Mesh(
     treetrunkgeometry,
     treetrunkmaterial
@@ -69,7 +70,7 @@ function GenerateTree(
       radialsegments
     );
 
-    const treetopmaterial = new THREE.MeshBasicMaterial({ color: color });
+    const treetopmaterial = new THREE.MeshBasicMaterial({ color: treetopcolor });
     const treetopcone = new THREE.Mesh(treetopgeometry, treetopmaterial);
     scene.add(treetopcone);
 
@@ -84,8 +85,8 @@ function GenerateTree(
   }
 }
 
-GenerateTree(5, 5, 3.5, 10, 10, 0x000000, 4, 1.5, 0, -0.6);
-GenerateTree(15, 5, 3.5, 10, 10, 0x000000, 4, 0.5, 0, -0.6);
+GenerateTree(5, 5, 3.5, 10, 10, 4, 1.5, 0, -0.6);
+GenerateTree(15, 5, 3.5, 10, 10, 4, 0.5, 0, -0.6);
 
 // Move camera from center
 camera.position.x = 2; // Move right from center of scene
