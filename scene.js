@@ -1,16 +1,17 @@
 // Create scene
-var scene = new THREE.Scene();
+let scene = new THREE.Scene();
 
 // Create camera
-var camera = new THREE.PerspectiveCamera(
-    75,     // fov - Camera frustum vertical field of view
-    window.innerWidth / window.innerHeight, // aspect - Camera frustum aspect ratio
-    0.1,   // near - Camera frustum near plane
-    5000); // far - Camera frustum far plane
+let camera = new THREE.PerspectiveCamera(
+  75, // fov - Camera frustum vertical field of view
+  window.innerWidth / window.innerHeight, // aspect - Camera frustum aspect ratio
+  0.1, // near - Camera frustum near plane
+  5000
+); // far - Camera frustum far plane
 // If the skybox gets added, change the far "1000" to "4000".
 
 // Create renderer
-var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -18,43 +19,50 @@ document.body.appendChild(renderer.domElement);
 const houseWidth = 2;
 const houseHeight = 2;
 const houseDepth = 2;
-var geometry = new THREE.BoxGeometry(houseWidth, houseHeight, houseDepth);
-var material = new THREE.MeshNormalMaterial();
-var house1 = new THREE.Mesh(geometry, material);
+let geometry = new THREE.BoxGeometry(houseWidth, houseHeight, houseDepth);
+let material = new THREE.MeshNormalMaterial();
+let house1 = new THREE.Mesh(geometry, material);
 scene.add(house1);
 
 //Skybox
-var directions  = ["right.bmp", "left.bmp", "top.bmp", "bottom.bmp", "front.bmp", "back.bmp"];
-var materialArray = [];
-for (var i = 0; i < 6; i++)
-{
-    materialArray.push(
-        new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture(`./assets/skybox/${directions[i]}`), 
-            side: THREE.BackSide})
-    );
+let directions = [
+  "right.bmp",
+  "left.bmp",
+  "top.bmp",
+  "bottom.bmp",
+  "front.bmp",
+  "back.bmp",
+];
+
+let materialArray = [];
+for (let i = 0; i < 6; i++) {
+  materialArray.push(
+    new THREE.MeshBasicMaterial({
+      map: new THREE.TextureLoader().load(`./assets/skybox/${directions[i]}`),
+      side: THREE.BackSide,
+    })
+  );
 }
-    
-var skyGeometry = new THREE.CubeGeometry(5000, 5000, 5000);    
-var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
-var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+
+let skyGeometry = new THREE.CubeGeometry(5000, 5000, 5000);
+let skyBox = new THREE.Mesh(skyGeometry, materialArray);
 scene.add(skyBox);
 
 // Move camera from center
-camera.position.x = 2;  // Move right from center of scene
-camera.position.y = 1;  // Move up from center of scene
-camera.position.z = 5;  // Move camera away from center of scene
+camera.position.x = 2; // Move right from center of scene
+camera.position.y = 1; // Move up from center of scene
+camera.position.z = 5; // Move camera away from center of scene
 
 // Import camera control and rotation library
 // Also update index.html for loading the orbit controls
-controls = new THREE.OrbitControls(camera);
+let controls = new THREE.OrbitControls(camera);
 
-var render = function() {
-    requestAnimationFrame(render);
+let render = function () {
+  requestAnimationFrame(render);
 
-    controls.update();
+  controls.update();
 
-    renderer.render(scene, camera);
+  renderer.render(scene, camera);
 };
 
 render();
