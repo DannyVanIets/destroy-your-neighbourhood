@@ -15,7 +15,7 @@ var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Create a house model.
+// Create lamppost model.
 const basegeometry = new THREE.CylinderGeometry(0.3, 0.5, 10, 50);
 const basematerial = new THREE.MeshBasicMaterial({ color: 0x9c9c9c });
 const basecylinder = new THREE.Mesh(basegeometry, basematerial);
@@ -39,20 +39,53 @@ scene.add(topcylinder);
 
 topcylinder.position.y = 5.4;
 
-const treetrunkgeometry = new THREE.CylinderGeometry(0.5, 1, 10, 50);
-const treetrunkmaterial = new THREE.MeshBasicMaterial({ color: 0x00a100 });
-const treetrunkcylinder = new THREE.Mesh(treetrunkgeometry, treetrunkmaterial);
-scene.add(treetrunkcylinder);
+function GenerateTree(
+  x,
+  y,
+  radius,
+  height,
+  radialsegments,
+  color,
+  amount,
+  yoffset = 0,
+  xoffset = 0,
+  radiusoffset = 0
+) {
+  //Tree model
+  const treetrunkgeometry = new THREE.CylinderGeometry(0.3, 1, 10, 50);
+  const treetrunkmaterial = new THREE.MeshBasicMaterial({ color: 0x00a100 });
+  const treetrunkcylinder = new THREE.Mesh(
+    treetrunkgeometry,
+    treetrunkmaterial
+  );
+  scene.add(treetrunkcylinder);
 
-treetrunkcylinder.position.x = 5;
+  treetrunkcylinder.position.x = x;
 
-const treetopgeometry = new THREE.ConeGeometry(3.5, 10, 10);
-const treetopmaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-const treetopcone = new THREE.Mesh(treetopgeometry, treetopmaterial);
-scene.add(treetopcone);
+  for (let i = 0; i < amount; i++) {
+    const treetopgeometry = new THREE.ConeGeometry(
+      radius,
+      height,
+      radialsegments
+    );
 
-treetopcone.position.x = 5;
-treetopcone.position.y = 5;
+    const treetopmaterial = new THREE.MeshBasicMaterial({ color: color });
+    const treetopcone = new THREE.Mesh(treetopgeometry, treetopmaterial);
+    scene.add(treetopcone);
+
+    treetopcone.position.x = x;
+    treetopcone.position.y = y;
+
+    x += xoffset;
+    y += yoffset;
+    radius += radiusoffset;
+
+    height -= yoffset;
+  }
+}
+
+GenerateTree(5, 5, 3.5, 10, 10, 0x000000, 4, 1.5, 0, -0.6);
+GenerateTree(15, 5, 3.5, 10, 10, 0x000000, 4, 0.5, 0, -0.6);
 
 // Move camera from center
 camera.position.x = 2; // Move right from center of scene
