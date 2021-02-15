@@ -7,7 +7,7 @@ class Box {
         return new THREE.BoxGeometry(height, width, depth); // width, height and depth.
     }
 
-    createMash(height, width, depth, url = false, wrapping = false, color, transparent = false){
+    createMesh(height, width, depth, url = false, wrapping = false, color, transparent = false){
         var geometry = this.createGeometry(height, width, depth);
         if(color){
             var material = new Material().createWithColor(color, transparent);

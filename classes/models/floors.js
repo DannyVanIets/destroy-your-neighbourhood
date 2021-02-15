@@ -13,7 +13,7 @@ class Floors {
             var f = this.floors[i];
 
             // Add a floor.
-            var floor = new Box().createMash(f.height, f.width, f.depth, f.texture, f.wrapping);
+            var floor = new Box().createMesh(f.height, f.width, f.depth, f.texture, f.wrapping);
             scene.add(floor);
             floor.position.set(f.positionX, f.positionY, f.positionZ); // x, y, z.
         }
