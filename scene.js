@@ -15,14 +15,16 @@ let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Create a house model.
-const houseWidth = 2;
-const houseHeight = 2;
-const houseDepth = 2;
-let geometry = new THREE.BoxGeometry(houseWidth, houseHeight, houseDepth);
-let material = new THREE.MeshNormalMaterial();
-let house1 = new THREE.Mesh(geometry, material);
-scene.add(house1);
+// Textures
+var grassTexture = "./textures/grass-texture.jpg";
+var doorTexture = "./textures/door-texture.png";
+var roadTexture = "./textures/road-texture.jpeg";
+
+// Add a floor and a road.
+new Floors(grassTexture, roadTexture).addFloors(scene);
+
+// Create houses.
+new Houses("not working", doorTexture, "right now").addHouses(scene);
 
 //Skybox
 let directions = [
@@ -49,20 +51,18 @@ let skyBox = new THREE.Mesh(skyGeometry, materialArray);
 scene.add(skyBox);
 
 // Move camera from center
-camera.position.x = 2; // Move right from center of scene
-camera.position.y = 1; // Move up from center of scene
-camera.position.z = 5; // Move camera away from center of scene
+camera.position.x = 1;  // Move right from center of scene
+camera.position.y = 1;  // Move up from center of scene
+camera.position.z = 15;  // Move camera away from center of scene
 
 // Import camera control and rotation library
 // Also update index.html for loading the orbit controls
 let controls = new THREE.OrbitControls(camera);
 
-let render = function () {
-  requestAnimationFrame(render);
-
-  controls.update();
-
-  renderer.render(scene, camera);
+var render = function() {
+    requestAnimationFrame(render);
+    controls.update();
+    renderer.render(scene, camera);
 };
 
 render();
