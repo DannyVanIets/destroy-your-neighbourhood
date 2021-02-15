@@ -36,7 +36,7 @@ camera.position.z = 15; // Move camera away from center of scene
 
 // Import camera control and rotation library
 // Also update index.html for loading the orbit controls
-let controls = new THREE.OrbitControls(camera);
+let controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 var render = function () {
   requestAnimationFrame(render);
