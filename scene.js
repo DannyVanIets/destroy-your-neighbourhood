@@ -1,8 +1,8 @@
 // Create scene
-var scene = new THREE.Scene();
+let scene = new THREE.Scene();
 
 // Create camera
-var camera = new THREE.PerspectiveCamera(
+let camera = new THREE.PerspectiveCamera(
   75, // fov - Camera frustum vertical field of view
   window.innerWidth / window.innerHeight, // aspect - Camera frustum aspect ratio
   0.1, // near - Camera frustum near plane
@@ -11,7 +11,7 @@ var camera = new THREE.PerspectiveCamera(
 // If the skybox gets added, change the far "1000" to "4000".
 
 // Create renderer
-var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -88,20 +88,32 @@ function GenerateTree(
 GenerateTree(5, 5, 3.5, 10, 10, 4, 1.5, 0, -0.6);
 GenerateTree(15, 5, 3.5, 10, 10, 4, 0.5, 0, -0.6);
 
+// Textures
+var grassTexture = "./textures/grass-texture.jpg";
+var doorTexture = "./textures/door-texture.png";
+var roadTexture = "./textures/road-texture.jpeg";
+
+// Add a floor and a road.
+new Floors(grassTexture, roadTexture).addFloors(scene);
+
+// Create houses.
+new Houses("not working", doorTexture, "right now").addHouses(scene);
+
+//Skybox
+new Skybox().addSkybox(scene);
+
 // Move camera from center
-camera.position.x = 2; // Move right from center of scene
+camera.position.x = 1; // Move right from center of scene
 camera.position.y = 1; // Move up from center of scene
-camera.position.z = 5; // Move camera away from center of scene
+camera.position.z = 15; // Move camera away from center of scene
 
 // Import camera control and rotation library
 // Also update index.html for loading the orbit controls
-controls = new THREE.OrbitControls(camera);
+let controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 var render = function () {
   requestAnimationFrame(render);
-
   controls.update();
-
   renderer.render(scene, camera);
 };
 
