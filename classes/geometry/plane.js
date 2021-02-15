@@ -3,12 +3,12 @@ class Plane {
 
     }
 
-    createGeometry(height, width, depth){
-        return new THREE.PlaneGeometry(height, width, depth); // width, height and depth.
+    createGeometry(width, height, depth){
+        return new THREE.PlaneGeometry(width, height, depth); // width, height and depth.
     }
 
-    createMesh(height, width, depth, url, wrapping = false, color, transparent = false) {
-        var geometry = this.createGeometry(height, width, depth);
+    createMesh(width, height, depth, url, wrapping = false, color, transparent = false) {
+        var geometry = this.createGeometry(width, height, depth);
         if (color) {
             var material = new Material().createWithColor(color, transparent);
         } else if (url) {
