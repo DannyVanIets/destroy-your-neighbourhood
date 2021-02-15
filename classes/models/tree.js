@@ -1,0 +1,9 @@
+class Tree{
+    constructor() {
+        
+    }
+
+    addTree(){
+        
+    }
+}

@@ -18,7 +18,7 @@ document.body.appendChild(renderer.domElement);
 // Create lamppost model.
 let lamppost = new Lamppost(scene);
 
-lamppost.addLamppost();
+lamppost.addLamppost(null, null, -20);
 
 function GenerateTree(
   x,
