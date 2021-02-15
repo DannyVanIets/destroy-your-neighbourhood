@@ -3,12 +3,8 @@ class Box {
 
     }
 
-    createGeometry(width, height, depth){
-        return new THREE.BoxGeometry(width, height, depth); // width, height and depth.
-    }
-
     createMesh(width, height, depth, url = false, wrapping = false, color, transparent = false){
-        var geometry = this.createGeometry(width, height, depth);
+        var geometry = new THREE.BoxGeometry(width, height, depth); // width, height and depth.
         if(color){
             var material = new Material().createWithColor(color, transparent);
         } else if(url) {

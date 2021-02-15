@@ -6,7 +6,7 @@ class Houses {
             { width: 17.25, height: 10, depth: 10, texture: null, positionX: -25, positionY: 0, positionZ: -25,
                 window: { width: 5, height: 5, depth: 1, texture: false, wrapping: false, color: 0xffffff, transparent: true, positionX: -30, positionY: 0, positionZ: -20.4},
                 door: { width: 5, height: 10, depth: 1, texture: doorTexture, wrapping: false, color: false, transparent: false, positionX: -20, positionY: 0, positionZ: -20.4},
-                roof: { width: 8.63, height: 8.63, depth: 10, radicalSegments: 5, heightSegments: 1, openEnded: false, thetaStart: Math.PI * 1, thetaLength: Math.PI * 1, texture: null, wrapping: false, color: false, transparent: false, positionX: -25, positionY: 5, positionZ: -25 }
+                roof: { width: 8.63, height: 8.63, depth: 10, radialSegments: 5, heightSegments: 1, openEnded: false, thetaStart: Math.PI * 1, thetaLength: Math.PI * 1, texture: null, wrapping: false, color: false, transparent: false, positionX: -25, positionY: 5, positionZ: -25 }
             }
         ]
     }
@@ -41,7 +41,7 @@ class Houses {
 
             // Add a roof.
             if(r){
-                var roof = new Cylinder().createMesh(r.width, r.height, r.depth, r.radicalSegments, r.heightSegments, r.openEnded, r.thetaStart, r.thetaLength, r.texture, r.wrapping, r.color, r.transparent);
+                var roof = new Cylinder().createMesh(r.width, r.height, r.depth, r.radialSegments, r.heightSegments, r.openEnded, r.thetaStart, r.thetaLength, r.texture, r.wrapping, r.color, r.transparent);
                 scene.add(roof);
                 // TODO: calculate where the positions should be, instead of hardcoding it.
                 roof.position.set(r.positionX, r.positionY, r.positionZ); // x, y, z.
