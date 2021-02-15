@@ -3,19 +3,19 @@ class Cylinder {
 
     }
 
-    createGeometry(height, width, depth){
-        return new THREE.CylinderGeometry(height, width, depth); // width, height and depth.
+    createGeometry(width, height, depth){
+        return new THREE.CylinderGeometry(width, height, depth); // width, height and depth.
     }
 
-    createGeometryTheta(height, width, depth, radicalSegments, heightSegments, openEnded, thetaStart, thetaLength){
-        return new THREE.CylinderGeometry(height, width, depth, radicalSegments, heightSegments, openEnded, thetaStart, thetaLength);
+    createGeometryTheta(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength){
+        return new THREE.CylinderGeometry(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength);
     }
 
-    createMesh(height, width, depth, radicalSegments = false, heightSegments, openEnded, thetaStart, thetaLength, url, wrapping = false, color, transparent = false){
-        if(!radicalSegments){
-            var geometry = this.createGeometry(height, width, depth);
+    createMesh(width, height, depth, radialSegments = false, heightSegments, openEnded, thetaStart, thetaLength, url, wrapping = false, color, transparent = false){
+        if(!radialSegments){
+            var geometry = this.createGeometry(width, height, depth);
         } else {
-            var geometry = this.createGeometryTheta(height, width, depth, radicalSegments, heightSegments, openEnded, thetaStart, thetaLength)
+            var geometry = this.createGeometryTheta(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength)
         }
         if(color){
             var material = new Material().createWithColor(color, transparent);
