@@ -43,6 +43,7 @@ class Houses {
             if(r){
                 var roof = new Cylinder().createMesh(r.width, r.height, r.depth, r.radicalSegments, r.heightSegments, r.openEnded, r.thetaStart, r.thetaLength, r.texture, r.wrapping, r.color, r.transparent);
                 scene.add(roof);
+                // TODO: calculate where the positions should be, instead of hardcoding it.
                 roof.position.set(r.positionX, r.positionY, r.positionZ); // x, y, z.
 
                 // Rotate the cylinder, so that it can be placed above a house.
