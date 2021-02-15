@@ -11,7 +11,7 @@ class Cylinder {
         return new THREE.CylinderGeometry(height, width, depth, radicalSegments, heightSegments, openEnded, thetaStart, thetaLength);
     }
 
-    createMash(height, width, depth, radicalSegments = false, heightSegments, openEnded, thetaStart, thetaLength, url, wrapping = false, color, transparent = false){
+    createMesh(height, width, depth, radicalSegments = false, heightSegments, openEnded, thetaStart, thetaLength, url, wrapping = false, color, transparent = false){
         if(!radicalSegments){
             var geometry = this.createGeometry(height, width, depth);
         } else {

@@ -21,27 +21,27 @@ class Houses {
             var r = this.houses[i].roof;
 
             // Add a box for the house.
-            var house = new Box().createMash(h.height, h.width, h.depth, h.texture);
+            var house = new Box().createMesh(h.height, h.width, h.depth, h.texture);
             scene.add(house);
             house.position.set(h.positionX, h.positionY, h.positionZ); // x, y, z.
 
             // Add a window if that's declared.
             if(w){
-                var window = new Box().createMash(w.height, w.width, w.depth, w.texture, w.wrapping, w.color, w.transparent);
+                var window = new Box().createMesh(w.height, w.width, w.depth, w.texture, w.wrapping, w.color, w.transparent);
                 scene.add(window);
                 window.position.set(w.positionX, w.positionY, w.positionZ); // x, y, z.
             }
 
             // Add a door.
             if(d){
-                var door = new Box().createMash(d.height, d.width, d.depth, d.texture, d.wrapping, d.color, d.transparent);
+                var door = new Box().createMesh(d.height, d.width, d.depth, d.texture, d.wrapping, d.color, d.transparent);
                 scene.add(door);
                 door.position.set(d.positionX, d.positionY, d.positionZ); // x, y, z.
             }
 
             // Add a roof.
             if(r){
-                var roof = new Cylinder().createMash(r.height, r.width, r.depth, r.radicalSegments, r.heightSegments, r.openEnded, r.thetaStart, r.thetaLength, r.texture, r.wrapping, r.color, r.transparent);
+                var roof = new Cylinder().createMesh(r.height, r.width, r.depth, r.radicalSegments, r.heightSegments, r.openEnded, r.thetaStart, r.thetaLength, r.texture, r.wrapping, r.color, r.transparent);
                 scene.add(roof);
                 roof.position.set(r.positionX, r.positionY, r.positionZ); // x, y, z.
 
