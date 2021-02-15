@@ -1,14 +1,39 @@
 class Lamppost {
-  constructor(
-    scene,
-    baseoptions = undefined,
-    headoptions = undefined,
-    topoptions = undefined
-  ) {
-    this.scene = scene;
+  //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
+  #scene;
+  #headcylinder;
+
+  /**
+   * Creates an instance of Lamppost.
+   * @param {*} scene
+   * @param {Object} [baseoptions]
+   * @param {number} [baseoptions.color]
+   * @param {number} [baseoptions.radiustop]
+   * @param {number} [baseoptions.radiusbottom]
+   * @param {number} [baseoptions.height]
+   * @param {number} [baseoptions.radialsegments]
+   * @param {Object} [headoptions]
+   * @param {number} [headoptions.color]
+   * @param {boolean} [headoptions.transparent]
+   * @param {number} [headoptions.opacity]
+   * @param {number} [headoptions.radiustop]
+   * @param {number} [headoptions.radiusbottom]
+   * @param {number} [headoptions.height]
+   * @param {number} [headoptions.radialsegments]
+   * @param {Object} [topoptions]
+   * @param {number} [topoptions.color]
+   * @param {number} [topoptions.radiustop]
+   * @param {number} [topoptions.radiusbottom]
+   * @param {number} [topoptions.height]
+   * @param {number} [topoptions.radialsegments]
+   * @memberof Lamppost
+   */
+  constructor(scene, baseoptions, headoptions, topoptions) {
+    this.#scene = scene;
 
     this.baseoptions = {
       color: 0x9c9c9c,
+
       radiustop: 0.3,
       radiusbottom: 0.5,
       height: 10,
@@ -17,6 +42,9 @@ class Lamppost {
 
     this.headoptions = {
       color: 0x9f978d,
+      transparent: true,
+      opacity: 0.7,
+
       radiustop: 1,
       radiusbottom: 0.4,
       height: 0.6,
@@ -25,6 +53,7 @@ class Lamppost {
 
     this.topoptions = {
       color: 0x000000,
+
       radiustop: 0.8,
       radiusbottom: 1,
       height: 0.2,
@@ -36,86 +65,110 @@ class Lamppost {
     this.topoptions = { ...this.topoptions, ...topoptions };
   }
 
-  //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
-  #headcylinder;
-
-  addLamppost(x = 0, y = 0, z = 0) {
+  /**
+   * Function to add another lamppost to the scene.
+   * @param {number} x
+   * @param {number} y
+   * @param {number} z
+   * @memberof Lamppost
+   */
+  addLamppost(x, y, z) {
     this.#createBase(x, y, z);
     this.#createHead(x, y, z);
-    this.#createTop(x, y, z);
+    this.#createTop(x, z);
   }
 
   //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
+  /**
+   * Function to create and add the base of the lamppost to the scene.
+   * @param {number} x
+   * @param {number} y
+   * @param {number} z
+   * @memberof Lamppost
+   */
   #createBase = (x, y, z) => {
     const options = this.baseoptions;
 
-    const basegeometry = new THREE.CylinderGeometry(
+    const geometry = new THREE.CylinderGeometry(
       options.radiustop,
       options.radiusbottom,
       options.height,
       options.radialsegments
     );
 
-    const basematerial = new Material().createWithColor(options.color);
-    const basecylinder = new THREE.Mesh(basegeometry, basematerial);
+    const material = new Material().createWithColor(options.color);
+    const cylinder = new THREE.Mesh(geometry, material);
 
-    this.scene.add(basecylinder);
+    this.#scene.add(cylinder);
 
-    basecylinder.position.x = x;
-    basecylinder.position.y = y;
-    basecylinder.position.z = z;
+    cylinder.position.set(x, y, z);
   };
 
   //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
+  /**
+   * Function to create and add the head of the lamppost to the scene.
+   * @param {number} x
+   * @param {number} y
+   * @param {number} z
+   * @memberof Lamppost
+   */
   #createHead = (x, y, z) => {
     const options = this.headoptions;
 
-    const headgeometry = new THREE.CylinderGeometry(
+    const geometry = new THREE.CylinderGeometry(
       options.radiustop,
       options.radiusbottom,
       options.height,
       options.radialsegments
     );
 
-    const headmaterial = new THREE.MeshBasicMaterial({
+    const material = new THREE.MeshBasicMaterial({
       color: options.color,
-      transparent: true,
-      opacity: 0.7,
+      transparent: options.transparent,
+      opacity: options.opacity,
     });
 
-    this.#headcylinder = new THREE.Mesh(headgeometry, headmaterial);
+    this.#headcylinder = new THREE.Mesh(geometry, material);
 
-    this.scene.add(this.#headcylinder);
+    this.#scene.add(this.#headcylinder);
+
+    this.#headcylinder.position.x = x;
 
     this.#headcylinder.position.y =
       y + this.baseoptions.height / 2 + options.height / 2;
 
-    this.#headcylinder.position.x = x;
     this.#headcylinder.position.z = z;
   };
 
   //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
-  #createTop = (x, y, z) => {
+  /**
+   * Function to create and add the top of the lamppost to the scene.
+   * @param {number} x
+   * @param {number} z
+   * @memberof Lamppost
+   */
+  #createTop = (x, z) => {
     const options = this.topoptions;
 
-    const topgeometry = new THREE.CylinderGeometry(
+    const geometry = new THREE.CylinderGeometry(
       options.radiustop,
       options.radiusbottom,
       options.height,
       options.radialsegments
     );
 
-    const topmaterial = new THREE.MeshBasicMaterial({ color: options.color });
-    const topcylinder = new THREE.Mesh(topgeometry, topmaterial);
+    const material = new Material().createWithColor(options.color);
+    const cylinder = new THREE.Mesh(geometry, material);
 
-    this.scene.add(topcylinder);
+    this.#scene.add(cylinder);
 
-    topcylinder.position.y =
+    cylinder.position.x = x;
+
+    cylinder.position.y =
       this.#headcylinder.position.y +
       this.headoptions.height / 2 +
       options.height / 2;
 
-    topcylinder.position.x = x;
-    topcylinder.position.z = z;
+    cylinder.position.z = z;
   };
 }

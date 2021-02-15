@@ -15,77 +15,40 @@ let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Create lamppost model.
-let lamppost = new Lamppost(scene);
-
-lamppost.addLamppost(null, null, -20);
-
-function GenerateTree(
-  x,
-  y,
-  radius,
-  height,
-  radialsegments,
-  amount,
-  yoffset = 0,
-  xoffset = 0,
-  radiusoffset = 0,
-  treetrunkcolor = 0x2c3125,
-  treetopcolor = 0x788a36
-) {
-  //Tree model
-  const treetrunkgeometry = new THREE.CylinderGeometry(0.3, 1, 10, 50);
-  const treetrunkmaterial = new THREE.MeshBasicMaterial({
-    color: treetrunkcolor,
-  });
-  const treetrunkcylinder = new THREE.Mesh(
-    treetrunkgeometry,
-    treetrunkmaterial
-  );
-  scene.add(treetrunkcylinder);
-
-  treetrunkcylinder.position.x = x;
-
-  for (let i = 0; i < amount; i++) {
-    const treetopgeometry = new THREE.ConeGeometry(
-      radius,
-      height,
-      radialsegments
-    );
-
-    const treetopmaterial = new THREE.MeshBasicMaterial({
-      color: treetopcolor,
-    });
-    const treetopcone = new THREE.Mesh(treetopgeometry, treetopmaterial);
-    scene.add(treetopcone);
-
-    treetopcone.position.x = x;
-    treetopcone.position.y = y;
-
-    x += xoffset;
-    y += yoffset;
-    radius += radiusoffset;
-
-    height -= yoffset;
-  }
-}
-
-GenerateTree(5, 5, 3.5, 10, 10, 4, 1.5, 0, -0.6);
-GenerateTree(15, 5, 3.5, 10, 10, 4, 0.5, 0, -0.6);
-
 // Textures
 var grassTexture = "./textures/grass-texture.jpg";
 var doorTexture = "./textures/door-texture.png";
 var roadTexture = "./textures/road-texture.jpeg";
 
+// Skybox
+new Skybox().addSkybox(scene);
+
 // Add a floor and a road.
-new Floors(grassTexture, roadTexture).addFloors(scene);
+let floor = new Floors(grassTexture, roadTexture);
+floor.addFloors(scene);
 
 // Create houses.
 new Houses("not working", doorTexture, "right now").addHouses(scene);
 
-//Skybox
-new Skybox().addSkybox(scene);
+// Create lampposts
+let lamppost = new Lamppost(scene);
+let tree = new Tree(scene);
+
+for (let j = -1; j <= 1; j += 2) {
+  for (
+    let i = floor.floors[1].width / -2;
+    i <= floor.floors[1].width / 2;
+    i += 50
+  ) {
+    lamppost.addLamppost(i, 0, -20 * j);
+    tree.addTree(i + 25, 0, -20 * j);
+  }
+}
+
+// Create trees
+// let tree = new Tree(scene);
+
+tree.addTree(0, 0, 0);
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
