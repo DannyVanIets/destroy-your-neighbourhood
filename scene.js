@@ -16,28 +16,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Create lamppost model.
-const basegeometry = new THREE.CylinderGeometry(0.3, 0.5, 10, 50);
-const basematerial = new THREE.MeshBasicMaterial({ color: 0x9c9c9c });
-const basecylinder = new THREE.Mesh(basegeometry, basematerial);
-scene.add(basecylinder);
+let lamppost = new Lamppost(scene);
 
-const headgeometry = new THREE.CylinderGeometry(1, 0.4, 0.6, 50);
-const headmaterial = new THREE.MeshBasicMaterial({
-  color: 0x9f978d,
-  transparent: true,
-  opacity: 0.7,
-});
-const headcylinder = new THREE.Mesh(headgeometry, headmaterial);
-scene.add(headcylinder);
-
-headcylinder.position.y = 5;
-
-const topgeometry = new THREE.CylinderGeometry(0.8, 1, 0.2, 50);
-const topmaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-const topcylinder = new THREE.Mesh(topgeometry, topmaterial);
-scene.add(topcylinder);
-
-topcylinder.position.y = 5.4;
+lamppost.addLamppost();
 
 function GenerateTree(
   x,
@@ -50,11 +31,13 @@ function GenerateTree(
   xoffset = 0,
   radiusoffset = 0,
   treetrunkcolor = 0x2c3125,
-  treetopcolor = 0x788a36,
+  treetopcolor = 0x788a36
 ) {
   //Tree model
   const treetrunkgeometry = new THREE.CylinderGeometry(0.3, 1, 10, 50);
-  const treetrunkmaterial = new THREE.MeshBasicMaterial({ color: treetrunkcolor });
+  const treetrunkmaterial = new THREE.MeshBasicMaterial({
+    color: treetrunkcolor,
+  });
   const treetrunkcylinder = new THREE.Mesh(
     treetrunkgeometry,
     treetrunkmaterial
@@ -70,7 +53,9 @@ function GenerateTree(
       radialsegments
     );
 
-    const treetopmaterial = new THREE.MeshBasicMaterial({ color: treetopcolor });
+    const treetopmaterial = new THREE.MeshBasicMaterial({
+      color: treetopcolor,
+    });
     const treetopcone = new THREE.Mesh(treetopgeometry, treetopmaterial);
     scene.add(treetopcone);
 
