@@ -32,23 +32,12 @@ new Houses("not working", doorTexture, "right now").addHouses(scene);
 
 // Create lampposts
 let lamppost = new Lamppost(scene);
-let tree = new Tree(scene);
-
-for (let j = -1; j <= 1; j += 2) {
-  for (
-    let i = floor.floors[1].width / -2;
-    i <= floor.floors[1].width / 2;
-    i += 50
-  ) {
-    lamppost.addLamppost(i, 0, -20 * j);
-    tree.addTree(i + 25, 0, -20 * j);
-  }
-}
+lamppost.addLamppost(0, 0, -20);
 
 // Create trees
-// let tree = new Tree(scene);
+let tree = new Tree(scene);
 
-tree.addTree(0, 0, 0);
+tree.addTree(10, 0, -20);
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene

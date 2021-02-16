@@ -18,7 +18,6 @@ class Tree {
    * @param {number} [topoptions.radiusoffset]
    * @param {number} [topoptions.yoffset]
    * @param {number} [topoptions.amount]
-   * @memberof Tree
    */
   constructor(scene, trunkoptions, topoptions) {
     this.#scene = scene;
@@ -44,8 +43,8 @@ class Tree {
       amount: 3,
     };
 
-    this.trunkoptions = { ...this.trunkoptions, trunkoptions };
-    this.topoptions = { ...this.topoptions, topoptions };
+    this.trunkoptions = { ...this.trunkoptions, ...trunkoptions };
+    this.topoptions = { ...this.topoptions, ...topoptions };
   }
 
   /**
@@ -53,7 +52,6 @@ class Tree {
    * @param {number} x
    * @param {number} y
    * @param {number} z
-   * @memberof Tree
    */
   addTree(x, y, z) {
     this.#createTrunk(x, y, z);
@@ -74,7 +72,6 @@ class Tree {
    * @param {number} x
    * @param {number} y
    * @param {number} z
-   * @memberof Tree
    */
   #createTrunk = (x, y, z) => {
     const options = this.trunkoptions;
@@ -102,7 +99,6 @@ class Tree {
    * @param {number} z
    * @param {number} radius
    * @param {number} height
-   * @memberof Tree
    */
   #createTop = (x, y, z, radius, height) => {
     const options = this.topoptions;
@@ -122,7 +118,8 @@ class Tree {
     this.#scene.add(cone);
 
     cone.position.x = x;
-    cone.position.y = y + this.topoptions.height / 4;
+    cone.position.y =
+      y + this.trunkoptions.height / 2 - this.topoptions.height / 6;
     cone.position.z = z;
   };
 }
