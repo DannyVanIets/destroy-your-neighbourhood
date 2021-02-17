@@ -33,6 +33,7 @@ hemiLight.groundColor.setHSL(0.095, 1, 0.75);
 hemiLight.position.set(0, 50, 0);
 scene.add(hemiLight);
 
+// TODO: Dit kan weg wanneer we helemaal happy de peppie met het licht zijn
 const hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 10);
 scene.add(hemiLightHelper);
 
@@ -57,6 +58,7 @@ dirLight.shadow.camera.bottom = -d;
 dirLight.shadow.camera.far = 3500;
 dirLight.shadow.bias = -0.0001;
 
+// TODO: Dit kan weg wanneer we helemaal happy de peppie met het licht zijn
 const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 10);
 scene.add(dirLightHelper);
 
