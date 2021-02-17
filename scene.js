@@ -1,6 +1,9 @@
 // Create scene
 let scene = new THREE.Scene();
 
+// Create GLTF loader
+const loader = new THREE.GLTFLoader();
+
 // Create camera
 let camera = new THREE.PerspectiveCamera(
   75, // fov - Camera frustum vertical field of view
@@ -38,6 +41,17 @@ lamppost.addLamppost(0, 0, -20);
 let tree = new Tree(scene);
 
 tree.addTree(10, 0, -20);
+
+// Add car
+loader.load("./assets/models/scene.gltf", (gltf) => {
+  const car = gltf.scene.children[0];
+  scene.add(car);
+
+  car.position.y = -3.5;
+  car.rotation.x = -1.59;
+  car.rotation.z = 1.6;
+  car.position.z = 8;
+});
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
