@@ -14,4 +14,10 @@ class Box {
         }
         return new THREE.Mesh(geometry, material);
     }
+
+    createMeshWithTextureArray(width, height, depth, textures){
+        var geometry = new THREE.BoxGeometry(width, height, depth); // width, height and depth.
+        var materials = new Material().createWithTextures(textures);
+        return new THREE.Mesh(geometry, materials);
+    }
 }

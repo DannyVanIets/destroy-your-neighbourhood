@@ -39,4 +39,18 @@ class Material {
         }
         return material;
     }
+
+    createWithTextures(texturesArray, wrapping) {
+        var materials = [];
+        for(var i = 0; i < texturesArray.length; i++){
+            var texture = new THREE.TextureLoader().load(texturesArray[i]);
+            if (wrapping && i != 0) { // The first texture we load, is for the roof which does not need the texture wrapping.
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(wrapping[0].x, wrapping[0].y);
+            }
+            materials.push(new THREE.MeshBasicMaterial({map: texture}));
+        }
+        return materials;
+    }
 }

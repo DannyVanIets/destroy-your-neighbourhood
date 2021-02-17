@@ -3,24 +3,16 @@ class Cylinder {
 
     }
 
-    createGeometry(width, height, depth){
-        return new THREE.CylinderGeometry(width, height, depth); // width, height and depth.
-    }
-
-    createGeometryTheta(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength){
-        return new THREE.CylinderGeometry(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength);
-    }
-
-    createMesh(width, height, depth, radialSegments = false, heightSegments, openEnded, thetaStart, thetaLength, url, wrapping = false, color, transparent = false){
+    createMesh(width, height, depth, radialSegments = false, heightSegments, openEnded, thetaStart, thetaLength, textures, wrapping = false, color, transparent = false){
         if(!radialSegments){
-            var geometry = this.createGeometry(width, height, depth);
+            var geometry = new THREE.CylinderGeometry(width, height, depth); // width, height and depth.
         } else {
-            var geometry = this.createGeometryTheta(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength)
+            var geometry = new THREE.CylinderGeometry(width, height, depth, radialSegments, heightSegments, openEnded, thetaStart, thetaLength);
         }
         if(color){
             var material = new Material().createWithColor(color, transparent);
-        } else if(url) {
-            var material = new Material().createWithTexture(url, wrapping, transparent);
+        } else if(textures) {
+            var material = new Material().createWithTextures(textures, wrapping, transparent);
         } else {
             var material = new Material().create();
         }

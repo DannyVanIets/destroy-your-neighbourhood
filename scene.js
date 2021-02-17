@@ -19,6 +19,21 @@ document.body.appendChild(renderer.domElement);
 var grassTexture = "./textures/grass-texture.jpg";
 var doorTexture = "./textures/door-texture.png";
 var roadTexture = "./textures/road-texture.jpeg";
+var houseTexture = "./textures/brick-texture.jpg";
+var houseTextures = [
+  "./textures/brick-texture.jpg",
+  "./textures/brick-texture.jpg",
+  "./textures/roof-texture.jpg", // Top of the cube
+  "./textures/brick-texture.jpg",
+  "./textures/brick-texture.jpg",
+  "./textures/brick-texture.jpg",
+];
+var windowTexture = "./textures/window-texture.png";
+var roofTextures = [
+  "./textures/roof-texture.jpg", // The sides of the cylinder.
+  "./textures/brick-texture.jpg", // Top
+  "./textures/brick-texture.jpg", // Bottom
+];
 
 // Skybox
 new Skybox().addSkybox(scene);
@@ -28,7 +43,7 @@ let floor = new Floors(grassTexture, roadTexture);
 floor.addFloors(scene);
 
 // Create houses.
-new Houses("not working", doorTexture, "right now").addHouses(scene);
+new Houses(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture).addHouses(scene);
 
 // Create lampposts
 let lamppost = new Lamppost(scene);
