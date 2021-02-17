@@ -54,6 +54,12 @@ let tree = new Tree(scene);
 
 tree.addTree(10, 0, -20);
 
+tree.addTree(10, 0, -40, false);
+
+tree.addTree(10, 0, -60);
+
+tree.addTree(10, 0, -80, false);
+
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
 camera.position.y = 1; // Move up from center of scene

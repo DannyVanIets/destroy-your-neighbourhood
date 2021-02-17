@@ -35,6 +35,7 @@ class Tree {
       color: 0x788a36,
 
       radius: 3.5,
+      width: 10,
       height: 10,
       radialsegments: 10,
 
@@ -52,8 +53,9 @@ class Tree {
    * @param {number} x
    * @param {number} y
    * @param {number} z
+   * @param {boolean} isCone
    */
-  addTree(x, y, z) {
+  addTree(x, y, z, isCone = true) {
     this.#createTrunk(x, y, z);
 
     for (let i = 0; i < this.topoptions.amount; i++) {
@@ -62,7 +64,8 @@ class Tree {
         y + this.topoptions.yoffset * i,
         z,
         this.topoptions.radius + this.topoptions.radiusoffset * i,
-        this.topoptions.height - this.topoptions.yoffset * i
+        this.topoptions.height - this.topoptions.yoffset * i,
+          isCone,
       );
     }
   }
@@ -99,15 +102,24 @@ class Tree {
    * @param {number} z
    * @param {number} radius
    * @param {number} height
+   * @param {boolean} isCone, decided if it uses a cone geometry or a sphere one.
    */
-  #createTop = (x, y, z, radius, height) => {
+  #createTop = (x, y, z, radius, height, isCone) => {
     const options = this.topoptions;
 
-    const geometry = new THREE.ConeGeometry(
-      radius,
-      height,
-      options.radialsegments
-    );
+    if(isCone){
+      var geometry = new THREE.ConeGeometry(
+          radius,
+          height,
+          options.radialsegments
+      );
+    } else {
+      var geometry = new THREE.SphereGeometry(
+          radius,
+          options.width,
+          height
+      );
+    }
 
     const material = new THREE.MeshBasicMaterial({
       color: options.color,
