@@ -23,8 +23,8 @@ class Material {
         return material;
     }
 
-    createWithTexture(url, wrapping, transparent) {
-        var texture = new THREE.TextureLoader().load(url);
+    createWithTexture(textureUrl, wrapping, transparent) {
+        var texture = new THREE.TextureLoader().load(textureUrl);
         if (wrapping) {
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
