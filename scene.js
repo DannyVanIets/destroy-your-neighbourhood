@@ -44,12 +44,11 @@ tree.addTree(10, 0, -20);
 
 // Add car
 loader.load("./assets/models/scene.gltf", (gltf) => {
-  const car = gltf.scene.children[0];
+  const car = gltf.scene;
   scene.add(car);
 
   car.position.y = -3.5;
-  car.rotation.x = -1.59;
-  car.rotation.z = 1.6;
+  car.rotation.y = 1.6;
   car.position.z = 8;
 });
 
