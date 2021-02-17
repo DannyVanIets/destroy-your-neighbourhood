@@ -79,32 +79,9 @@ let tree = new Tree(scene);
 tree.addTree(10, 0, -20);
 
 // Add car
-loader.load("./assets/models/scene.gltf", (gltf) => {
-  let car = gltf.scene.children[0];
-
-  car.castShadow = true;
-  car.receiveShadow = true;
-
-  scene.add(car);
-
-  car.position.y = -3.5;
-  car.rotation.z = 1.6;
-  car.position.z = 8;
-});
-
-loader.load("./assets/models/scene.gltf", (gltf) => {
-  let car = gltf.scene.children[0];
-
-  car.castShadow = true;
-  car.receiveShadow = true;
-
-  scene.add(car);
-
-  car.position.x = 100;
-  car.position.y = -3.5;
-  car.rotation.z = -1.6;
-  car.position.z = -8;
-});
+let car = new Car(scene, loader);
+car.addCar(-50, 0, 8, 0, 0, -4.7);
+car.addCar(10, 0, -8, 0, 0, 4.7);
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
