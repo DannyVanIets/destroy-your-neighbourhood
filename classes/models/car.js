@@ -5,7 +5,7 @@ class Car {
   scene;
 
   /**
-   * The loader with wich the model of the car will be loaded.
+   * The loader with which the model of the car will be loaded.
    */
   loader;
 
