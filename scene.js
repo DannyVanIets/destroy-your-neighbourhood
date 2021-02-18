@@ -96,6 +96,7 @@ new Clock(clockTexture).addClocks(scene);
 
 // Add car
 let car = new Car(scene, loader);
+
 car.addCar(-10, 0, 8, 0, 0, -4.7, {
   car: {
     posX: 30,
@@ -103,9 +104,10 @@ car.addCar(-10, 0, 8, 0, 0, -4.7, {
   tires: {
     rotX: 30,
   },
-  options: {
-    endPosition: floor.floors[1].width / 2,
-    startPosition: -floor.floors[1].width / 2,
+  callback: (carobject) => {
+    if (carobject.car.position.x >= floor.floors[1].width / 2) {
+      carobject.car.position.x = -floor.floors[1].width / 2;
+    }
   },
 });
 
@@ -116,22 +118,27 @@ car.addCar(10, 0, -8, 0, 0, 4.7, {
   tires: {
     rotX: 30,
   },
-  options: {
-    endPosition: -floor.floors[1].width / 2,
-    startPosition: floor.floors[1].width / 2,
+  callback: (carobject) => {
+    if (carobject.car.position.x <= -floor.floors[1].width / 2) {
+      carobject.car.position.x = floor.floors[1].width / 2;
+    }
   },
 });
 
-car.addCar(50, 0, 33, 0, 0, 0, {
+car.addCar(50, 1, 33, 0, 0, 0, {
   car: {
     posY: 1,
-    rotY: 1,
-    rotX: 1,
-    rotZ: 1,
+    rotY: 0.1,
+    rotX: 0.1,
+    rotZ: 0.1,
   },
-  general: {
-    
-  }
+  callback: (carobject) => {
+    if (carobject.car.position.y >= 20) {
+      carobject.options.car.posY = -1;
+    } else if (carobject.car.position.y <= 1) {
+      carobject.options.car.posY = 1;
+    }
+  },
 });
 
 // Add ufo

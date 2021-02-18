@@ -51,6 +51,12 @@ class Car {
   }
 
   /**
+   * Callback for the animation meant to change directions or change position when the car reached a certain destination.
+   * @callback animationCallback
+   * @param {*} carobject
+   */
+
+  /**
    * Function to add a car to the scene.
    * @param {number} posX The X position of the car.
    * @param {number} posY The Y position of the car.
@@ -63,13 +69,14 @@ class Car {
    * @param {number} [animateOptions.car.posX]
    * @param {number} [animateOptions.car.posY]
    * @param {number} [animateOptions.car.posZ]
+   * @param {number} [animateOptions.car.rotX]
+   * @param {number} [animateOptions.car.rotY]
+   * @param {number} [animateOptions.car.rotZ]
    * @param {Object} [animateOptions.tires]
    * @param {number} [animateOptions.tires.rotX]
    * @param {number} [animateOptions.tires.rotY]
    * @param {number} [animateOptions.tires.rotZ]
-   * @param {Object} animateOptions.general
-   * @param {number} animateOptions.general.endPosition
-   * @param {number} animateOptions.general.startPosition
+   * @param {animationCallback} [animateOptions.callback]
    */
   addCar(
     posX,
@@ -103,6 +110,9 @@ class Car {
           posX: 0,
           posY: 0,
           posZ: 0,
+          rotX: 0,
+          rotY: 0,
+          rotZ: 0,
         };
 
         let defaulttires = {
@@ -116,7 +126,7 @@ class Car {
           options: {
             car: { ...defaultcar, ...animateOptions.car },
             tires: { ...defaulttires, ...animateOptions.tires },
-            general: animateOptions.options,
+            callback: animateOptions.callback,
           },
         });
       }
@@ -136,6 +146,10 @@ class Car {
       car.position.y += options.car.posY * delta;
       car.position.z += options.car.posZ * delta;
 
+      car.rotation.x += options.car.rotX * delta;
+      car.rotation.y += options.car.rotY * delta;
+      car.rotation.z += options.car.rotZ * delta;
+
       let tires = car.children[0].children[0].children[0].children;
 
       for (let i = 1; i < tires.length; i++) {
@@ -145,8 +159,8 @@ class Car {
         tire.rotation.z += options.tires.rotZ * delta;
       }
 
-      if (Math.abs(car.position.x) >= Math.abs(options.general.endPosition)) {
-        car.position.x = options.general.startPosition;
+      if (options.callback) {
+        options.callback(carobject);
       }
     });
   }
