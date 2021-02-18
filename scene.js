@@ -82,7 +82,13 @@ let floor = new Floors(grassTexture, roadTexture);
 floor.addFloors(scene);
 
 // Create houses.
-new Houses(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture).addHouses(scene);
+new Houses(
+  houseTexture,
+  houseTextures,
+  doorTexture,
+  roofTextures,
+  windowTexture
+).addHouses(scene);
 
 // Create lampposts
 let lamppost = new Lamppost(scene);
@@ -95,8 +101,23 @@ tree.addTree(10, 0, -20);
 
 // Add car
 let car = new Car(scene, loader);
-car.addCar(-50, 0, 8, 0, 0, -4.7);
-car.addCar(10, 0, -8, 0, 0, 4.7);
+
+car.addCar(-10, 0, 8, 0, 0, -4.7, {
+  car: {
+    posX: 30,
+  },
+  tires: {
+    rotX: 12,
+  },
+});
+car.addCar(10, 0, -8, 0, 0, 4.7, {
+  car: {
+    posX: -30,
+  },
+  tires: {
+    rotX: 12,
+  },
+});
 
 tree.addTree(10, 0, -40, false);
 
@@ -113,9 +134,14 @@ camera.position.z = 15; // Move camera away from center of scene
 // Also update index.html for loading the orbit controls
 let controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-var render = function () {
+let clock = new THREE.Clock();
+
+let render = function () {
   requestAnimationFrame(render);
   controls.update();
+
+  car.animateCars(clock.getDelta());
+
   renderer.render(scene, camera);
 };
 

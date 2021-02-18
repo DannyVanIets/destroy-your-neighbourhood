@@ -1,5 +1,4 @@
 class Car {
-
   /**
    * The scene the car will be added to.
    */
@@ -29,6 +28,19 @@ class Car {
   rotXOffset = -1.59;
 
   /**
+   * List of all the cars.
+   * @type {any[]}
+   */
+  cars = [];
+
+  /**
+   * List of cars that will be animated.
+   * @type {any[]}
+   * @private
+   */
+  carsToAnimate = [];
+
+  /**
    * Creates an instance of Car.
    * @param {*} scene The scene the car will be added to.
    * @param {*} GLTFLoader The loader with wich the model of the car will be loaded.
@@ -46,8 +58,26 @@ class Car {
    * @param {number} [rotX=0] The X rotation of the car.
    * @param {number} [rotY=0] The Y rotation of the car.
    * @param {number} [rotZ=0] The Z rotation of the car.
+   * @param {Object} [animateOptions=undefined]
+   * @param {Object} [animateOptions.car]
+   * @param {number} [animateOptions.car.posX]
+   * @param {number} [animateOptions.car.posY]
+   * @param {number} [animateOptions.car.posZ]
+   * @param {Object} [animateOptions.tires]
+   * @param {number} [animateOptions.tires.rotX]
+   * @param {number} [animateOptions.tires.rotY]
+   * @param {number} [animateOptions.tires.rotZ]
+   * @memberof Car
    */
-  addCar(posX, posY, posZ, rotX = 0, rotY = 0, rotZ = 0) {
+  addCar(
+    posX,
+    posY,
+    posZ,
+    rotX = 0,
+    rotY = 0,
+    rotZ = 0,
+    animateOptions = undefined
+  ) {
     loader.load(this.carModel, (gltf) => {
       let car = gltf.scene.children[0];
 
@@ -63,6 +93,50 @@ class Car {
       car.rotation.x = rotX + this.rotXOffset;
       car.rotation.y = rotY;
       car.rotation.z = rotZ;
+
+      this.cars.push(car);
+
+      if (animateOptions) {
+        let defaultcar = {
+          posX: 0,
+          posY: 0,
+          posZ: 0,
+        };
+
+        let defaulttires = {
+          rotX: 0,
+          rotY: 0,
+          rotZ: 0,
+        };
+
+        this.carsToAnimate.push({
+          car,
+          options: {
+            car: { ...defaultcar, ...animateOptions.car },
+            tires: { ...defaulttires, ...animateOptions.tires },
+          },
+        });
+      }
+    });
+  }
+
+  animateCars(delta) {
+    this.carsToAnimate.map((carobject) => {
+      let options = carobject.options;
+      let car = carobject.car;
+
+      car.position.x += options.car.posX * delta;
+      car.position.y += options.car.posY * delta;
+      car.position.z += options.car.posZ * delta;
+
+      let tires = car.children[0].children[0].children[0].children;
+
+      for (let i = 1; i < tires.length; i++) {
+        let tire = tires[i];
+        tire.rotation.x += options.tires.rotX * delta;
+        tire.rotation.y += options.tires.rotY * delta;
+        tire.rotation.z += options.tires.rotZ * delta;
+      }
     });
   }
 }
