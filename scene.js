@@ -88,24 +88,24 @@ new Houses(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture
 // Create clocks.
 new Clock(clockTexture).addClocks(scene);
 
+// Add car
+let car = new Car(scene, loader);
+car.addCar(-50, 0, 8, 0, 0, -4.7);
+car.addCar(10, 0, -8, 0, 0, 4.7);
+
+// Add ufo
+let ufo = new Ufo(scene, loader);
+ufo.addUfo(50, -25, 35, 0,0, 0);
+
 // Create lampposts
 let lamppost = new Lamppost(scene);
 lamppost.addLamppost(0, 0, -20);
 
 // Create trees
 let tree = new Tree(scene);
-
 tree.addTree(10, 0, -20);
-
-// Add car
-let car = new Car(scene, loader);
-car.addCar(-50, 0, 8, 0, 0, -4.7);
-car.addCar(10, 0, -8, 0, 0, 4.7);
-
 tree.addTree(10, 0, -40, false);
-
 tree.addTree(10, 0, -60);
-
 tree.addTree(10, 0, -80, false);
 
 // Move camera from center
