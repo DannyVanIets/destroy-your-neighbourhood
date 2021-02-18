@@ -1,7 +1,13 @@
 class Lamppost {
-  //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
-  #scene;
-  #headcylinder;
+  /**
+   * @private
+   */
+  scene;
+
+  /**
+   * @private
+   */
+  headcylinder;
 
   /**
    * Creates an instance of Lamppost.
@@ -29,7 +35,7 @@ class Lamppost {
    * @memberof Lamppost
    */
   constructor(scene, baseoptions, headoptions, topoptions) {
-    this.#scene = scene;
+    this.scene = scene;
 
     this.baseoptions = {
       color: 0x9c9c9c,
@@ -73,20 +79,19 @@ class Lamppost {
    * @memberof Lamppost
    */
   addLamppost(x, y, z) {
-    this.#createBase(x, y, z);
-    this.#createHead(x, y, z);
-    this.#createTop(x, z);
+    this.createBase(x, y, z);
+    this.createHead(x, y, z);
+    this.createTop(x, z);
   }
 
-  //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
   /**
    * Function to create and add the base of the lamppost to the scene.
    * @param {number} x
    * @param {number} y
    * @param {number} z
-   * @memberof Lamppost
+   * @private
    */
-  #createBase = (x, y, z) => {
+  createBase = (x, y, z) => {
     const options = this.baseoptions;
 
     const geometry = new THREE.CylinderGeometry(
@@ -99,20 +104,19 @@ class Lamppost {
     const material = new Material().createWithColor(options.color);
     const cylinder = new THREE.Mesh(geometry, material);
 
-    this.#scene.add(cylinder);
+    this.scene.add(cylinder);
 
     cylinder.position.set(x, y, z);
   };
 
-  //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
   /**
    * Function to create and add the head of the lamppost to the scene.
    * @param {number} x
    * @param {number} y
    * @param {number} z
-   * @memberof Lamppost
+   * @private
    */
-  #createHead = (x, y, z) => {
+  createHead = (x, y, z) => {
     const options = this.headoptions;
 
     const geometry = new THREE.CylinderGeometry(
@@ -128,26 +132,25 @@ class Lamppost {
       opacity: options.opacity,
     });
 
-    this.#headcylinder = new THREE.Mesh(geometry, material);
+    this.headcylinder = new THREE.Mesh(geometry, material);
 
-    this.#scene.add(this.#headcylinder);
+    this.scene.add(this.headcylinder);
 
-    this.#headcylinder.position.x = x;
+    this.headcylinder.position.x = x;
 
-    this.#headcylinder.position.y =
+    this.headcylinder.position.y =
       y + this.baseoptions.height / 2 + options.height / 2;
 
-    this.#headcylinder.position.z = z;
+    this.headcylinder.position.z = z;
   };
 
-  //TODO: Hier nog naar kijken of Puja een browser heeft die dit ondersteund https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields#browser_compatibility
   /**
    * Function to create and add the top of the lamppost to the scene.
    * @param {number} x
    * @param {number} z
-   * @memberof Lamppost
+   * @private
    */
-  #createTop = (x, z) => {
+  createTop = (x, z) => {
     const options = this.topoptions;
 
     const geometry = new THREE.CylinderGeometry(
@@ -160,12 +163,12 @@ class Lamppost {
     const material = new Material().createWithColor(options.color);
     const cylinder = new THREE.Mesh(geometry, material);
 
-    this.#scene.add(cylinder);
+    this.scene.add(cylinder);
 
     cylinder.position.x = x;
 
     cylinder.position.y =
-      this.#headcylinder.position.y +
+      this.headcylinder.position.y +
       this.headoptions.height / 2 +
       options.height / 2;
 

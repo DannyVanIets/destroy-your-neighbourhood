@@ -1,5 +1,8 @@
 class Tree {
-  #scene;
+  /**
+   * @private
+   */
+  scene;
 
   /**
    * Creates an instance of Tree.
@@ -20,7 +23,7 @@ class Tree {
    * @param {number} [topoptions.amount]
    */
   constructor(scene, trunkoptions, topoptions) {
-    this.#scene = scene;
+    this.scene = scene;
 
     this.trunkoptions = {
       color: 0x2c3125,
@@ -56,16 +59,16 @@ class Tree {
    * @param {boolean} isCone
    */
   addTree(x, y, z, isCone = true) {
-    this.#createTrunk(x, y, z);
+    this.createTrunk(x, y, z);
 
     for (let i = 0; i < this.topoptions.amount; i++) {
-      this.#createTop(
+      this.createTop(
         x,
         y + this.topoptions.yoffset * i,
         z,
         this.topoptions.radius + this.topoptions.radiusoffset * i,
         this.topoptions.height - this.topoptions.yoffset * i,
-          isCone,
+        isCone
       );
     }
   }
@@ -75,8 +78,9 @@ class Tree {
    * @param {number} x
    * @param {number} y
    * @param {number} z
+   * @private
    */
-  #createTrunk = (x, y, z) => {
+  createTrunk = (x, y, z) => {
     const options = this.trunkoptions;
 
     const geometry = new THREE.CylinderGeometry(
@@ -90,7 +94,7 @@ class Tree {
     });
     const cylinder = new THREE.Mesh(geometry, material);
 
-    this.#scene.add(cylinder);
+    this.scene.add(cylinder);
 
     cylinder.position.set(x, y, z);
   };
@@ -103,22 +107,19 @@ class Tree {
    * @param {number} radius
    * @param {number} height
    * @param {boolean} isCone, decided if it uses a cone geometry or a sphere one.
+   * @private
    */
-  #createTop = (x, y, z, radius, height, isCone) => {
+  createTop = (x, y, z, radius, height, isCone) => {
     const options = this.topoptions;
 
-    if(isCone){
+    if (isCone) {
       var geometry = new THREE.ConeGeometry(
-          radius,
-          height,
-          options.radialsegments
+        radius,
+        height,
+        options.radialsegments
       );
     } else {
-      var geometry = new THREE.SphereGeometry(
-          radius,
-          options.width,
-          height
-      );
+      var geometry = new THREE.SphereGeometry(radius, options.width, height);
     }
 
     const material = new THREE.MeshBasicMaterial({
@@ -127,7 +128,7 @@ class Tree {
 
     const cone = new THREE.Mesh(geometry, material);
 
-    this.#scene.add(cone);
+    this.scene.add(cone);
 
     cone.position.x = x;
     cone.position.y =
