@@ -13,7 +13,7 @@ class Car {
    * The model that will be used for the car.
    * @type {string}
    */
-  carModel = "./assets/models/scene.gltf";
+  carModel = "./assets/models/car/scene.gltf";
 
   /**
    * The offset that is needed to put the car on the ground.

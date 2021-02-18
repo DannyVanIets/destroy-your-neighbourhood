@@ -28,7 +28,7 @@ class Material {
         if (wrapping) {
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
-            texture.repeat.set(20, 1);
+            texture.repeat.set(wrapping[0].x, wrapping[0].y); // 20, 1
         }
         if(transparent){
             var material = new THREE.MeshBasicMaterial({map: texture, refractionRatio: 0.5, side: THREE.DoubleSide});
@@ -44,7 +44,7 @@ class Material {
         var materials = [];
         for(var i = 0; i < texturesArray.length; i++){
             var texture = new THREE.TextureLoader().load(texturesArray[i]);
-            if (wrapping && i != 0) { // The first texture we load, is for the roof which does not need the texture wrapping.
+            if (wrapping && i != 0) { // The first texture we load is for the roof which does not need the texture wrapping.
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
                 texture.repeat.set(wrapping[0].x, wrapping[0].y);
