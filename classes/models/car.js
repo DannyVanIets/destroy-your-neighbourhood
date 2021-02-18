@@ -145,7 +145,7 @@ class Car {
             "./assets/audio/Just-One-More-Night.mp3",
             function (buffer) {
               sound.setBuffer(buffer);
-              sound.setRefDistance(20);
+              sound.setRefDistance(10);
               sound.play();
             }
           );
