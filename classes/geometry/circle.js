@@ -1,10 +1,10 @@
-class Sphere {
+class Circle {
     constructor() {
 
     }
 
-    createMesh(width, height, depth, textureUrl = false, wrapping = false, color, transparent = false){
-        var geometry = new THREE.CircleGeometry(width, height, depth); // width, height and depth.
+    createMesh(radius, segments, textureUrl = false, wrapping = false, color, transparent = false){
+        var geometry = new THREE.CircleGeometry(radius, segments); // width, height and depth.
         if(color){
             var material = new Material().createWithColor(color, transparent);
         } else if(textureUrl) {

@@ -20,6 +20,7 @@ var grassTexture = "./textures/grass-texture.jpg";
 var doorTexture = "./textures/door-texture.png";
 var roadTexture = "./textures/road-texture.jpeg";
 var houseTexture = "./textures/brick-texture.jpg";
+var clockTexture = "./textures/clock-texture.png";
 var houseTextures = [
   "./textures/brick-texture.jpg",
   "./textures/brick-texture.jpg",
@@ -44,6 +45,9 @@ floor.addFloors(scene);
 
 // Create houses.
 new Houses(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture).addHouses(scene);
+
+// Create clocks.
+new Clock(clockTexture).addClocks(scene);
 
 // Create lampposts
 let lamppost = new Lamppost(scene);
