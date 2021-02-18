@@ -23,8 +23,8 @@ class Material {
         return material;
     }
 
-    createWithTexture(url, wrapping, transparent) {
-        var texture = new THREE.TextureLoader().load(url);
+    createWithTexture(textureUrl, wrapping, transparent) {
+        var texture = new THREE.TextureLoader().load(textureUrl);
         if (wrapping) {
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
@@ -38,5 +38,19 @@ class Material {
             var material = new THREE.MeshBasicMaterial({map: texture, side: THREE.DoubleSide});
         }
         return material;
+    }
+
+    createWithTextures(texturesArray, wrapping) {
+        var materials = [];
+        for(var i = 0; i < texturesArray.length; i++){
+            var texture = new THREE.TextureLoader().load(texturesArray[i]);
+            if (wrapping && i != 0) { // The first texture we load, is for the roof which does not need the texture wrapping.
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(wrapping[0].x, wrapping[0].y);
+            }
+            materials.push(new THREE.MeshBasicMaterial({map: texture}));
+        }
+        return materials;
     }
 }
