@@ -1,26 +1,27 @@
 class Tree {
   /**
+   * The scene the tree will be added to.
    * @private
    */
   scene;
 
   /**
    * Creates an instance of Tree.
-   * @param {*} scene
-   * @param {Object} [trunkoptions]
-   * @param {number} [trunkoptions.color]
-   * @param {number} [trunkoptions.radiustop]
-   * @param {number} [trunkoptions.radiusbottom]
-   * @param {number} [trunkoptions.height]
-   * @param {number} [trunkoptions.radialsegments]
-   * @param {Object} [topoptions]
-   * @param {number} [topoptions.color]
-   * @param {number} [topoptions.radius]
-   * @param {number} [topoptions.height]
-   * @param {number} [topoptions.radialsegments]
-   * @param {number} [topoptions.radiusoffset]
-   * @param {number} [topoptions.yoffset]
-   * @param {number} [topoptions.amount]
+   * @param {*} scene The scene the tree will be added to.
+   * @param {Object} [trunkoptions] Options to modify how the tree trunk looks.
+   * @param {number} [trunkoptions.color] Option to change the tree trunk color.
+   * @param {number} [trunkoptions.radiustop] Option to change the tree trunk top radius.
+   * @param {number} [trunkoptions.radiusbottom] Option to change the tree trunk bottom radius.
+   * @param {number} [trunkoptions.height] Option to change the tree trunk height.
+   * @param {number} [trunkoptions.radialsegments] Option to change the tree trunk radial segment amount.
+   * @param {Object} [topoptions] Options to modify how the top part of the tree looks.
+   * @param {number} [topoptions.color] Option to change the color of the top part of the tree.
+   * @param {number} [topoptions.radius] Option to change the radius of the top part of the tree.
+   * @param {number} [topoptions.height] Option to change the height of the top part of the tree.
+   * @param {number} [topoptions.radialsegments] Option to change the radialsegments amount of the top part of the tree.
+   * @param {number} [topoptions.radiusoffset] Option to change the radius offset of the top part of the tree. This is used to place multiple parts ontop of each other.
+   * @param {number} [topoptions.yoffset] Option to change the y offset of the top part of the tree. This is used to place multiple parts ontop of each other.
+   * @param {number} [topoptions.amount] Option to change the amount of top parts of the tree.
    */
   constructor(scene, trunkoptions, topoptions) {
     this.scene = scene;
@@ -53,10 +54,10 @@ class Tree {
 
   /**
    * Function to create and add an tree to the scene
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
-   * @param {boolean} isCone
+   * @param {number} x The x position of the tree.
+   * @param {number} y The y position of the tree.
+   * @param {number} z The z position of the tree.
+   * @param {boolean} [isCone=true] Decide if the three leaves are a cone or a sphere.
    */
   addTree(x, y, z, isCone = true) {
     this.createTrunk(x, y, z);
@@ -75,9 +76,9 @@ class Tree {
 
   /**
    * Function to create the trunk of the tree and add it to the scene.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
+   * @param {number} x The x position of the tree trunk.
+   * @param {number} y The y position of the tree trunk.
+   * @param {number} z The z position of the tree trunk.
    * @private
    */
   createTrunk = (x, y, z) => {
@@ -101,12 +102,12 @@ class Tree {
 
   /**
    * Function to create the top of the tree and add it to the scene.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
-   * @param {number} radius
-   * @param {number} height
-   * @param {boolean} isCone, decided if it uses a cone geometry or a sphere one.
+   * @param {number} x The x position of the tree top.
+   * @param {number} y The x position of the tree top.
+   * @param {number} z The x position of the tree top.
+   * @param {number} radius The radius of the tree top.
+   * @param {number} height The height of the tree top.
+   * @param {boolean} isCone Decide if it uses a cone geometry or a sphere one.
    * @private
    */
   createTop = (x, y, z, radius, height, isCone) => {

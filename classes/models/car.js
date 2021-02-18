@@ -64,19 +64,19 @@ class Car {
    * @param {number} [rotX=0] The X rotation of the car.
    * @param {number} [rotY=0] The Y rotation of the car.
    * @param {number} [rotZ=0] The Z rotation of the car.
-   * @param {Object} [animateOptions=undefined]
-   * @param {Object} [animateOptions.car]
-   * @param {number} [animateOptions.car.posX]
-   * @param {number} [animateOptions.car.posY]
-   * @param {number} [animateOptions.car.posZ]
-   * @param {number} [animateOptions.car.rotX]
-   * @param {number} [animateOptions.car.rotY]
-   * @param {number} [animateOptions.car.rotZ]
-   * @param {Object} [animateOptions.tires]
-   * @param {number} [animateOptions.tires.rotX]
-   * @param {number} [animateOptions.tires.rotY]
-   * @param {number} [animateOptions.tires.rotZ]
-   * @param {animationCallback} [animateOptions.callback]
+   * @param {Object} [animateOptions=undefined] Options to set animations.
+   * @param {Object} [animateOptions.car] Options to set the car animations. 
+   * @param {number} [animateOptions.car.posX] Option to set the car's position x animation.
+   * @param {number} [animateOptions.car.posY] Option to set the car's position y animation.
+   * @param {number} [animateOptions.car.posZ] Option to set the car's position z animation.
+   * @param {number} [animateOptions.car.rotX] Option to set the car's rotation x animation.
+   * @param {number} [animateOptions.car.rotY] Option to set the car's rotation y animation.
+   * @param {number} [animateOptions.car.rotZ] Option to set the car's rotation z animation.
+   * @param {Object} [animateOptions.tires] Options to set the tires animations.
+   * @param {number} [animateOptions.tires.rotX] Option to set the tires rotation x animation.
+   * @param {number} [animateOptions.tires.rotY] Option to set the tires rotation y animation.
+   * @param {number} [animateOptions.tires.rotZ] Option to set the tires rotation z animation.
+   * @param {animationCallback} [animateOptions.callback] Callback for the animation meant to change directions or change position when the car reached a certain destination.
    */
   addCar(
     posX,
@@ -134,7 +134,7 @@ class Car {
   }
 
   /**
-   * Function to animate the cars
+   * Function to animate the cars.
    * @param {number} delta
    */
   animateCars(delta) {

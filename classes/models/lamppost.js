@@ -1,37 +1,39 @@
 class Lamppost {
   /**
+   * The scene the lamppost will be added to.
    * @private
    */
   scene;
 
   /**
+   * The headcylinder of the lamppost this will be used to calculate the location of the topmost part of the lamppost.
    * @private
    */
   headcylinder;
 
   /**
    * Creates an instance of Lamppost.
-   * @param {*} scene
-   * @param {Object} [baseoptions]
-   * @param {number} [baseoptions.color]
-   * @param {number} [baseoptions.radiustop]
-   * @param {number} [baseoptions.radiusbottom]
-   * @param {number} [baseoptions.height]
-   * @param {number} [baseoptions.radialsegments]
-   * @param {Object} [headoptions]
-   * @param {number} [headoptions.color]
-   * @param {boolean} [headoptions.transparent]
-   * @param {number} [headoptions.opacity]
-   * @param {number} [headoptions.radiustop]
-   * @param {number} [headoptions.radiusbottom]
-   * @param {number} [headoptions.height]
-   * @param {number} [headoptions.radialsegments]
-   * @param {Object} [topoptions]
-   * @param {number} [topoptions.color]
-   * @param {number} [topoptions.radiustop]
-   * @param {number} [topoptions.radiusbottom]
-   * @param {number} [topoptions.height]
-   * @param {number} [topoptions.radialsegments]
+   * @param {*} scene The scene the lamppost will be added to.
+   * @param {Object} [baseoptions] Options to change how the lamppost base looks.
+   * @param {number} [baseoptions.color] Option to change the lamppost base color.
+   * @param {number} [baseoptions.radiustop] Option to change the lamppost base top radius.
+   * @param {number} [baseoptions.radiusbottom] Option to change the lamppost base bottom radius.
+   * @param {number} [baseoptions.height] Option to change the lamppost base height.
+   * @param {number} [baseoptions.radialsegments] Option to change the lamppost base amount of radialsegments.
+   * @param {Object} [headoptions] Options to change how the lamppost head looks.
+   * @param {number} [headoptions.color] Option to change the lamppost head color.
+   * @param {boolean} [headoptions.transparent] Option to change the lamppost head transparantie.
+   * @param {number} [headoptions.opacity] Option to change the lamppost head opacity. NOTE: headoptions.transparent needs to be true
+   * @param {number} [headoptions.radiustop] Option to change the lamppost head top radius.
+   * @param {number} [headoptions.radiusbottom] Option to change the lamppost head bottom radius.
+   * @param {number} [headoptions.height] Option to change the lamppost head height.
+   * @param {number} [headoptions.radialsegments] Option to change the lamppost head amount of radialsegments
+   * @param {Object} [topoptions] Options to change how the lamppost top looks.
+   * @param {number} [topoptions.color] Option to change the lamppost top color.
+   * @param {number} [topoptions.radiustop] Option to change the lamppost top top radius.
+   * @param {number} [topoptions.radiusbottom] Option to change the lamppost top bottom radius.
+   * @param {number} [topoptions.height] Option to change the lamppost top height.
+   * @param {number} [topoptions.radialsegments] Option to change the lamppost top amount of radialsegments
    * @memberof Lamppost
    */
   constructor(scene, baseoptions, headoptions, topoptions) {
@@ -73,9 +75,9 @@ class Lamppost {
 
   /**
    * Function to add another lamppost to the scene.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
+   * @param {number} x The x location of the lamppost.
+   * @param {number} y The y location of the lamppost.
+   * @param {number} z The z location of the lamppost.
    * @memberof Lamppost
    */
   addLamppost(x, y, z) {
@@ -86,9 +88,9 @@ class Lamppost {
 
   /**
    * Function to create and add the base of the lamppost to the scene.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
+   * @param {number} x The x location of the lamppost base.
+   * @param {number} y The y location of the lamppost base.
+   * @param {number} z The z location of the lamppost base.
    * @private
    */
   createBase = (x, y, z) => {
@@ -111,9 +113,9 @@ class Lamppost {
 
   /**
    * Function to create and add the head of the lamppost to the scene.
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
+   * @param {number} x The x location of the lamppost head.
+   * @param {number} y The y location of the lamppost head.
+   * @param {number} z The z location of the lamppost head.
    * @private
    */
   createHead = (x, y, z) => {
@@ -146,8 +148,8 @@ class Lamppost {
 
   /**
    * Function to create and add the top of the lamppost to the scene.
-   * @param {number} x
-   * @param {number} z
+   * @param {number} x The x location of the lamppost top.
+   * @param {number} z The z location of the lamppost top.
    * @private
    */
   createTop = (x, z) => {

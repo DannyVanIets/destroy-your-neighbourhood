@@ -1,4 +1,12 @@
 class Skybox {
+  /**
+   * Creates an instance of Skybox.
+   * @param {number} [width=5000] The width of the skybox.
+   * @param {number} [height=5000] The height of the skybox.
+   * @param {number} [depth=5000] The depth of the skybox.
+   * @param {string} [skyboxdirectory="./assets/skybox/"] The directory of the skybox images.
+   * @param {string[]} [skyboximages=null] An array containing the names of the skybox images. In the order of RIGHT, LEFT, TOP, BOTTOM, FRONT, BACK.
+   */
   constructor(
     width = 5000,
     height = 5000,
@@ -25,6 +33,10 @@ class Skybox {
     }
   }
 
+  /**
+   * Function to add the skybox to a scene.
+   * @param {*} scene The scene the skybox will be added to.
+   */
   addSkybox(scene) {
     let materialArray = [];
 
