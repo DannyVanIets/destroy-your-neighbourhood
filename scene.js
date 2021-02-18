@@ -80,6 +80,7 @@ scene.add(dirLightHelper);
 
 // Add a floor and a road.
 let floor = new Floors(grassTexture, roadTexture);
+
 floor.addFloors(scene);
 
 // Create houses.
@@ -111,19 +112,40 @@ car.addCar(-10, 0, 8, 0, 0, -4.7, {
   },
 });
 
-car.addCar(10, 0, -8, 0, 0, 4.7, {
-  car: {
-    posX: -35,
+let xrot = 0.05;
+let tempxpos = 0;
+car.addCar(
+  10,
+  0,
+  -8,
+  0,
+  0,
+  4.7,
+  {
+    car: {
+      posX: -35,
+    },
+    tires: {
+      rotX: 30,
+    },
+    callback: (carobject) => {
+      if (carobject.car.position.x <= -floor.floors[1].width / 2) {
+        carobject.car.position.x = floor.floors[1].width / 2;
+        tempxpos = carobject.car.position.x;
+      }
+
+      if (carobject.car.position.x <= tempxpos - 7) {
+        carobject.car.children[0].children[0].children[0].children[0].rotation.z = xrot;
+        carobject.car.children[0].children[0].children[0].children[0].rotation.x =
+          Math.random() * 0.1 - 0.05;
+
+        xrot = xrot * -1;
+        tempxpos = carobject.car.position.x;
+      }
+    },
   },
-  tires: {
-    rotX: 30,
-  },
-  callback: (carobject) => {
-    if (carobject.car.position.x <= -floor.floors[1].width / 2) {
-      carobject.car.position.x = floor.floors[1].width / 2;
-    }
-  },
-});
+  true
+);
 
 car.addCar(50, 1, 33, 0, 0, 0, {
   car: {
@@ -143,14 +165,17 @@ car.addCar(50, 1, 33, 0, 0, 0, {
 
 // Add ufo
 let ufo = new Ufo(scene, loader);
+
 ufo.addUfo(50, -25, 35);
 
 // Create lampposts
 let lamppost = new Lamppost(scene);
+
 lamppost.addLamppost(0, 0, -20);
 
 // Create trees
 let tree = new Tree(scene);
+
 tree.addTree(10, 0, -20);
 tree.addTree(10, 0, -40, false);
 tree.addTree(10, 0, -60);

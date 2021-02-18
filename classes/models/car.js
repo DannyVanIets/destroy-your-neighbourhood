@@ -65,7 +65,7 @@ class Car {
    * @param {number} [rotY=0] The Y rotation of the car.
    * @param {number} [rotZ=0] The Z rotation of the car.
    * @param {Object} [animateOptions=undefined] Options to set animations.
-   * @param {Object} [animateOptions.car] Options to set the car animations. 
+   * @param {Object} [animateOptions.car] Options to set the car animations.
    * @param {number} [animateOptions.car.posX] Option to set the car's position x animation.
    * @param {number} [animateOptions.car.posY] Option to set the car's position y animation.
    * @param {number} [animateOptions.car.posZ] Option to set the car's position z animation.
@@ -85,7 +85,8 @@ class Car {
     rotX = 0,
     rotY = 0,
     rotZ = 0,
-    animateOptions = undefined
+    animateOptions = undefined,
+    easterEgg = false
   ) {
     loader.load(this.carModel, (gltf) => {
       let car = gltf.scene.children[0];
@@ -129,6 +130,28 @@ class Car {
             callback: animateOptions.callback,
           },
         });
+
+        if (easterEgg) {
+          // create an AudioListener and add it to the camera
+          const listener = new THREE.AudioListener();
+          camera.add(listener);
+
+          // create the PositionalAudio object (passing in the listener)
+          const sound = new THREE.PositionalAudio(listener);
+
+          // load a sound and set it as the PositionalAudio object's buffer
+          const audioLoader = new THREE.AudioLoader();
+          audioLoader.load(
+            "./assets/audio/Just-One-More-Night.mp3",
+            function (buffer) {
+              sound.setBuffer(buffer);
+              sound.setRefDistance(20);
+              sound.play();
+            }
+          );
+
+          car.add(sound);
+        }
       }
     });
   }
