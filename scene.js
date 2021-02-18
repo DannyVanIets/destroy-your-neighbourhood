@@ -111,15 +111,24 @@ car.addCar(-10, 0, 8, 0, 0, -4.7, {
     posX: 30,
   },
   tires: {
-    rotX: 12,
+    rotX: 30,
+  },
+  options: {
+    endPosition: floor.floors[1].width / 2,
+    startPosition: -floor.floors[1].width / 2,
   },
 });
+
 car.addCar(10, 0, -8, 0, 0, 4.7, {
   car: {
-    posX: -30,
+    posX: -35,
   },
   tires: {
-    rotX: 12,
+    rotX: 30,
+  },
+  options: {
+    endPosition: -floor.floors[1].width / 2,
+    startPosition: floor.floors[1].width / 2,
   },
 });
 

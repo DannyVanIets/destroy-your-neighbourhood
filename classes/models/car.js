@@ -67,7 +67,9 @@ class Car {
    * @param {number} [animateOptions.tires.rotX]
    * @param {number} [animateOptions.tires.rotY]
    * @param {number} [animateOptions.tires.rotZ]
-   * @memberof Car
+   * @param {Object} animateOptions.general
+   * @param {number} animateOptions.general.endPosition
+   * @param {number} animateOptions.general.startPosition
    */
   addCar(
     posX,
@@ -114,12 +116,17 @@ class Car {
           options: {
             car: { ...defaultcar, ...animateOptions.car },
             tires: { ...defaulttires, ...animateOptions.tires },
+            general: animateOptions.options,
           },
         });
       }
     });
   }
 
+  /**
+   * Function to animate the cars
+   * @param {number} delta
+   */
   animateCars(delta) {
     this.carsToAnimate.map((carobject) => {
       let options = carobject.options;
@@ -136,6 +143,10 @@ class Car {
         tire.rotation.x += options.tires.rotX * delta;
         tire.rotation.y += options.tires.rotY * delta;
         tire.rotation.z += options.tires.rotZ * delta;
+      }
+
+      if (Math.abs(car.position.x) >= Math.abs(options.general.endPosition)) {
+        car.position.x = options.general.startPosition;
       }
     });
   }
