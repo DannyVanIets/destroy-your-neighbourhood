@@ -195,15 +195,15 @@ for (let i = 50; i < floors.floors[0].depth / 2; i += Math.random() * 40 + 10) {
 //Add trees between houses
 for (let i = 0; i < houses.houses.length; i++) {
   const house = houses.houses[i];
-  const nexthouse = houses.houses[i + 1];
 
   for (let j = -40; j > -150; j -= 20) {
-    let posx = house.width / 2 + house.positionX;
+    let isCone = false;
 
-    if (nexthouse) {
+    if (Math.random() > 0.5) {
+      isCone = true;
     }
 
-    tree.addTree(posx, 0, j);
+    tree.addTree((house.positionX + house.width / 2) + 15, 0, j, isCone);
   }
 }
 
