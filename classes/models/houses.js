@@ -1,5 +1,4 @@
 // Useful: https://www.freecodecamp.org/news/javascript-array-of-objects-tutorial-how-to-create-update-and-loop-through-objects-using-js-array-methods/.
-// TODO: Make holes in cubes for the windows/doors: http://evanw.github.io/csg.js/.
 
 class Houses {
     constructor(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture) {

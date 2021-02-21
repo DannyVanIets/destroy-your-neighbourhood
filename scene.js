@@ -39,6 +39,14 @@ var roofTextures = [
   "./textures/brick-texture.jpg", // Bottom
 ];
 
+//Controls variables.
+let moveForward = false;
+let moveBackward = false;
+let moveLeft = false;
+let moveRight = false;
+const velocity = new THREE.Vector3();
+const direction = new THREE.Vector3();
+
 // Skybox
 new Skybox().addSkybox(scene);
 
@@ -170,7 +178,6 @@ ufo.addUfo(50, -25, 35);
 
 // Create lampposts
 let lamppost = new Lamppost(scene);
-
 lamppost.addLamppost(0, 0, -20);
 
 // Create trees
@@ -181,6 +188,9 @@ tree.addTree(10, 0, -40, false);
 tree.addTree(10, 0, -60);
 tree.addTree(10, 0, -80, false);
 
+// Deltaclock for animation.
+let clock = new THREE.Clock();
+
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
 camera.position.y = 1; // Move up from center of scene
@@ -188,16 +198,108 @@ camera.position.z = 15; // Move camera away from center of scene
 
 // Import camera control and rotation library
 // Also update index.html for loading the orbit controls
-let controls = new THREE.OrbitControls(camera, renderer.domElement);
+//let controls = new THREE.OrbitControls(camera, renderer.domElement);
+let controls = new THREE.PointerLockControls( camera, renderer.domElement );
 
-let clock = new THREE.Clock();
+document.addEventListener( 'click', function () {
+  controls.lock();
+} );
+
+scene.add( controls.getObject() );
+
+const onKeyDown = function ( event ) {
+
+  switch ( event.code ) {
+
+    case 'ArrowUp':
+    case 'KeyW':
+      moveForward = true;
+      break;
+
+    case 'ArrowLeft':
+    case 'KeyA':
+      moveLeft = true;
+      break;
+
+    case 'ArrowDown':
+    case 'KeyS':
+      moveBackward = true;
+      break;
+
+    case 'ArrowRight':
+    case 'KeyD':
+      moveRight = true;
+      break;
+  }
+
+};
+
+const onKeyUp = function ( event ) {
+
+  switch ( event.code ) {
+
+    case 'ArrowUp':
+    case 'KeyW':
+      moveForward = false;
+      break;
+
+    case 'ArrowLeft':
+    case 'KeyA':
+      moveLeft = false;
+      break;
+
+    case 'ArrowDown':
+    case 'KeyS':
+      moveBackward = false;
+      break;
+
+    case 'ArrowRight':
+    case 'KeyD':
+      moveRight = false;
+      break;
+
+  }
+};
+
+document.addEventListener( 'keydown', onKeyDown );
+document.addEventListener( 'keyup', onKeyUp );
 
 let render = function () {
   requestAnimationFrame(render);
-  controls.update();
-
+  //controls.update();
   car.animateCars(clock.getDelta());
 
+  // For the movement.
+  const time = performance.now();
+
+  if ( controls.isLocked === true ) {
+    const delta = ( time - prevTime ) / 1000;
+
+    velocity.x -= velocity.x * 10.0 * delta;
+    velocity.z -= velocity.z * 10.0 * delta;
+
+    velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+
+    direction.z = Number( moveForward ) - Number( moveBackward );
+    direction.x = Number( moveRight ) - Number( moveLeft );
+    direction.normalize(); // this ensures consistent movements in all directions
+
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 200.0 * delta;
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 200.0 * delta;
+
+    controls.moveRight( - velocity.x * delta );
+    controls.moveForward( - velocity.z * delta );
+
+    controls.getObject().position.y += ( velocity.y * delta ); // new behavior
+
+    if ( controls.getObject().position.y < 10 ) {
+
+      velocity.y = 0;
+      controls.getObject().position.y = 1;
+    }
+  }
+
+  prevTime = time;
   renderer.render(scene, camera);
 };
 
