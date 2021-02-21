@@ -38,7 +38,7 @@ let roofTextures = [
   "./textures/brick-texture.jpg", // Bottom
 ];
 
-//Classes.
+// Classes.
 let skybox = new Skybox();
 let movement = new Movement();
 let lights = new Light(scene);
@@ -172,7 +172,7 @@ movement.AddPointerEvents(controls, scene);
 
 let render = function () {
   requestAnimationFrame(render);
-  
+
   // Animate the car according to the clock.
   car.animateCars(clock.getDelta());
 
