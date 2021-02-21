@@ -9,6 +9,9 @@ class Circle {
     color,
     transparent = false
   ) {
+    // Create a geometry for circles, with a color or a texture or neither,
+    // and then mesh it together so it can be added to a scene.
+
     let geometry = new THREE.CircleGeometry(radius, segments); // width, height and depth.
     let material;
 

@@ -1,5 +1,3 @@
-// Useful: https://www.freecodecamp.org/news/javascript-array-of-objects-tutorial-how-to-create-update-and-loop-through-objects-using-js-array-methods/.
-
 class Houses {
   constructor(
     houseTexture,
@@ -8,6 +6,8 @@ class Houses {
     roofTextures,
     windowTexture
   ) {
+    // Array used to add houses to the scene.
+
     this.houses = [
       {
         width: 100,
@@ -164,7 +164,6 @@ class Houses {
             positionX: 160,
             positionY: 25,
           },
-          //{ width: 15, height: 10, depth: 1, texture: windowTexture, wrapping: false, color: 0xffffff, transparent: true, positionX: 160, positionY: 25}, old version.
         ],
         door: {
           height: 15,
@@ -193,10 +192,12 @@ class Houses {
 
   addHouses(scene) {
     // Add all the houses in the array this.houses and add them to the scene automatically.
+
     for (let i = 0; i < this.houses.length; i++) {
       let h = this.houses[i];
       let w;
 
+      // Check if the house has a window in the array.
       if (this.houses[i].windows) {
         w = this.houses[i].windows[0];
       }
@@ -225,6 +226,7 @@ class Houses {
         );
       }
 
+      // Add the box to the scene and position it correctly.
       scene.add(house);
       house.position.set(h.positionX, h.positionY, h.positionZ); // x, y, z.
 
@@ -232,15 +234,18 @@ class Houses {
       if (w) {
         let j = 1;
 
+        // Loop through every window that the house has in the array.
         while (w) {
           let windowPositionX;
+
+          // If the window does not have any x position filled in, we will automatically create one.
           if (w.positionX) {
             windowPositionX = w.positionX;
           } else {
             windowPositionX = h.positionX - 10;
           }
 
-          let windowPositionZ = h.positionZ + h.depth / 2 - w.depth / 2.25;
+          let windowPositionZ = h.positionZ + h.depth / 2 - w.depth / 2.25; // Calculate where the window is gonna be, based on the position and the depth of the house. This will then be minus the window depth divided by 2.25.
 
           let window = new Box().createMesh(
             w.width,
@@ -258,18 +263,19 @@ class Houses {
         }
       }
 
-      // Add a door.
+      // Add a door if that is in the array of the house.
       if (d) {
-        let doorWidth = d.height / 2;
+        let doorWidth = d.height / 2; // Based on the height, the width will be calculated.
         let doorPositionX;
 
+        // If the window does not have any x position filled in, we will give it one.
         if (d.positionX) {
           doorPositionX = d.positionX;
         } else {
-          doorPositionX = h.positionX + h.width / 3 - doorWidth / 3;
+          doorPositionX = h.positionX + h.width / 3 - doorWidth / 3; // The door position X will be based on the house positionX added with the width, divided by 3 and then minus the doorwidth divided by 3.
         }
 
-        let doorPositionZ = h.positionZ + h.depth / 2 - d.depth / 2.25;
+        let doorPositionZ = h.positionZ + h.depth / 2 - d.depth / 2.25; // Used to calculate the z position of the door. Same as the windowPositionZ.
 
         let door = new Box().createMesh(
           doorWidth,
@@ -286,6 +292,7 @@ class Houses {
 
       // Add a roof.
       if (r) {
+        // First we will calculate the y and x positions, based on the house x and y added with the width and height.
         let roofPositionX = h.positionX + h.width / 2 - r.radius + 0.25;
         let roofPositionY = h.positionY + h.height / 2 - 0.5;
 
@@ -304,10 +311,9 @@ class Houses {
           r.transparent
         );
         scene.add(roof);
-        // TODO: calculate the radius.
         roof.position.set(roofPositionX, roofPositionY, h.positionZ); // x, y, z.
 
-        // Rotate the cylinder, so that it can be placed above a house.
+        // Rotate the cylinder, so that 90 degrees turned and that it fits on top of a box.
         roof.rotation.x = Math.PI / 2;
         roof.rotation.y = Math.PI / 0.6666;
       }

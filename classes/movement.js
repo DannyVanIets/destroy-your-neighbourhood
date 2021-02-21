@@ -4,12 +4,15 @@ class Movement {
     }
 
     AddPointerEvents(controls, scene){
+        // Add events for the movement.
+        // First event is used to make sure you have clicked on the screen before you can walk.
         document.addEventListener( 'click', function () {
             controls.lock();
         } );
 
         scene.add( controls.getObject() );
 
+        // onKeyDown sets the right variable to true once you press in a key.
         const onKeyDown = function ( event ) {
 
             switch ( event.code ) {
@@ -37,6 +40,7 @@ class Movement {
 
         };
 
+        // onKeyUp sets the right variable to false once you no longer press in the key.
         const onKeyUp = function ( event ) {
 
             switch ( event.code ) {
@@ -69,6 +73,7 @@ class Movement {
     }
 
     CalculateMovement(time, prevTime, velocity, direction, controls){
+        // This function is used to calculate which direction with which velocity the camera should go to.
         const delta = (time - prevTime) / 1000;
 
         velocity.x -= velocity.x * 10.0 * delta;

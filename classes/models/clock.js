@@ -1,5 +1,7 @@
 class Clock {
   constructor(clockTexture) {
+    // Array used to add clocks to the scene.
+
     this.clocks = [
       {
         radius: 5,
@@ -13,6 +15,8 @@ class Clock {
   }
 
   addClocks(scene) {
+    // Loop through every clock, create a mesh for it, add it to the scene and set the position correctly.
+
     for (let i = 0; i < this.clocks.length; i++) {
       let c = this.clocks[i];
       let clock = new Circle().createMesh(c.radius, c.segments, c.texture);

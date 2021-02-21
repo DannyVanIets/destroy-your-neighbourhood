@@ -10,6 +10,8 @@ class Sphere {
     color,
     transparent = false
   ) {
+    // Create a geometry for sphere, with a color or a texture or neither,
+    // and then mesh it together so it can be added to a scene.
     let geometry = new THREE.SphereGeometry(width, height, depth); // width, height and depth.
     let material;
 
