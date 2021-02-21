@@ -290,7 +290,7 @@ class Houses {
         door.position.set(doorPositionX, d.positionY, doorPositionZ); // x, y, z.
       }
 
-      // Add a roof.
+      // Add a roof if that is in the array of the house.
       if (r) {
         // First we will calculate the y and x positions, based on the house x and y added with the width and height.
         let roofPositionX = h.positionX + h.width / 2 - r.radius + 0.25;

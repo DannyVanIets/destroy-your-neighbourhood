@@ -12,12 +12,12 @@ let camera = new THREE.PerspectiveCamera(
   5000 // far - Camera frustum far plane.
 );
 
-// Create renderer
+// Create renderer.
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Textures
+// Textures.
 let grassTexture = "./textures/grass-texture.jpg";
 let doorTexture = "./textures/door-texture.png";
 let roadTexture = "./textures/road-texture.jpeg";
@@ -82,7 +82,7 @@ houses.addHouses(scene);
 // Add clocks.
 clocks.addClocks(scene);
 
-// Add car
+// Add car and the animations.
 car.addCar(-10, 0, 8, 0, 0, -4.7, {
   car: {
     posX: 30,
@@ -172,6 +172,8 @@ movement.AddPointerEvents(controls, scene);
 
 let render = function () {
   requestAnimationFrame(render);
+  
+  // Animate the car according to the clock.
   car.animateCars(clock.getDelta());
 
   // For the movement.
@@ -182,6 +184,8 @@ let render = function () {
   }
 
   prevTime = time;
+
+  // Render it all.
   renderer.render(scene, camera);
 };
 
