@@ -10,8 +10,7 @@ let camera = new THREE.PerspectiveCamera(
   window.innerWidth / window.innerHeight, // aspect - Camera frustum aspect ratio
   0.1, // near - Camera frustum near plane
   5000
-); // far - Camera frustum far plane
-// If the skybox gets added, change the far "1000" to "4000".
+); // far - Camera frustum far plane.
 
 // Create renderer
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -39,7 +38,22 @@ let roofTextures = [
   "./textures/brick-texture.jpg", // Bottom
 ];
 
-//Controls variables.
+//Classes.
+let skybox = new Skybox();
+let movement = new Movement();
+let lights = new Light(scene);
+let floors = new Floors(grassTexture, roadTexture);
+let houses = new Houses(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture);
+let clocks = new Clock(clockTexture);
+let car = new Car(scene, loader);
+let ufo = new Ufo(scene, loader);
+let lamppost = new Lamppost(scene);
+let tree = new Tree(scene);
+
+// Deltaclock for animation.
+let clock = new THREE.Clock();
+
+//Movement variables.
 let moveForward = false;
 let moveBackward = false;
 let moveLeft = false;
@@ -48,33 +62,21 @@ const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
 // Skybox
-new Skybox().addSkybox(scene);
+skybox.addSkybox(scene);
 
 // Add lights
-let lights = new Light(scene);
-
 lights.addLights();
 
 // Add a floor and a road.
-let floor = new Floors(grassTexture, roadTexture);
+floors.addFloors(scene);
 
-floor.addFloors(scene);
+// Add houses.
+houses.addHouses(scene);
 
-// Create houses.
-new Houses(
-  houseTexture,
-  houseTextures,
-  doorTexture,
-  roofTextures,
-  windowTexture
-).addHouses(scene);
-
-// Create clocks.
-new Clock(clockTexture).addClocks(scene);
+// Add clocks.
+clocks.addClocks(scene);
 
 // Add car
-let car = new Car(scene, loader);
-
 car.addCar(-10, 0, 8, 0, 0, -4.7, {
   car: {
     posX: 30,
@@ -141,24 +143,16 @@ car.addCar(50, 1, 33, 0, 0, 0, {
 });
 
 // Add ufo
-let ufo = new Ufo(scene, loader);
-
 ufo.addUfo(50, -25, 35);
 
 // Create lampposts
-let lamppost = new Lamppost(scene);
 lamppost.addLamppost(0, 0, -20);
 
 // Create trees
-let tree = new Tree(scene);
-
 tree.addTree(10, 0, -20);
 tree.addTree(10, 0, -40, false);
 tree.addTree(10, 0, -60);
 tree.addTree(10, 0, -80, false);
-
-// Deltaclock for animation.
-let clock = new THREE.Clock();
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
@@ -166,106 +160,19 @@ camera.position.y = 1; // Move up from center of scene
 camera.position.z = 15; // Move camera away from center of scene
 
 // Import camera control and rotation library
-// Also update index.html for loading the orbit controls
-//let controls = new THREE.OrbitControls(camera, renderer.domElement);
-let controls = new THREE.PointerLockControls( camera, renderer.domElement );
-
-document.addEventListener( 'click', function () {
-  controls.lock();
-} );
-
-scene.add( controls.getObject() );
-
-const onKeyDown = function ( event ) {
-
-  switch ( event.code ) {
-
-    case 'ArrowUp':
-    case 'KeyW':
-      moveForward = true;
-      break;
-
-    case 'ArrowLeft':
-    case 'KeyA':
-      moveLeft = true;
-      break;
-
-    case 'ArrowDown':
-    case 'KeyS':
-      moveBackward = true;
-      break;
-
-    case 'ArrowRight':
-    case 'KeyD':
-      moveRight = true;
-      break;
-  }
-
-};
-
-const onKeyUp = function ( event ) {
-
-  switch ( event.code ) {
-
-    case 'ArrowUp':
-    case 'KeyW':
-      moveForward = false;
-      break;
-
-    case 'ArrowLeft':
-    case 'KeyA':
-      moveLeft = false;
-      break;
-
-    case 'ArrowDown':
-    case 'KeyS':
-      moveBackward = false;
-      break;
-
-    case 'ArrowRight':
-    case 'KeyD':
-      moveRight = false;
-      break;
-
-  }
-};
-
-document.addEventListener( 'keydown', onKeyDown );
-document.addEventListener( 'keyup', onKeyUp );
+// Also update index.html for loading the PointerLockcontrols
+let controls = new THREE.PointerLockControls(camera, renderer.domElement);
+movement.AddPointerEvents(controls, scene);
 
 let render = function () {
   requestAnimationFrame(render);
-  //controls.update();
   car.animateCars(clock.getDelta());
 
   // For the movement.
   const time = performance.now();
 
-  if ( controls.isLocked === true ) {
-    const delta = ( time - prevTime ) / 1000;
-
-    velocity.x -= velocity.x * 10.0 * delta;
-    velocity.z -= velocity.z * 10.0 * delta;
-
-    velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-
-    direction.z = Number( moveForward ) - Number( moveBackward );
-    direction.x = Number( moveRight ) - Number( moveLeft );
-    direction.normalize(); // this ensures consistent movements in all directions
-
-    if ( moveForward || moveBackward ) velocity.z -= direction.z * 200.0 * delta;
-    if ( moveLeft || moveRight ) velocity.x -= direction.x * 200.0 * delta;
-
-    controls.moveRight( - velocity.x * delta );
-    controls.moveForward( - velocity.z * delta );
-
-    controls.getObject().position.y += ( velocity.y * delta ); // new behavior
-
-    if ( controls.getObject().position.y < 10 ) {
-
-      velocity.y = 0;
-      controls.getObject().position.y = 1;
-    }
+  if (controls.isLocked === true) {
+    movement.CalculateMovement(time, prevTime, velocity, direction, controls)
   }
 
   prevTime = time;
