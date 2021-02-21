@@ -50,15 +50,6 @@ class Houses {
         width: 40,
         height: 20,
         depth: 30,
-        textures: houseTextures,
-        positionX: -50,
-        positionY: 5,
-        positionZ: -115,
-      },
-      {
-        width: 40,
-        height: 20,
-        depth: 30,
         texture: houseTexture,
         positionX: -150,
         positionY: 5,
@@ -225,6 +216,10 @@ class Houses {
           h.color
         );
       }
+
+      // Add lights.
+      house.castShadow = true;
+      house.receiveShadow = true;
 
       // Add the box to the scene and position it correctly.
       scene.add(house);
