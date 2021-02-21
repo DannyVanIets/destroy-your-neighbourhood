@@ -195,9 +195,12 @@ class Houses {
     // Add all the houses in the array this.houses and add them to the scene automatically.
     for (let i = 0; i < this.houses.length; i++) {
       let h = this.houses[i];
+      let w;
+
       if (this.houses[i].windows) {
-        let w = this.houses[i].windows[0];
+        w = this.houses[i].windows[0];
       }
+
       let d = this.houses[i].door;
       let r = this.houses[i].roof;
 
@@ -230,7 +233,7 @@ class Houses {
         let j = 1;
 
         while (w) {
-            let windowPositionX;
+          let windowPositionX;
           if (w.positionX) {
             windowPositionX = w.positionX;
           } else {

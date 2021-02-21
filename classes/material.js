@@ -11,16 +11,18 @@ class Material {
   }
 
   createWithColor(color, transparent) {
+    let material;
     if (transparent) {
-      let material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshBasicMaterial({
         color: color,
         refractionRatio: 0.5,
         side: THREE.DoubleSide,
       }); // THREE.DoubleSide is used to show the texture on all sides.
+
       material.transparent = true;
       material.opacity = 0.5;
     } else {
-      let material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshBasicMaterial({
         color: color,
         side: THREE.DoubleSide,
       });
