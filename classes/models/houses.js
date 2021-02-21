@@ -256,6 +256,8 @@ class Houses {
             w.color,
             w.transparent
           );
+
+          // Add it to the scene, place it correctly and move to the next window in the array.
           scene.add(window);
           window.position.set(windowPositionX, w.positionY, windowPositionZ); // x, y, z.
           w = this.houses[i].windows[j];
@@ -286,6 +288,8 @@ class Houses {
           d.color,
           d.transparent
         );
+
+        // Add it to the scene and position it correctly.
         scene.add(door);
         door.position.set(doorPositionX, d.positionY, doorPositionZ); // x, y, z.
       }
@@ -310,6 +314,8 @@ class Houses {
           r.color,
           r.transparent
         );
+
+        // Add it to the scene and position it correctly.
         scene.add(roof);
         roof.position.set(roofPositionX, roofPositionY, h.positionZ); // x, y, z.
 
