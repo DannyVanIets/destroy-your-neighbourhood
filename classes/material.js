@@ -21,6 +21,7 @@ class Material {
         refractionRatio: 0.5,
         side: THREE.DoubleSide,
       }); // THREE.DoubleSide is used to show the texture on all sides.
+
       material.transparent = true;
       material.opacity = 0.5;
     } else {

@@ -9,8 +9,8 @@ let camera = new THREE.PerspectiveCamera(
   75, // fov - Camera frustum vertical field of view
   window.innerWidth / window.innerHeight, // aspect - Camera frustum aspect ratio
   0.1, // near - Camera frustum near plane
-  5000
-); // far - Camera frustum far plane.
+  5000 // far - Camera frustum far plane.
+);
 
 // Create renderer
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -43,7 +43,13 @@ let skybox = new Skybox();
 let movement = new Movement();
 let lights = new Light(scene);
 let floors = new Floors(grassTexture, roadTexture);
-let houses = new Houses(houseTexture, houseTextures, doorTexture, roofTextures, windowTexture);
+let houses = new Houses(
+  houseTexture,
+  houseTextures,
+  doorTexture,
+  roofTextures,
+  windowTexture
+);
 let clocks = new Clock(clockTexture);
 let car = new Car(scene, loader);
 let ufo = new Ufo(scene, loader);
@@ -53,7 +59,7 @@ let tree = new Tree(scene);
 // Deltaclock for animation.
 let clock = new THREE.Clock();
 
-//Movement variables.
+// Movement variables.
 let moveForward = false;
 let moveBackward = false;
 let moveLeft = false;
@@ -61,7 +67,7 @@ let moveRight = false;
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
-// Skybox
+// Add skybox
 skybox.addSkybox(scene);
 
 // Add lights
@@ -145,10 +151,10 @@ car.addCar(50, 1, 33, 0, 0, 0, {
 // Add ufo
 ufo.addUfo(50, -25, 35);
 
-// Create lampposts
+// Add lampposts
 lamppost.addLamppost(0, 0, -20);
 
-// Create trees
+// Add trees
 tree.addTree(10, 0, -20);
 tree.addTree(10, 0, -40, false);
 tree.addTree(10, 0, -60);
@@ -172,7 +178,7 @@ let render = function () {
   const time = performance.now();
 
   if (controls.isLocked === true) {
-    movement.CalculateMovement(time, prevTime, velocity, direction, controls)
+    movement.CalculateMovement(time, prevTime, velocity, direction, controls);
   }
 
   prevTime = time;
