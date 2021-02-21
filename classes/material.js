@@ -5,14 +5,18 @@ class Material {
   constructor() {}
 
   create() {
-    // Only used for testing.
+    // Creates a mesh without anything added. Only used for testing!
     // Every geometry does need to get at least a color and a texture!
+
     return new THREE.MeshNormalMaterial({});
   }
 
   createWithColor(color, transparent) {
+    // Create a mesh for the material with a color.
+
+    let material;
     if (transparent) {
-      let material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshBasicMaterial({
         color: color,
         refractionRatio: 0.5,
         side: THREE.DoubleSide,
@@ -20,7 +24,7 @@ class Material {
       material.transparent = true;
       material.opacity = 0.5;
     } else {
-      let material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshBasicMaterial({
         color: color,
         side: THREE.DoubleSide,
       });
@@ -29,6 +33,11 @@ class Material {
   }
 
   createWithTexture(textureUrl, wrapping, transparent) {
+    // Create a mesh for the material with a texture,
+    // and potentionally wrapping added to it.
+    // The wrapping is used if the texture stretches.
+    // side: THREE.DoubleSide is used to make the texture appear on both sides.
+
     let texture = new THREE.TextureLoader().load(textureUrl);
     if (wrapping) {
       texture.wrapS = THREE.RepeatWrapping;
@@ -57,10 +66,15 @@ class Material {
   }
 
   createWithTextures(texturesArray, wrapping) {
+    // Same as the function "createWithTexture", only it uses an array of textures.
+    // This is used, for example, to create a different texture for every side of a cube.
+
     let materials = [];
 
     for (let i = 0; i < texturesArray.length; i++) {
+      // Loop through every texture, load it and push it to the material array.
       let texture = new THREE.TextureLoader().load(texturesArray[i]);
+
       if (wrapping && i != 0) {
         // The first texture we load is for the roof which does not need the texture wrapping.
         texture.wrapS = THREE.RepeatWrapping;
@@ -69,6 +83,7 @@ class Material {
       }
       materials.push(new THREE.MeshBasicMaterial({ map: texture }));
     }
+
     return materials;
   }
 }
