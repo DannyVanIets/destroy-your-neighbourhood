@@ -298,7 +298,7 @@ class Houses {
       if (r) {
         // First we will calculate the y and x positions, based on the house x and y added with the width and height.
         let roofPositionX = h.positionX + h.width / 2 - r.radius + 0.25;
-        let roofPositionY = h.positionY + h.height / 2 - 0.5;
+        let roofPositionY = h.positionY + h.height / 2;
 
         let roof = new Cylinder().createMesh(
           r.radius,
