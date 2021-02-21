@@ -91,8 +91,8 @@ car.addCar(-10, 0, 8, 0, 0, -4.7, {
     rotX: 30,
   },
   callback: (carobject) => {
-    if (carobject.car.position.x >= floor.floors[1].width / 2) {
-      carobject.car.position.x = -floor.floors[1].width / 2;
+    if (carobject.car.position.x >= floors.floors[1].width / 2) {
+      carobject.car.position.x = -floors.floors[1].width / 2;
     }
   },
 });
@@ -114,8 +114,8 @@ car.addCar(
       rotX: 30,
     },
     callback: (carobject) => {
-      if (carobject.car.position.x <= -floor.floors[1].width / 2) {
-        carobject.car.position.x = floor.floors[1].width / 2;
+      if (carobject.car.position.x <= -floors.floors[1].width / 2) {
+        carobject.car.position.x = floors.floors[1].width / 2;
         tempxpos = carobject.car.position.x;
       }
 
