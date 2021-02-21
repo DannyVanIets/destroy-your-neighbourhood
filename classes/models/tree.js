@@ -112,15 +112,16 @@ class Tree {
    */
   createTop = (x, y, z, radius, height, isCone) => {
     const options = this.topoptions;
+    let geometry;
 
     if (isCone) {
-      var geometry = new THREE.ConeGeometry(
+      geometry = new THREE.ConeGeometry(
         radius,
         height,
         options.radialsegments
       );
     } else {
-      var geometry = new THREE.SphereGeometry(radius, options.width, height);
+      geometry = new THREE.SphereGeometry(radius, options.width, height);
     }
 
     const material = new THREE.MeshBasicMaterial({

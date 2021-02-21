@@ -15,12 +15,12 @@ class Floors {
 
     addFloors(scene){
         // Add all the floors in the array this.floors and add them to the scene automatically.
-        for(var i = 0; i < this.floors.length; i++){
+        for(let i = 0; i < this.floors.length; i++){
 
-            var f = this.floors[i];
+            let f = this.floors[i];
 
             // Add a floor.
-            var floor = new Box().createMesh(f.width, f.height, f.depth, f.texture, f.wrapping, f.color);
+            let floor = new Box().createMesh(f.width, f.height, f.depth, f.texture, f.wrapping, f.color);
             scene.add(floor);
             floor.position.set(f.positionX, f.positionY, f.positionZ); // x, y, z.
         }

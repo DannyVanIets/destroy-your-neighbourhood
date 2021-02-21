@@ -1,17 +1,30 @@
 class Sphere {
-    constructor() {
+  constructor() {}
 
+  createMesh(
+    width,
+    height,
+    depth,
+    textureUrl = false,
+    wrapping = false,
+    color,
+    transparent = false
+  ) {
+    let geometry = new THREE.SphereGeometry(width, height, depth); // width, height and depth.
+    let material;
+
+    if (color) {
+      material = new Material().createWithColor(color, transparent);
+    } else if (textureUrl) {
+      material = new Material().createWithTexture(
+        textureUrl,
+        wrapping,
+        transparent
+      );
+    } else {
+      material = new Material().create();
     }
 
-    createMesh(width, height, depth, textureUrl = false, wrapping = false, color, transparent = false){
-        var geometry = new THREE.SphereGeometry(width, height, depth); // width, height and depth.
-        if(color){
-            var material = new Material().createWithColor(color, transparent);
-        } else if(textureUrl) {
-            var material = new Material().createWithTexture(textureUrl, wrapping, transparent);
-        } else {
-            var material = new Material().create();
-        }
-        return new THREE.Mesh(geometry, material);
-    }
+    return new THREE.Mesh(geometry, material);
+  }
 }
