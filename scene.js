@@ -165,13 +165,52 @@ car.addCar(50, 1, 33, 0, 0, 0, {
 ufo.addUfo(50, -25, 35);
 
 // Add lampposts
-lamppost.addLamppost(0, 0, -20);
+for (
+  let i = -floors.floors[1].width / 2;
+  i <= floors.floors[1].width / 2;
+  i += 60
+) {
+  for (let j = -20; j <= 20; j += 40) {
+    lamppost.addLamppost(i, 0, j);
+  }
+}
 
-// Add trees
-tree.addTree(10, 0, -20);
-tree.addTree(10, 0, -40, false);
-tree.addTree(10, 0, -60);
-tree.addTree(10, 0, -80, false);
+// Add trees for forrest
+for (let i = 50; i < floors.floors[0].depth / 2; i += Math.random() * 40 + 10) {
+  for (
+    let j = -floors.floors[0].width / 2;
+    j < floors.floors[0].width / 2;
+    j += Math.random() * 40 + 10
+  ) {
+    let isCone = false;
+
+    if (Math.random() > 0.5) {
+      isCone = true;
+    }
+
+    tree.addTree(j, 0, i, isCone);
+  }
+}
+
+//Add trees between houses
+for (let i = 0; i < houses.houses.length; i++) {
+  const house = houses.houses[i];
+  const nexthouse = houses.houses[i + 1];
+
+  for (let j = -40; j > -150; j -= 20) {
+    let posx = house.width / 2 + house.positionX;
+
+    if (nexthouse) {
+    }
+
+    tree.addTree(posx, 0, j);
+  }
+}
+
+// tree.addTree(10, 0, -20);
+// tree.addTree(10, 0, -40, false);
+// tree.addTree(10, 0, -60);
+// tree.addTree(10, 0, -80, false);
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene
