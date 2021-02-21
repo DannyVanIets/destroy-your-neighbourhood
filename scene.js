@@ -19,12 +19,12 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Textures
-var grassTexture = "./textures/grass-texture.jpg";
-var doorTexture = "./textures/door-texture.png";
-var roadTexture = "./textures/road-texture.jpeg";
-var houseTexture = "./textures/brick-texture.jpg";
-var clockTexture = "./textures/clock-texture.png";
-var houseTextures = [
+let grassTexture = "./textures/grass-texture.jpg";
+let doorTexture = "./textures/door-texture.png";
+let roadTexture = "./textures/road-texture.jpeg";
+let houseTexture = "./textures/brick-texture.jpg";
+let clockTexture = "./textures/clock-texture.png";
+let houseTextures = [
   "./textures/brick-texture.jpg",
   "./textures/brick-texture.jpg",
   "./textures/roof-texture.jpg", // Top of the cube
@@ -32,8 +32,8 @@ var houseTextures = [
   "./textures/brick-texture.jpg",
   "./textures/brick-texture.jpg",
 ];
-var windowTexture = "./textures/window-texture.png";
-var roofTextures = [
+let windowTexture = "./textures/window-texture.png";
+let roofTextures = [
   "./textures/roof-texture.jpg", // The sides of the cylinder.
   "./textures/brick-texture.jpg", // Top
   "./textures/brick-texture.jpg", // Bottom
