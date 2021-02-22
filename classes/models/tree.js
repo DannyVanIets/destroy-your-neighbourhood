@@ -22,6 +22,7 @@ class Tree {
    * @param {number} [topoptions.radiusoffset] Option to change the radius offset of the top part of the tree. This is used to place multiple parts ontop of each other.
    * @param {number} [topoptions.yoffset] Option to change the y offset of the top part of the tree. This is used to place multiple parts ontop of each other.
    * @param {number} [topoptions.amount] Option to change the amount of top parts of the tree.
+   * @param {number} [topoptions.cone] Option to change the shape of the top part of the tree.
    */
   constructor(scene, trunkoptions, topoptions) {
     this.scene = scene;
@@ -59,7 +60,6 @@ class Tree {
    * @param {number} x The x position of the tree.
    * @param {number} y The y position of the tree.
    * @param {number} z The z position of the tree.
-   * @param {boolean} [isCone=true] Decide if the three leaves are a cone or a sphere.
    */
   addTree(x, y, z) {
     this.createTrunk(x, y, z);
@@ -106,7 +106,6 @@ class Tree {
    * @param {number} z The x position of the tree top.
    * @param {number} radius The radius of the tree top.
    * @param {number} height The height of the tree top.
-   * @param {boolean} isCone Decide if it uses a cone geometry or a sphere one.
    * @private
    */
   createTop = (x, y, z, radius, height) => {
