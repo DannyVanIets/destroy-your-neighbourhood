@@ -11,7 +11,7 @@ class Material {
     return new THREE.MeshNormalMaterial({});
   }
 
-  createWithColor(color, transparent) {
+  createWithColor(color, transparent, opacity) {
     // Create a mesh for the material with a color.
 
     let material;
@@ -23,7 +23,11 @@ class Material {
       }); // THREE.DoubleSide is used to show the texture on all sides.
 
       material.transparent = true;
-      material.opacity = 0.5;
+      if(!opacity){
+        material.opacity = 0.5;
+      } else {
+        material.opacity = opacity;
+      }
     } else {
       material = new THREE.MeshPhongMaterial({
         color: color,

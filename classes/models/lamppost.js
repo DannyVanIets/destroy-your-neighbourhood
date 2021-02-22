@@ -51,7 +51,7 @@ class Lamppost {
     this.headoptions = {
       color: 0x9f978d,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.5,
 
       radiustop: 1,
       radiusbottom: 0.4,
@@ -130,11 +130,7 @@ class Lamppost {
       options.radialsegments
     );
 
-    const material = new THREE.MeshBasicMaterial({
-      color: options.color,
-      transparent: options.transparent,
-      opacity: options.opacity,
-    });
+    const material = new Material().createWithColor(options.color, options.transparent, options.opacity);
 
     this.headcylinder = new THREE.Mesh(geometry, material);
 
