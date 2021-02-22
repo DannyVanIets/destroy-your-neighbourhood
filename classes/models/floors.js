@@ -22,6 +22,8 @@ class Floors {
             let f = this.floors[i];
 
             let floor = new Box().createMesh(f.width, f.height, f.depth, f.texture, f.wrapping, f.color);
+
+            floor.receiveShadow = true;
             scene.add(floor);
             floor.position.set(f.positionX, f.positionY, f.positionZ); // x, y, z.
         }

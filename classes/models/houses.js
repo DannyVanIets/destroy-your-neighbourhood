@@ -219,7 +219,6 @@ class Houses {
 
       // Add lights.
       house.castShadow = true;
-      house.receiveShadow = true;
 
       // Add the box to the scene and position it correctly.
       scene.add(house);
@@ -309,6 +308,10 @@ class Houses {
           r.color,
           r.transparent
         );
+
+        // Add lights.
+        roof.castShadow = true;
+        roof.receiveShadow = true;
 
         // Add it to the scene and position it correctly.
         scene.add(roof);

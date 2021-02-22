@@ -67,19 +67,6 @@ let moveRight = false;
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
-// Lights.
-renderer.shadowMapEnabled = true;
-renderer.shadowMapSoft = true;
-
-renderer.shadowCameraNear = 3;
-renderer.shadowCameraFar = camera.far;
-renderer.shadowCameraFov = 50;
-
-renderer.shadowMapBias = 0.0039;
-renderer.shadowMapDarkness = 0.5;
-renderer.shadowMapWidth = 1024;
-renderer.shadowMapHeight = 1024;
-
 // Add skybox
 skybox.addSkybox(scene);
 
@@ -221,6 +208,10 @@ camera.position.z = 15; // Move camera away from center of scene
 // Also update index.html for loading the PointerLockcontrols
 let controls = new THREE.PointerLockControls(camera, renderer.domElement);
 movement.AddPointerEvents(controls, scene);
+
+// Lights.
+renderer.shadowMapEnabled = true;
+renderer.shadowMapSoft = true;
 
 let render = function () {
   requestAnimationFrame(render);

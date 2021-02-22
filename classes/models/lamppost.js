@@ -106,6 +106,8 @@ class Lamppost {
     const material = new Material().createWithColor(options.color);
     const cylinder = new THREE.Mesh(geometry, material);
 
+    cylinder.castShadow = true;
+
     this.scene.add(cylinder);
 
     cylinder.position.set(x, y, z);
@@ -136,6 +138,8 @@ class Lamppost {
 
     this.headcylinder = new THREE.Mesh(geometry, material);
 
+    this.headcylinder.castShadow = true;
+
     this.scene.add(this.headcylinder);
 
     this.headcylinder.position.x = x;
@@ -164,6 +168,8 @@ class Lamppost {
 
     const material = new Material().createWithColor(options.color);
     const cylinder = new THREE.Mesh(geometry, material);
+
+    cylinder.castShadow = true;
 
     this.scene.add(cylinder);
 

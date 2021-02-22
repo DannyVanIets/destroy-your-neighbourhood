@@ -65,9 +65,10 @@ class Ufo {
             ufo.rotation.z = rotZ;
 
             // Add a cone that makes it seem like there is a light coming down.
-            let geometry = new THREE.ConeGeometry(15, this.posYOffset + 10, 20); // Radius, height,
+            let geometry = new THREE.ConeGeometry(15, this.posYOffset + 10, 100); // Radius, height,
             let material = new Material().createWithColor(0xD3E9E6, true);
             const cone = new THREE.Mesh(geometry, material);
+
             scene.add(cone);
             cone.position.set(posX, 0, posZ - 2.5);
         });

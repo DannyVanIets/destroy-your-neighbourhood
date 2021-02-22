@@ -16,7 +16,7 @@ class Material {
 
     let material;
     if (transparent) {
-      material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshPhongMaterial({
         color: color,
         refractionRatio: 0.5,
         side: THREE.DoubleSide,
@@ -25,7 +25,7 @@ class Material {
       material.transparent = true;
       material.opacity = 0.5;
     } else {
-      material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshPhongMaterial({
         color: color,
         side: THREE.DoubleSide,
       });
@@ -49,7 +49,7 @@ class Material {
     let material;
 
     if (transparent) {
-      material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshPhongMaterial({
         map: texture,
         refractionRatio: 0.5,
         side: THREE.DoubleSide,
@@ -57,7 +57,7 @@ class Material {
       material.transparent = true;
       material.opacity = 0.5;
     } else {
-      material = new THREE.MeshBasicMaterial({
+      material = new THREE.MeshPhongMaterial({
         map: texture,
         side: THREE.DoubleSide,
       });
@@ -82,7 +82,10 @@ class Material {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(wrapping[0].x, wrapping[0].y);
       }
-      materials.push(new THREE.MeshBasicMaterial({ map: texture }));
+      materials.push(new THREE.MeshPhongMaterial({
+        map: texture,
+        side: THREE.DoubleSide
+      }));
     }
 
     return materials;

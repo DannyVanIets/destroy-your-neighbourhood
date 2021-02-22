@@ -90,11 +90,9 @@ class Tree {
       options.height,
       options.radialsegments
     );
-    const material = new THREE.MeshBasicMaterial({
-      color: options.color,
-    });
+    const material = new Material().createWithColor(options.color);
     const cylinder = new THREE.Mesh(geometry, material);
-
+    cylinder.castShadow = true;
     this.scene.add(cylinder);
 
     cylinder.position.set(x, y, z);
@@ -124,11 +122,11 @@ class Tree {
       geometry = new THREE.SphereGeometry(radius, options.width, height);
     }
 
-    const material = new THREE.MeshBasicMaterial({
-      color: options.color,
-    });
+    const material = new Material().createWithColor(options.color);
 
     const cone = new THREE.Mesh(geometry, material);
+
+    cone.castShadow = true;
 
     this.scene.add(cone);
 
