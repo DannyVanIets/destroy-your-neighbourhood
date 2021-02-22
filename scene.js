@@ -54,7 +54,11 @@ let clocks = new Clock(clockTexture);
 let car = new Car(scene, loader);
 let ufo = new Ufo(scene, loader);
 let lamppost = new Lamppost(scene);
-let tree = new Tree(scene);
+let conetree = new Tree(scene);
+let balltree = new Tree(scene, undefined, {
+  cone: false,
+  amount: 1,
+});
 
 // Deltaclock for animation.
 let clock = new THREE.Clock();
@@ -163,41 +167,34 @@ for (
 }
 
 // Add trees for forrest
-for (let i = 50; i < floors.floors[0].depth / 2; i += Math.random() * 40 + 10) {
+const mintreedistance = 10;
+const maxtreedistance = 100
+for (let i = 50; i < floors.floors[0].depth / 2; i += Math.random() * maxtreedistance + mintreedistance) {
   for (
     let j = -floors.floors[0].width / 2;
     j < floors.floors[0].width / 2;
-    j += Math.random() * 40 + 10
+    j += Math.random() * maxtreedistance + mintreedistance
   ) {
-    let isCone = false;
-
     if (Math.random() > 0.5) {
-      isCone = true;
+      conetree.addTree(j, 0, i);
+    } else {
+      balltree.addTree(j, 0, i);
     }
-
-    tree.addTree(j, 0, i, isCone);
   }
 }
 
 //Add trees between houses
-for (let i = 0; i < houses.houses.length; i++) {
+for (let i = 0; i < houses.houses.length - 1; i++) {
   const house = houses.houses[i];
 
   for (let j = -40; j > -150; j -= 20) {
-    let isCone = false;
-
     if (Math.random() > 0.5) {
-      isCone = true;
+      conetree.addTree(house.positionX + house.width / 2 + 15, 0, j);
+    } else {
+      balltree.addTree(house.positionX + house.width / 2 + 15, 0, j);
     }
-
-    tree.addTree((house.positionX + house.width / 2) + 15, 0, j, isCone);
   }
 }
-
-// tree.addTree(10, 0, -20);
-// tree.addTree(10, 0, -40, false);
-// tree.addTree(10, 0, -60);
-// tree.addTree(10, 0, -80, false);
 
 // Move camera from center
 camera.position.x = 1; // Move right from center of scene

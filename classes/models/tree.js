@@ -46,6 +46,8 @@ class Tree {
       radiusoffset: -0.6,
       yoffset: 1.5,
       amount: 3,
+
+      cone: true,
     };
 
     this.trunkoptions = { ...this.trunkoptions, ...trunkoptions };
@@ -59,7 +61,7 @@ class Tree {
    * @param {number} z The z position of the tree.
    * @param {boolean} [isCone=true] Decide if the three leaves are a cone or a sphere.
    */
-  addTree(x, y, z, isCone = true) {
+  addTree(x, y, z) {
     this.createTrunk(x, y, z);
 
     for (let i = 0; i < this.topoptions.amount; i++) {
@@ -69,7 +71,6 @@ class Tree {
         z,
         this.topoptions.radius + this.topoptions.radiusoffset * i,
         this.topoptions.height - this.topoptions.yoffset * i,
-        isCone
       );
     }
   }
@@ -108,11 +109,11 @@ class Tree {
    * @param {boolean} isCone Decide if it uses a cone geometry or a sphere one.
    * @private
    */
-  createTop = (x, y, z, radius, height, isCone) => {
+  createTop = (x, y, z, radius, height) => {
     const options = this.topoptions;
     let geometry;
 
-    if (isCone) {
+    if (options.cone) {
       geometry = new THREE.ConeGeometry(
         radius,
         height,
