@@ -36,6 +36,16 @@ class Movement {
                 case 'KeyD':
                     moveRight = true;
                     break;
+
+                case 'ArrowQ':
+                case 'KeyQ':
+                    moveUp = true;
+                    break;
+
+                case 'ArrowE':
+                case 'KeyE':
+                    moveDown = true;
+                    break;
             }
 
         };
@@ -65,6 +75,13 @@ class Movement {
                     moveRight = false;
                     break;
 
+                case 'KeyQ':
+                    moveUp = false;
+                    break;
+
+                case 'KeyE':
+                    moveDown = false;
+                    break;
             }
         };
 
@@ -78,24 +95,24 @@ class Movement {
 
         velocity.x -= velocity.x * 10.0 * delta;
         velocity.z -= velocity.z * 10.0 * delta;
-
-        velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+        velocity.y -= velocity.y * 10.0 * delta;
 
         direction.z = Number( moveForward ) - Number( moveBackward );
         direction.x = Number( moveRight ) - Number( moveLeft );
+        direction.y = Number( moveDown ) - Number( moveUp );
         direction.normalize(); // this ensures consistent movements in all directions
 
         if ( moveForward || moveBackward ) velocity.z -= direction.z * 200.0 * delta;
         if ( moveLeft || moveRight ) velocity.x -= direction.x * 200.0 * delta;
+        if ( moveUp || moveDown ) velocity.y -= direction.y * 200.0 * delta;
 
         controls.moveRight( - velocity.x * delta );
         controls.moveForward( - velocity.z * delta );
 
-        controls.getObject().position.y += ( velocity.y * delta ); // new behavior
+        let positionY = controls.getObject().position.y + velocity.y * delta;
 
-        if ( controls.getObject().position.y < 10 ) {
-            velocity.y = 0;
-            controls.getObject().position.y = 1;
+        if(positionY > 1){
+            controls.getObject().position.y = positionY;
         }
     }
 }

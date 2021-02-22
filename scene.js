@@ -68,6 +68,8 @@ let moveForward = false;
 let moveBackward = false;
 let moveLeft = false;
 let moveRight = false;
+let moveUp = false;
+let moveDown = false;
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
@@ -166,9 +168,9 @@ for (
   }
 }
 
-// Add trees for forrest
+// Add trees for forest
 const mintreedistance = 10;
-const maxtreedistance = 100
+const maxtreedistance = 100;
 for (let i = 50; i < floors.floors[0].depth / 2; i += Math.random() * maxtreedistance + mintreedistance) {
   for (
     let j = -floors.floors[0].width / 2;
