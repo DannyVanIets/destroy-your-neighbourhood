@@ -39,7 +39,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.labelPhase = new System.Windows.Forms.Label();
             this.labelRotateZ = new System.Windows.Forms.Label();
             this.labelRotateY = new System.Windows.Forms.Label();
             this.labelRotateX = new System.Windows.Forms.Label();
@@ -163,14 +163,14 @@
             this.label11.TabIndex = 10;
             this.label11.Text = "theta:";
             // 
-            // label12
+            // labelPhase
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 521);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(97, 25);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "Phase: 0";
+            this.labelPhase.AutoSize = true;
+            this.labelPhase.Location = new System.Drawing.Point(15, 521);
+            this.labelPhase.Name = "labelPhase";
+            this.labelPhase.Size = new System.Drawing.Size(97, 25);
+            this.labelPhase.TabIndex = 11;
+            this.labelPhase.Text = "Phase: 0";
             // 
             // labelRotateZ
             // 
@@ -397,7 +397,7 @@
             this.Controls.Add(this.labelTranslateY);
             this.Controls.Add(this.labelTranslateX);
             this.Controls.Add(this.labelScale);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.labelPhase);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -431,7 +431,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelPhase;
         private System.Windows.Forms.Label labelRotateZ;
         private System.Windows.Forms.Label labelRotateY;
         private System.Windows.Forms.Label labelRotateX;

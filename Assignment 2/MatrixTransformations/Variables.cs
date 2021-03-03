@@ -12,7 +12,7 @@
         public float distance { get; set; } = 800;
 
         //Cube variables.
-        public float scale { get; set; } = 1;
+        public double scale { get; set; } = 1;
 
         public double translateX { get; set; } = 0.0;
         public double translateY { get; set; } = 0.0;

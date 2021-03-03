@@ -59,9 +59,12 @@ namespace MatrixTransformations
             vb = ViewportTransformation(z_axis.vb);
             z_axis.Draw(e.Graphics, vb);  // TODO: does not work yet.
 
+            // Scale the cube.
+            List<Vector> scaled = Transform(cube.vertexbuffer, Matrix.ScaleMatrix((float)variables.scale));
+
             // Translation should always be last.
             // Draw cube.
-            vb = ViewingPipeline(cube.vertexbuffer);
+            vb = ViewingPipeline(scaled);
             cube.Draw(e.Graphics, vb);
         }
 
@@ -111,6 +114,26 @@ namespace MatrixTransformations
             variables = new Variables();
         }
 
+        public void UpdateLabels()
+        {
+            labelScale.Text = variables.scale.ToString();
+
+            labelTranslateX.Text = variables.translateX.ToString();
+            labelTranslateY.Text = variables.translateY.ToString();
+            labelTranslateZ.Text = variables.translateZ.ToString();
+
+            labelRotateX.Text = variables.rotateX.ToString();
+            labelRotateY.Text = variables.rotateY.ToString();
+            labelRotateZ.Text = variables.rotateZ.ToString();
+
+            labelR.Text = variables.r.ToString();
+            labelDistance.Text = variables.distance.ToString();
+            labelPhi.Text = variables.phi.ToString();
+            labelTheta.Text = variables.theta.ToString();
+
+            labelPhase.Text = "Phase 0";
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -119,9 +142,17 @@ namespace MatrixTransformations
                     Application.Exit();
                     break;
 
+                case Keys.A:
+                    // Animation time! Hooray.
+                    variables.scale += 0.01;
+                    labelScale.Text = variables.scale.ToString();
+                    labelPhase.Text = "Phase 1";
+                    break;
+
                 // Reset all variables to default.
                 case Keys.C:
                     Reset();
+                    UpdateLabels();
                     break;
 
                 // Change scale.
