@@ -139,11 +139,18 @@ namespace MatrixTransformations
             z_axis.Draw(e.Graphics, vb);  // TODO: does not work yet.
 
             // Scale the cube.
-            List<Vector> scaled = Transform(cube.vertexbuffer, Matrix.ScaleMatrix((float)variables.scale));
+            vb = Transform(cube.vertexbuffer, Matrix.ScaleMatrix((float)variables.scale));
 
-            // Translation should always be last.
+            // Rotation.
+            vb = Transform(vb, Matrix.RotateMatrixX((float)variables.rotateX));
+            vb = Transform(vb, Matrix.RotateMatrixY((float)variables.rotateY));
+            vb = Transform(vb, Matrix.RotateMatrixZ((float)variables.rotateZ));
+
+            // Translate, should always be last!
+            vb = Transform(vb, Matrix.TranslateMatrix(new Vector((float)variables.translateX, (float)variables.translateY, (float)variables.translateZ)));
+            
             // Draw cube.
-            vb = ViewingPipeline(scaled);
+            vb = ViewingPipeline(vb);
             cube.Draw(e.Graphics, vb);
         }
 
