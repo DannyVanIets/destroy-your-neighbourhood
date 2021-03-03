@@ -1,0 +1,19 @@
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\bin\Debug\MatrixTransformations.exe.config
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\bin\Debug\MatrixTransformations.exe
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\bin\Debug\MatrixTransformations.pdb
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\obj\Debug\MatrixTransformations.Form1.resources
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\obj\Debug\MatrixTransformations.Properties.Resources.resources
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\obj\Debug\MatrixTransformations.csproj.GenerateResource.cache
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\obj\Debug\MatrixTransformations.csproj.CoreCompileInputs.cache
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\obj\Debug\MatrixTransformations.exe
+D:\code\git\jaar3-computer-graphics\lecture 2\CG - Lecture 2 - 0 - Sleketon start\MatrixTransformations\obj\Debug\MatrixTransformations.pdb
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\bin\Debug\MatrixTransformations.exe.config
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\bin\Debug\MatrixTransformations.exe
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\bin\Debug\MatrixTransformations.pdb
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.csprojAssemblyReference.cache
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.Form1.resources
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.Properties.Resources.resources
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.csproj.GenerateResource.cache
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.csproj.CoreCompileInputs.cache
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.exe
+D:\code\git\kill-your-neighbourhood\Assigment 2\MatrixTransformations\obj\Debug\MatrixTransformations.pdb

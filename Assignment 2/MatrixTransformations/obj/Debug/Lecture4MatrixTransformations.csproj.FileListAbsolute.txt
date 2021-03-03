@@ -1,0 +1,10 @@
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\bin\Debug\MatrixTransformations.exe.config
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\bin\Debug\MatrixTransformations.exe
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\bin\Debug\MatrixTransformations.pdb
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\Lecture4MatrixTransformations.csprojAssemblyReference.cache
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\MatrixTransformations.Form1.resources
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\MatrixTransformations.Properties.Resources.resources
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\Lecture4MatrixTransformations.csproj.GenerateResource.cache
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\Lecture4MatrixTransformations.csproj.CoreCompileInputs.cache
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\MatrixTransformations.exe
+D:\code\git\jaar3-computer-graphics\Lectures\Lecture4MatrixTransformations\obj\Debug\MatrixTransformations.pdb
