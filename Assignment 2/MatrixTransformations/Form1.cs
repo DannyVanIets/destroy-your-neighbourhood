@@ -138,8 +138,11 @@ namespace MatrixTransformations
             vb = ViewportTransformation(z_axis.vb);
             z_axis.Draw(e.Graphics, vb);  // TODO: does not work yet.
 
+            // Time for cube.
+            vb = cube.vertexbuffer;
+
             // Scale the cube.
-            vb = Transform(cube.vertexbuffer, Matrix.ScaleMatrix((float)variables.scale));
+            vb = Transform(vb, Matrix.ScaleMatrix((float)variables.scale));
 
             // Rotation.
             vb = Transform(vb, Matrix.RotateMatrixX((float)variables.rotateX));
@@ -154,12 +157,11 @@ namespace MatrixTransformations
             cube.Draw(e.Graphics, vb);
         }
 
-        public static List<Vector> Transform(List<Vector> vb, Matrix transformmatrix)
+        public static List<Vector> Transform(List<Vector> vb, Matrix transformMatrix)
         {
+            // Go through every vector and multiple it with the transformMatrix.
             List<Vector> result = new List<Vector>();
-
-            vb.ForEach(x => result.Add(transformmatrix * x));
-
+            vb.ForEach(x => result.Add(transformMatrix * x));
             return result;
         }
 
@@ -182,7 +184,6 @@ namespace MatrixTransformations
         public static List<Vector> ViewingPipeline(List<Vector> vb)
         {
             List<Vector> result = new List<Vector>();
-            Form1 form = new Form1();
             Matrix viewMatrix = Matrix.ViewMatrix(variables.r, variables.theta, variables.phi);
 
             vb.ForEach(v =>
@@ -240,8 +241,9 @@ namespace MatrixTransformations
                     }
                     break;
 
-                // Reset all variables to default.
+                // Reset all variables to default, stop the animation and reset the labels as well.
                 case Keys.C:
+                    timer.Stop();
                     Reset();
                     UpdateLabels();
                     break;
@@ -367,7 +369,7 @@ namespace MatrixTransformations
                     labelTheta.Text = variables.theta.ToString();
                     break;
             }
-            this.Invalidate();
+            Invalidate();
         }
     }
 }
