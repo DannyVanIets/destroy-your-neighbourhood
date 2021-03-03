@@ -28,6 +28,14 @@ namespace MatrixTransformations
 
         public float scale { get; set; } = 1;
 
+        public double translateX { get; set; } = 0.0;
+        public double translateY { get; set; } = 0.0;
+        public double translateZ { get; set; } = 0.0;
+
+        public float rotateX { get; set; } = 0;
+        public float rotateY { get; set; } = 0;
+        public float rotateZ { get; set; } = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -146,6 +154,12 @@ namespace MatrixTransformations
                     Application.Exit();
                     break;
 
+                // Reset all variables to default.
+                case Keys.C:
+                    Reset();
+                    break;
+
+                // Change scale.
                 case Keys.S when e.Shift:
                     scale++;
                     labelScale.Text = scale.ToString();
@@ -156,8 +170,114 @@ namespace MatrixTransformations
                     labelScale.Text = scale.ToString();
                     break;
 
-                case Keys.C:
-                    Reset();
+                // Change translateX.
+                case Keys.Left:
+                    translateX -= 0.1;
+                    labelTranslateX.Text = translateX.ToString();
+                    break;
+
+                case Keys.Right:
+                    translateX += 0.1;
+                    labelTranslateX.Text = translateX.ToString();
+                    break;
+
+                // Change translateY.
+                case Keys.Up:
+                    translateY -= 0.1;
+                    labelTranslateY.Text = translateY.ToString();
+                    break;
+
+                case Keys.Down:
+                    translateY += 0.1;
+                    labelTranslateY.Text = translateY.ToString();
+                    break;
+
+                // Change translateZ.
+                case Keys.PageUp:
+                    translateZ -= 0.1;
+                    labelTranslateZ.Text = translateZ.ToString();
+                    break;
+
+                case Keys.PageDown:
+                    translateZ += 0.1;
+                    labelTranslateZ.Text = translateZ.ToString();
+                    break;
+
+                // Change RotateX
+                case Keys.X when e.Shift:
+                    rotateX++;
+                    labelRotateX.Text = rotateX.ToString();
+                    break;
+
+                case Keys.X:
+                    rotateX--;
+                    labelRotateX.Text = rotateX.ToString();
+                    break;
+
+                // Change RotateY
+                case Keys.Y when e.Shift:
+                    rotateY++;
+                    labelRotateY.Text = rotateY.ToString();
+                    break;
+
+                case Keys.Y:
+                    rotateY--;
+                    labelRotateY.Text = rotateY.ToString();
+                    break;
+
+                // Change RotateZ
+                case Keys.Z when e.Shift:
+                    rotateZ++;
+                    labelRotateZ.Text = rotateZ.ToString();
+                    break;
+
+                case Keys.Z:
+                    rotateZ--;
+                    labelRotateZ.Text = rotateZ.ToString();
+                    break;
+
+                // Change r
+                case Keys.R when e.Shift:
+                    r++;
+                    labelR.Text = r.ToString();
+                    break;
+
+                case Keys.R:
+                    r--;
+                    labelR.Text = r.ToString();
+                    break;
+
+                // Change distance
+                case Keys.D when e.Shift:
+                    distance++;
+                    labelDistance.Text = distance.ToString();
+                    break;
+
+                case Keys.D:
+                    distance--;
+                    labelDistance.Text = distance.ToString();
+                    break;
+
+                // Change phi
+                case Keys.P when e.Shift:
+                    phi++;
+                    labelPhi.Text = phi.ToString();
+                    break;
+
+                case Keys.P:
+                    phi--;
+                    labelPhi.Text = phi.ToString();
+                    break;
+
+                // Change theta
+                case Keys.T when e.Shift:
+                    theta++;
+                    labelTheta.Text = theta.ToString();
+                    break;
+
+                case Keys.T:
+                    theta--;
+                    labelTheta.Text = theta.ToString();
                     break;
             }
         }
