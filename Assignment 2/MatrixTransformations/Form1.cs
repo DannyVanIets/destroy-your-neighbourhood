@@ -1,13 +1,17 @@
-﻿using MatrixTransformations.lecture_4;
-using System;
+﻿using System;
+using MatrixTransformations.lecture_4;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MatrixTransformations
 {
     public partial class Form1 : Form
     {
+        //Timer
+        private Timer timer = new Timer();
+
         // Axes
         AxisX x_axis;
         AxisY y_axis;
@@ -30,6 +34,10 @@ namespace MatrixTransformations
             this.Height = HEIGHT;
             this.DoubleBuffered = true;
 
+            //Timer
+            timer.Interval = 50;
+            timer.Tick += TimerOnTick;
+
             // Define axes
             x_axis = new AxisX(200);
             y_axis = new AxisY(200);
@@ -37,6 +45,77 @@ namespace MatrixTransformations
 
             // Create object
             cube = new Cube(Color.Purple);
+        }
+
+        private int subphase = 0;
+
+        private void TimerOnTick(object sender, EventArgs e)
+        {
+            if (variables.phase == 1)
+            {
+                if (variables.scale < 1.5 && subphase == 0)
+                {
+                    variables.scale += 0.01f;
+                }
+                else if (variables.scale > 1 && subphase == 1)
+                {
+                    variables.scale -= 0.01f;
+                }
+                else if (variables.scale >= 1.5f)
+                {
+                    subphase = 1;
+                }
+                else
+                {
+                    subphase = 0;
+                    variables.phase = 2;
+                }
+
+                variables.theta -= 1f;
+            }
+            else if (variables.phase == 2)
+            {
+                if (variables.rotateX < 45 && subphase == 0)
+                {
+                    variables.rotateX += 1f;
+                }
+
+                variables.theta -= 1;
+            }
+            else if (variables.phase == 3)
+            {
+                if (variables.rotateY < 45 && subphase == 0)
+                {
+                    variables.rotateY += 1f;
+                }
+
+                variables.phi += 1;
+            }
+            else
+            {
+                bool phidone = false;
+
+                if (variables.phi > -10)
+                {
+                    variables.phi -= 1;
+                }
+                else
+                {
+                    phidone = true;
+                }
+
+                if (variables.theta < -100)
+                {
+                    variables.theta += 1;
+                }
+                else if (phidone)
+                {
+                    variables.phase = 1;
+                }
+            }
+
+            this.UpdateLabels();
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -131,7 +210,7 @@ namespace MatrixTransformations
             labelPhi.Text = variables.phi.ToString();
             labelTheta.Text = variables.theta.ToString();
 
-            labelPhase.Text = "Phase 0";
+            labelPhase.Text = $"Phase {variables.phase}";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -143,10 +222,15 @@ namespace MatrixTransformations
                     break;
 
                 case Keys.A:
-                    // Animation time! Hooray.
-                    variables.scale += 0.01f;
-                    labelScale.Text = variables.scale.ToString();
-                    labelPhase.Text = "Phase 1";
+                    if (timer.Enabled)
+                    {
+                        timer.Stop();
+                    }
+                    else
+                    {
+                        timer.Start();
+                        variables.phase = 1;
+                    }
                     break;
 
                 // Reset all variables to default.

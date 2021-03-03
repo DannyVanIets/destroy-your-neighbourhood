@@ -21,5 +21,8 @@
         public float rotateX { get; set; } = 0;
         public float rotateY { get; set; } = 0;
         public float rotateZ { get; set; } = 0;
+
+        //Animation
+        public int phase { get; set; } = 0;
     }
 }
