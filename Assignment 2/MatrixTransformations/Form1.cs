@@ -104,6 +104,15 @@ namespace MatrixTransformations
             cube.Draw(e.Graphics, vb);
         }
 
+        public static List<Vector> Transform(List<Vector> vb, Matrix transformmatrix)
+        {
+            List<Vector> result = new List<Vector>();
+
+            vb.ForEach(x => result.Add(transformmatrix * x));
+
+            return result;
+        }
+
         public static List<Vector> ViewportTransformation(List<Vector> vb)
         {
             List<Vector> result = new List<Vector>();
@@ -116,6 +125,7 @@ namespace MatrixTransformations
                 Vector v2 = new Vector(v.x + delta_x, delta_y - v.y);
                 result.Add(v2);
             }
+
             return result;
         }
 
@@ -131,6 +141,7 @@ namespace MatrixTransformations
                 vp = Matrix.ProjectionMatrix(form.distance, vp) * vp;
                 result.Add(vp);
             });
+
             return ViewportTransformation(result);
         }
 
