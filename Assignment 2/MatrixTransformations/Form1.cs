@@ -144,7 +144,7 @@ namespace MatrixTransformations
 
                 case Keys.A:
                     // Animation time! Hooray.
-                    variables.scale += 0.01;
+                    variables.scale += 0.01f;
                     labelScale.Text = variables.scale.ToString();
                     labelPhase.Text = "Phase 1";
                     break;
@@ -157,45 +157,45 @@ namespace MatrixTransformations
 
                 // Change scale.
                 case Keys.S when e.Shift:
-                    variables.scale++;
+                    variables.scale += 0.1f;
                     labelScale.Text = variables.scale.ToString();
                     break;
 
                 case Keys.S:
-                    variables.scale--;
+                    variables.scale -= 0.1f;
                     labelScale.Text = variables.scale.ToString();
                     break;
 
                 // Change translateX.
-                case Keys.Left:
-                    variables.translateX -= 0.1;
-                    labelTranslateX.Text = variables.translateX.ToString();
-                    break;
-
                 case Keys.Right:
                     variables.translateX += 0.1;
                     labelTranslateX.Text = variables.translateX.ToString();
                     break;
 
-                // Change translateY.
-                case Keys.Up:
-                    variables.translateY -= 0.1;
-                    labelTranslateY.Text = variables.translateY.ToString();
+                case Keys.Left:
+                    variables.translateX -= 0.1;
+                    labelTranslateX.Text = variables.translateX.ToString();
                     break;
 
+                // Change translateY.
                 case Keys.Down:
                     variables.translateY += 0.1;
                     labelTranslateY.Text = variables.translateY.ToString();
                     break;
 
+                case Keys.Up:
+                    variables.translateY -= 0.1;
+                    labelTranslateY.Text = variables.translateY.ToString();
+                    break;
+
                 // Change translateZ.
-                case Keys.PageUp:
-                    variables.translateZ -= 0.1;
+                case Keys.PageDown:
+                    variables.translateZ += 0.1;
                     labelTranslateZ.Text = variables.translateZ.ToString();
                     break;
 
-                case Keys.PageDown:
-                    variables.translateZ += 0.1;
+                case Keys.PageUp:
+                    variables.translateZ -= 0.1;
                     labelTranslateZ.Text = variables.translateZ.ToString();
                     break;
 
@@ -276,6 +276,7 @@ namespace MatrixTransformations
                     labelTheta.Text = variables.theta.ToString();
                     break;
             }
+            this.Invalidate();
         }
     }
 }
