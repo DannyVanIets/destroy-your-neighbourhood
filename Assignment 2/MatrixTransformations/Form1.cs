@@ -19,14 +19,67 @@ namespace MatrixTransformations
         // Window dimensions
         const int WIDTH = 800;
         const int HEIGHT = 600;
-        
-        // Camera variable.
-        public float r { get; set; } = 10;
-        public float theta { get; set; } = -100;
-        public float phi { get; set; } = -10;
-        public float distance { get; set; } = 800;
 
-        public float scale { get; set; } = 1;
+        //Camera Variable backingfields.
+        private float _r = 10;
+        private float _theta = -100;
+        private float _phi = -10;
+        private float _distance = 800;
+
+        // Camera variable.
+        public float r
+        {
+            get => _r;
+            set
+            {
+                _r = value;
+                labelR.Text = value.ToString();
+            }
+        }
+
+        public float theta
+        {
+            get => _theta;
+            set
+            {
+                _theta = value;
+                labelTheta.Text = value.ToString();
+            }
+        }
+
+        public float phi
+        {
+            get => _phi;
+            set
+            {
+                _phi = value;
+                labelPhi.Text = value.ToString();
+            }
+        }
+
+        public float distance
+        {
+            get => _distance;
+            set
+            {
+                _distance = value;
+                labelDistance.Text = value.ToString();
+            }
+        }
+
+        //Camera Variable backingfields.
+        public float _scale = 1;
+
+        //Cube variables.
+        public float scale
+        {
+            get => _scale;
+            set
+            {
+                _scale = value;
+                labelScale.Text = value.ToString();
+            }
+        }
 
         public Form1()
         {
