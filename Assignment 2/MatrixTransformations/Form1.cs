@@ -125,12 +125,9 @@ namespace MatrixTransformations
             List<Vector> vb;
 
             // Update the labels.
-            labelR.Text = variables.r.ToString();
-            labelDistance.Text = variables.distance.ToString();
-            labelPhi.Text = variables.phi.ToString();
-            labelTheta.Text = variables.theta.ToString();
+            UpdateLabels();
 
-            // Draw axes
+            // Draw axes.
             vb = ViewportTransformation(x_axis.vb);
             x_axis.Draw(e.Graphics, vb);
             vb = ViewportTransformation(y_axis.vb);
@@ -229,6 +226,7 @@ namespace MatrixTransformations
                     Application.Exit();
                     break;
 
+                // If A is pressed, start or stop a timer for the animations.
                 case Keys.A:
                     if (timer.Enabled)
                     {
@@ -241,132 +239,109 @@ namespace MatrixTransformations
                     }
                     break;
 
-                // Reset all variables to default, stop the animation and reset the labels as well.
+                // If C is pressed, reset all variables to default, stop the animation and reset the labels as well.
                 case Keys.C:
                     timer.Stop();
                     Reset();
-                    UpdateLabels();
                     break;
 
-                // Change scale.
+                // If S/s is pressed, change scale of the cube.
                 case Keys.S when e.Shift:
                     variables.scale += 0.1f;
-                    labelScale.Text = variables.scale.ToString();
                     break;
 
                 case Keys.S:
                     variables.scale -= 0.1f;
-                    labelScale.Text = variables.scale.ToString();
                     break;
 
-                // Change translateX.
+                // If arrows left/right are pressed, change translateX.
                 case Keys.Right:
                     variables.translateX += 0.1;
-                    labelTranslateX.Text = variables.translateX.ToString();
                     break;
 
                 case Keys.Left:
                     variables.translateX -= 0.1;
-                    labelTranslateX.Text = variables.translateX.ToString();
                     break;
 
-                // Change translateY.
-                case Keys.Down:
-                    variables.translateY += 0.1;
-                    labelTranslateY.Text = variables.translateY.ToString();
-                    break;
-
+                // If arrows down/up are pressed, change translateY.
                 case Keys.Up:
+                    variables.translateY += 0.1;
+                    break;
+
+                case Keys.Down:
                     variables.translateY -= 0.1;
-                    labelTranslateY.Text = variables.translateY.ToString();
                     break;
 
-                // Change translateZ.
-                case Keys.PageDown:
-                    variables.translateZ += 0.1;
-                    labelTranslateZ.Text = variables.translateZ.ToString();
-                    break;
-
+                // If arrows PageDown/PageUp are pressed, change translateZ.
                 case Keys.PageUp:
-                    variables.translateZ -= 0.1;
-                    labelTranslateZ.Text = variables.translateZ.ToString();
+                    variables.translateZ += 0.1;
                     break;
 
-                // Change RotateX
+                case Keys.PageDown:
+                    variables.translateZ -= 0.1;
+                    break;
+
+                // If X/x is pressed, change RotateX.
                 case Keys.X when e.Shift:
-                    variables.rotateX++;
-                    labelRotateX.Text = variables.rotateX.ToString();
+                    variables.rotateX += 0.1f;
                     break;
 
                 case Keys.X:
-                    variables.rotateX--;
-                    labelRotateX.Text = variables.rotateX.ToString();
+                    variables.rotateX -= 0.1f;
                     break;
 
-                // Change RotateY
+                // If Y/y is pressed, change RotateY.
                 case Keys.Y when e.Shift:
-                    variables.rotateY++;
-                    labelRotateY.Text = variables.rotateY.ToString();
+                    variables.rotateY += 0.1f;
                     break;
 
                 case Keys.Y:
-                    variables.rotateY--;
-                    labelRotateY.Text = variables.rotateY.ToString();
+                    variables.rotateY -= 0.1f;
                     break;
 
-                // Change RotateZ
+                // If Z/z is pressed, change RotateZ.
                 case Keys.Z when e.Shift:
-                    variables.rotateZ++;
-                    labelRotateZ.Text = variables.rotateZ.ToString();
+                    variables.rotateZ += 0.1f;
                     break;
 
                 case Keys.Z:
-                    variables.rotateZ--;
-                    labelRotateZ.Text = variables.rotateZ.ToString();
+                    variables.rotateZ -= 0.1f;
                     break;
 
-                // Change r
+                // If R/r is pressed, change r.
                 case Keys.R when e.Shift:
-                    variables.r++;
-                    labelR.Text = variables.r.ToString();
+                    variables.r += 0.1f;
                     break;
 
                 case Keys.R:
-                    variables.r--;
-                    labelR.Text = variables.r.ToString();
+                    variables.r -= 0.1f;
                     break;
 
-                // Change distance
+                // If D/d is pressed, change distance.
                 case Keys.D when e.Shift:
-                    variables.distance++;
-                    labelDistance.Text = variables.distance.ToString();
+                    variables.distance += 0.1f;
                     break;
 
                 case Keys.D:
-                    variables.distance--;
-                    labelDistance.Text = variables.distance.ToString();
+                    variables.distance -= 0.1f;
                     break;
 
-                // Change phi
+                // If P/p is pressed, change phi.
                 case Keys.P when e.Shift:
-                    variables.phi++;
-                    labelPhi.Text = variables.phi.ToString();
+                    variables.phi += 0.1f;
                     break;
 
                 case Keys.P:
-                    variables.phi--;
-                    labelPhi.Text = variables.phi.ToString();
+                    variables.phi -= 0.1f;
                     break;
 
-                // Change theta
+                // If T/t is pressed, change theta.
                 case Keys.T when e.Shift:
-                    variables.theta++;
-                    labelTheta.Text = variables.theta.ToString();
+                    variables.theta += 0.1f;
                     break;
 
                 case Keys.T:
-                    variables.theta--;
-                    labelTheta.Text = variables.theta.ToString();
+                    variables.theta -= 0.1f;
                     break;
             }
             Invalidate();
