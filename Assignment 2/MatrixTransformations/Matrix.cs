@@ -337,23 +337,5 @@ namespace MatrixTransformations
 
             return projMatrix;
         }
-
-        public static Matrix CameraMatrix(Vector vector)
-        {
-            /*  Should look like this:
-             *  1, 0, 0, vector.x
-             *  0, 1, 0, vector.y
-             *  0, 0, 1, vector.z
-             *  0, 0, 0, 1
-             */
-            // Insert the camera positions into a matrix.
-            Matrix projMatrix = new Matrix();
-
-            projMatrix.mat[0, 3] = vector.x;
-            projMatrix.mat[1, 3] = vector.y;
-            projMatrix.mat[2, 3] = vector.z;
-
-            return projMatrix;
-        }
     }
 }
