@@ -52,6 +52,7 @@ namespace MatrixTransformations
 
         private void Animate(object sender, EventArgs e)
         {
+            //Nee
             if (variables.phase == 1)
             {
                 if (variables.scale < 1.5 && subphase == 0)
