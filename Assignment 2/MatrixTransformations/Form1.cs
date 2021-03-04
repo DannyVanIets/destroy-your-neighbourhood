@@ -313,6 +313,7 @@ namespace MatrixTransformations
                 case Keys.C:
                     timer.Stop();
                     variables = new Variables();
+                    cube.col = variables.Colors[variables.CurrentColorIndex];
                     break;
 
                 // If S/s is pressed, change scale of the cube.
