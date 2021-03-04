@@ -44,7 +44,7 @@ namespace MatrixTransformations
             // Define axes
             x_axis = new AxisX(200);
             y_axis = new AxisY(200);
-            z_axis = new AxisZ(200); // TODO: does not work yet.
+            z_axis = new AxisZ(200);
 
             // Create object
             cube = new Cube(Color.Purple);
@@ -156,14 +156,14 @@ namespace MatrixTransformations
 
             // Update the all the labels.
             UpdateLabels();
-
+            
             // Draw axes.
-            vb = ViewportTransformation(x_axis.vb);
+            vb = ViewingAxis(x_axis.vb);
             x_axis.Draw(e.Graphics, vb);
-            vb = ViewportTransformation(y_axis.vb);
+            vb = ViewingAxis(y_axis.vb);
             y_axis.Draw(e.Graphics, vb);
-            vb = ViewportTransformation(z_axis.vb);
-            z_axis.Draw(e.Graphics, vb);  // TODO: does not work yet.
+            vb = ViewingAxis(z_axis.vb);
+            z_axis.Draw(e.Graphics, vb);
 
             // Time for cube.
             vb = cube.vertexbuffer;
@@ -194,6 +194,20 @@ namespace MatrixTransformations
             List<Vector> result = new List<Vector>();
             vb.ForEach(x => result.Add(transformMatrix * x));
             return result;
+        }
+
+        public static List<Vector> ViewingAxis(List<Vector> vb)
+        {
+            List<Vector> result = new List<Vector>();
+            Matrix viewMatrix = Matrix.ViewMatrix(variables.r, variables.theta, variables.phi);
+
+            vb.ForEach(v =>
+            {
+                Vector vp = viewMatrix * v;
+                result.Add(vp);
+            });
+
+            return ViewportTransformation(result);
         }
 
         public static List<Vector> ViewportTransformation(List<Vector> vb)
