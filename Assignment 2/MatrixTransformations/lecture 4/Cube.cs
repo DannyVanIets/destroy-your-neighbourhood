@@ -39,7 +39,7 @@ namespace MatrixTransformations
             new Vector(-1.2f,  1.2f, -1.2f)     //7
         };
 
-        Color col;
+        public Color col;
 
         public Cube(Color c) { col = c; }
 

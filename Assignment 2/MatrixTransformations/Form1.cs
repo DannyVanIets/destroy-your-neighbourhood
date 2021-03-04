@@ -47,7 +47,7 @@ namespace MatrixTransformations
             z_axis = new AxisZ(200);
 
             // Create object
-            cube = new Cube(Color.Purple);
+            cube = new Cube(variables.Colors[variables.CurrentColorIndex]);
         }
 
         private void Animate(object sender, EventArgs e)
@@ -275,6 +275,8 @@ namespace MatrixTransformations
             labelPhi.Text = Math.Round(variables.phi, decimalamount).ToString();
             labelTheta.Text = Math.Round(variables.theta, decimalamount).ToString();
 
+            labelColor.Text = cube.col.Name;
+
             string phasetext = "";
 
             if (subphase > 0)
@@ -410,6 +412,19 @@ namespace MatrixTransformations
 
                 case Keys.T:
                     variables.theta -= 1f;
+                    break;
+
+                //If [/] is pressed, change color.
+                //[
+                case Keys.Oem4:
+                    variables.CurrentColorIndex = variables.CurrentColorIndex <= 0 ? variables.Colors.Count - 1 : variables.CurrentColorIndex - 1;
+                    cube.col = variables.Colors[variables.CurrentColorIndex];
+                    break;
+
+                //]
+                case Keys.Oem6:
+                    variables.CurrentColorIndex = variables.CurrentColorIndex >= variables.Colors.Count - 1 ? 0 : variables.CurrentColorIndex + 1;
+                    cube.col = variables.Colors[variables.CurrentColorIndex];
                     break;
             }
             Invalidate();

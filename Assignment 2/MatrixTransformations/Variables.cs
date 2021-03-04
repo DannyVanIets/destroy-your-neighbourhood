@@ -1,4 +1,7 @@
-﻿namespace MatrixTransformations
+﻿using System.Collections.Generic;
+using System.Drawing;
+
+namespace MatrixTransformations
 {
     public class Variables
     {
@@ -22,5 +25,9 @@
 
         // Animation variables.
         public int phase { get; set; } = 0;
+
+        //Colors
+        public int CurrentColorIndex { get; set; } = 0;
+        public List<Color> Colors = new List<Color> { Color.Purple, Color.Red, Color.Green, Color.Blue, Color.Black, Color.Yellow};
     }
 }
