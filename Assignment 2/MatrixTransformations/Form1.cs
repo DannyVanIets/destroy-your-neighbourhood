@@ -237,7 +237,7 @@ namespace MatrixTransformations
             labelPhi.Text = variables.phi.ToString();
             labelTheta.Text = variables.theta.ToString();
 
-            labelPhase.Text = $"Phase {variables.phase}";
+            labelPhase.Text = $"Phase: {variables.phase}";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
