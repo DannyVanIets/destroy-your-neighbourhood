@@ -2,7 +2,6 @@
 using MatrixTransformations.lecture_4;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MatrixTransformations
@@ -79,6 +78,19 @@ namespace MatrixTransformations
                 {
                     variables.rotateX += 1f;
                 }
+                else if (variables.rotateX > 0 && subphase == 1)
+                {
+                    variables.rotateX -= 1f;
+                }
+                else if (variables.rotateX >= 45)
+                {
+                    subphase = 1;
+                }
+                else
+                {
+                    subphase = 0;
+                    variables.phase = 3;
+                }
 
                 variables.theta -= 1;
             }
@@ -87,6 +99,19 @@ namespace MatrixTransformations
                 if (variables.rotateY < 45 && subphase == 0)
                 {
                     variables.rotateY += 1f;
+                }
+                else if (variables.rotateY > 0 && subphase == 1)
+                {
+                    variables.rotateY -= 1f;
+                }
+                else if (variables.rotateY >= 45)
+                {
+                    subphase = 1;
+                }
+                else
+                {
+                    subphase = 0;
+                    variables.phase = 4;
                 }
 
                 variables.phi += 1;
@@ -139,16 +164,16 @@ namespace MatrixTransformations
             vb = cube.vertexbuffer;
 
             // Scale the cube.
-            vb = Transform(vb, Matrix.ScaleMatrix((float)variables.scale));
+            vb = Transform(vb, Matrix.ScaleMatrix(variables.scale));
 
             // Rotation.
-            vb = Transform(vb, Matrix.RotateMatrixX((float)variables.rotateX));
-            vb = Transform(vb, Matrix.RotateMatrixY((float)variables.rotateY));
-            vb = Transform(vb, Matrix.RotateMatrixZ((float)variables.rotateZ));
+            vb = Transform(vb, Matrix.RotateMatrixX(variables.rotateX));
+            vb = Transform(vb, Matrix.RotateMatrixY(variables.rotateY));
+            vb = Transform(vb, Matrix.RotateMatrixZ(variables.rotateZ));
 
             // Translate, should always be last!
             vb = Transform(vb, Matrix.TranslateMatrix(new Vector((float)variables.translateX, (float)variables.translateY, (float)variables.translateZ)));
-            
+
             // Draw cube.
             vb = ViewingPipeline(vb);
             cube.Draw(e.Graphics, vb);
