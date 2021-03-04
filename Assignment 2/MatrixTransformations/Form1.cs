@@ -25,6 +25,8 @@ namespace MatrixTransformations
 
         private static Variables variables = new Variables();
 
+        private int subphase = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -45,8 +47,6 @@ namespace MatrixTransformations
             // Create object
             cube = new Cube(Color.Purple);
         }
-
-        private int subphase = 0;
 
         private void TimerOnTick(object sender, EventArgs e)
         {
@@ -116,7 +116,7 @@ namespace MatrixTransformations
 
                 variables.phi += 1;
             }
-            else
+            else if (variables.phase == 4)
             {
                 bool phidone = false;
 
@@ -138,6 +138,11 @@ namespace MatrixTransformations
                     variables.phase = 1;
                 }
             }
+            else
+            {
+                variables.phase = 1;
+            }
+
             Invalidate();
         }
 
@@ -175,7 +180,7 @@ namespace MatrixTransformations
             // Multiple them all up.
             Matrix total = scaled * rotateX * rotateY * rotateZ * translate;
             vb = Transform(vb, total);
-            
+
             // Draw cube.
             vb = ViewingPipeline(vb);
             cube.Draw(e.Graphics, vb);
@@ -254,16 +259,12 @@ namespace MatrixTransformations
                     break;
 
                 // If A is pressed, start or stop a timer for the animations.
+                case Keys.A when timer.Enabled:
+                    timer.Stop();
+                    break;
+
                 case Keys.A:
-                    if (timer.Enabled)
-                    {
-                        timer.Stop();
-                    }
-                    else
-                    {
-                        timer.Start();
-                        variables.phase = 1;
-                    }
+                    timer.Start();
                     break;
 
                 // If C is pressed, reset all variables to default, stop the animation and reset the labels as well.
