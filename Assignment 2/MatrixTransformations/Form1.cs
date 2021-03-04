@@ -138,9 +138,7 @@ namespace MatrixTransformations
                     variables.phase = 1;
                 }
             }
-
-            this.UpdateLabels();
-            this.Invalidate();
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -164,16 +162,20 @@ namespace MatrixTransformations
             vb = cube.vertexbuffer;
 
             // Scale the cube.
-            vb = Transform(vb, Matrix.ScaleMatrix(variables.scale));
+            Matrix scaled = Matrix.ScaleMatrix((float)variables.scale);
 
             // Rotation.
-            vb = Transform(vb, Matrix.RotateMatrixX(variables.rotateX));
-            vb = Transform(vb, Matrix.RotateMatrixY(variables.rotateY));
-            vb = Transform(vb, Matrix.RotateMatrixZ(variables.rotateZ));
+            Matrix rotateX = Matrix.RotateMatrixX((float)variables.rotateX);
+            Matrix rotateY = Matrix.RotateMatrixX((float)variables.rotateY);
+            Matrix rotateZ = Matrix.RotateMatrixX((float)variables.rotateZ);
 
             // Translate, should always be last!
-            vb = Transform(vb, Matrix.TranslateMatrix(new Vector((float)variables.translateX, (float)variables.translateY, (float)variables.translateZ)));
+            Matrix translate = Matrix.TranslateMatrix(new Vector((float)variables.translateX, (float)variables.translateY, (float)variables.translateZ, 0));
 
+            // Multiple them all up.
+            Matrix total = scaled * rotateX * rotateY * rotateZ * translate;
+            vb = Transform(vb, total);
+            
             // Draw cube.
             vb = ViewingPipeline(vb);
             cube.Draw(e.Graphics, vb);
@@ -344,29 +346,29 @@ namespace MatrixTransformations
 
                 // If D/d is pressed, change distance.
                 case Keys.D when e.Shift:
-                    variables.distance += 0.1f;
+                    variables.distance += 10f;
                     break;
 
                 case Keys.D:
-                    variables.distance -= 0.1f;
+                    variables.distance -= 10f;
                     break;
 
                 // If P/p is pressed, change phi.
                 case Keys.P when e.Shift:
-                    variables.phi += 0.1f;
+                    variables.phi += 1f;
                     break;
 
                 case Keys.P:
-                    variables.phi -= 0.1f;
+                    variables.phi -= 1f;
                     break;
 
                 // If T/t is pressed, change theta.
                 case Keys.T when e.Shift:
-                    variables.theta += 0.1f;
+                    variables.theta += 1f;
                     break;
 
                 case Keys.T:
-                    variables.theta -= 0.1f;
+                    variables.theta -= 1f;
                     break;
             }
             Invalidate();
