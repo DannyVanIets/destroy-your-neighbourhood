@@ -156,7 +156,7 @@ namespace MatrixTransformations
 
             // Update the all the labels.
             UpdateLabels();
-            
+
             // Draw axes.
             vb = ViewingAxis(x_axis.vb);
             x_axis.Draw(e.Graphics, vb);
@@ -258,7 +258,16 @@ namespace MatrixTransformations
             labelPhi.Text = Math.Round(variables.phi, decimalamount).ToString();
             labelTheta.Text = Math.Round(variables.theta, decimalamount).ToString();
 
-            labelPhase.Text = $"Phase: {variables.phase}";
+            string phasetext = "";
+
+            if (subphase > 0)
+            {
+                phasetext = " -";
+            }
+
+            phasetext += variables.phase;
+
+            labelPhase.Text = $"Phase: {phasetext}";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
