@@ -27,6 +27,8 @@ namespace MatrixTransformations
 
         private int subphase = 0;
 
+        private int decimalamount = 2;
+
         public Form1()
         {
             InitializeComponent();
@@ -227,20 +229,20 @@ namespace MatrixTransformations
 
         public void UpdateLabels()
         {
-            labelScale.Text = variables.scale.ToString();
+            labelScale.Text = Math.Round(variables.scale, decimalamount).ToString();
 
-            labelTranslateX.Text = variables.translateX.ToString();
-            labelTranslateY.Text = variables.translateY.ToString();
-            labelTranslateZ.Text = variables.translateZ.ToString();
+            labelTranslateX.Text = Math.Round(variables.translateX, decimalamount).ToString();
+            labelTranslateY.Text = Math.Round(variables.translateY, decimalamount).ToString();
+            labelTranslateZ.Text = Math.Round(variables.translateZ, decimalamount).ToString();
 
-            labelRotateX.Text = variables.rotateX.ToString();
-            labelRotateY.Text = variables.rotateY.ToString();
-            labelRotateZ.Text = variables.rotateZ.ToString();
+            labelRotateX.Text = Math.Round(variables.rotateX, decimalamount).ToString();
+            labelRotateY.Text = Math.Round(variables.rotateY, decimalamount).ToString();
+            labelRotateZ.Text = Math.Round(variables.rotateZ, decimalamount).ToString();
 
-            labelR.Text = variables.r.ToString();
-            labelDistance.Text = variables.distance.ToString();
-            labelPhi.Text = variables.phi.ToString();
-            labelTheta.Text = variables.theta.ToString();
+            labelR.Text = Math.Round(variables.r, decimalamount).ToString();
+            labelDistance.Text = Math.Round(variables.distance, decimalamount).ToString();
+            labelPhi.Text = Math.Round(variables.phi, decimalamount).ToString();
+            labelTheta.Text = Math.Round(variables.theta, decimalamount).ToString();
 
             labelPhase.Text = $"Phase: {variables.phase}";
         }
