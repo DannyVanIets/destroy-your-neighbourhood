@@ -172,6 +172,7 @@ namespace MatrixTransformations
                 z = mat[2, 0],
                 w = mat[3, 0]
             };
+
             return vector;
         }
 
@@ -204,9 +205,11 @@ namespace MatrixTransformations
              *  0, 0, 0, 1
              */
             Matrix m = new Matrix();
+
             m.mat[0, 0] = s;
             m.mat[1, 1] = s;
             m.mat[2, 2] = s;
+
             return m;
         }
 
@@ -227,6 +230,7 @@ namespace MatrixTransformations
                 cos, -sin,
                 sin, cos
             );
+
             return rotatedMatrix;
         }
 
