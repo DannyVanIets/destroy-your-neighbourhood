@@ -5,7 +5,7 @@ namespace MatrixTransformations
 {
     public class Matrix
     {
-        float[,] mat = new float[4, 4];
+        public float[,] mat = new float[4, 4];
 
         public Matrix()
         {
