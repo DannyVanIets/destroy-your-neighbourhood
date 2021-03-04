@@ -2,12 +2,12 @@
 {
     public class Variables
     {
-        // Camera variable.
+        // Camera variables.
         public float r { get; set; } = 10;
         public float theta { get; set; } = -100;
         public float phi { get; set; } = -10;
         public float distance { get; set; } = 800;
-
+        // Make the cube bigger or smaller.
         public float scale { get; set; } = 1;
 
         // Translate the cube, should always be done after scaling and rotating!
@@ -20,7 +20,7 @@
         public float rotateY { get; set; } = 0;
         public float rotateZ { get; set; } = 0;
 
-        //Animation
+        // Animation variables.
         public int phase { get; set; } = 0;
     }
 }

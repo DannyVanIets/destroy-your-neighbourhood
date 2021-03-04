@@ -243,6 +243,8 @@ namespace MatrixTransformations
 
         public void UpdateLabels()
         {
+            // Update every label with a number in it, after a key press or during the animation.
+
             labelScale.Text = Math.Round(variables.scale, decimalamount).ToString();
 
             labelTranslateX.Text = Math.Round(variables.translateX, decimalamount).ToString();
@@ -263,6 +265,9 @@ namespace MatrixTransformations
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            // In this function we have switch cases for keypresses.
+            // Once a button is pressed, the cube will be redrawn and the labels will be updated, based on the keypress.
+
             switch (e.KeyCode)
             {
                 case Keys.Escape:
