@@ -99,6 +99,25 @@ namespace NUnitTestsMatrixTransformations
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
 
+        [TestCase(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+        [TestCase(5, 4, 3, 2, 10, 8, 6, 4, 82, -4, -3, -2)]
+        [TestCase(-5, 32, 88, 99, -15, -16, 34, 46, 10, 48, 54, 53)]
+        public void Test_Matrix_Times_Vector(int m11, int m12, int m21, int m22, int x, int y, int z, int w, int expectedX, int expectedY, int expectedZ, int expectedW)
+        {
+            // Arrange
+            Matrix matrix = new Matrix(m11, m12, m21, m22);
+            Vector vector = new Vector(x, y, z, w);
+
+            // Act
+            Vector result = matrix * vector;
+
+            // Assert
+            Assert.AreEqual(expectedX, result.x);
+            Assert.AreEqual(expectedY, result.y);
+            Assert.AreEqual(expectedZ, result.z);
+            Assert.AreEqual(expectedW, result.w);
+        }
+
         [TestCase(1, 1, 1, 1, 1, 1, 1, 1, 1)]
         [TestCase(5, 10, 12, 50, 2, 10, 20, 24, 100)]
         [TestCase(560, 301, 123, 502, 5, 2800, 1505, 615, 2510)]

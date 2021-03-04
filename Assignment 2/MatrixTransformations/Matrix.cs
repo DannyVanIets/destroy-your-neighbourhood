@@ -106,15 +106,7 @@ namespace MatrixTransformations
 
         public static Matrix operator *(float f, Matrix m1)
         {
-            Matrix matrix = new Matrix();
-            for (int i = 0; i < m1.mat.GetLength(0); i++)
-            {
-                for (int j = 0; j < m1.mat.GetLength(1); j++)
-                {
-                    matrix.mat[i, j] = m1.mat[i, j] * f;
-                }
-            }
-            return matrix;
+            return m1 * f;
         }
 
         public static Matrix operator *(Matrix m1, Matrix m2)
