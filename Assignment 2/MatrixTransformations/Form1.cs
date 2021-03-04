@@ -147,7 +147,7 @@ namespace MatrixTransformations
 
             List<Vector> vb;
 
-            // Update the labels.
+            // Update the all the labels.
             UpdateLabels();
 
             // Draw axes.
@@ -164,12 +164,12 @@ namespace MatrixTransformations
             // Scale the cube.
             Matrix scaled = Matrix.ScaleMatrix((float)variables.scale);
 
-            // Rotation.
+            // Rotate the cube.
             Matrix rotateX = Matrix.RotateMatrixX((float)variables.rotateX);
             Matrix rotateY = Matrix.RotateMatrixX((float)variables.rotateY);
             Matrix rotateZ = Matrix.RotateMatrixX((float)variables.rotateZ);
 
-            // Translate, should always be last!
+            // Translate the cube, should always be last!
             Matrix translate = Matrix.TranslateMatrix(new Vector((float)variables.translateX, (float)variables.translateY, (float)variables.translateZ, 0));
 
             // Multiple them all up.
@@ -220,11 +220,6 @@ namespace MatrixTransformations
             return ViewportTransformation(result);
         }
 
-        public static void Reset()
-        {
-            variables = new Variables();
-        }
-
         public void UpdateLabels()
         {
             labelScale.Text = variables.scale.ToString();
@@ -269,7 +264,7 @@ namespace MatrixTransformations
                 // If C is pressed, reset all variables to default, stop the animation and reset the labels as well.
                 case Keys.C:
                     timer.Stop();
-                    Reset();
+                    variables = new Variables();
                     break;
 
                 // If S/s is pressed, change scale of the cube.
