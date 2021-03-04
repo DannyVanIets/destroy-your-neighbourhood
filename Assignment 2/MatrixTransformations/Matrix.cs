@@ -9,9 +9,11 @@ namespace MatrixTransformations
 
         public Matrix()
         {
-            /* Create it like this:
-             * [1,0]
-             * [0,1]
+            /*  Should look like this:
+             *  1, 0, 0, 0
+             *  0, 1, 0, 0
+             *  0, 0, 1, 0
+             *  0, 0, 0, 1
              */
             mat = new Matrix(
                 1, 0, 
@@ -22,6 +24,12 @@ namespace MatrixTransformations
         public Matrix(float m11, float m12,
                       float m21, float m22)
         {
+            /*  Should look like this:
+             *  m11, m12, 0, 0
+             *  m21, m22, 0, 0
+             *  0,   0,   0, 0
+             *  0,   0,   0, 0
+             */ 
             mat[0, 0] = m11; mat[0, 1] = m12; mat[0, 2] = 0; mat[0, 3] = 0;
             mat[1, 0] = m21; mat[1, 1] = m22; mat[1, 2] = 0; mat[1, 3] = 0;
             mat[2, 0] = 0;   mat[2, 1] = 0;   mat[2, 2] = 1; mat[2, 3] = 0;
@@ -30,6 +38,12 @@ namespace MatrixTransformations
 
         public Matrix(Vector v)
         {
+            /*  Should look like this:
+             *  v.x, 0, 0, 0
+             *  v.y, 1, 0, 0
+             *  v.z, 0, 1, 0
+             *  0,   0, 0, 1
+             */
             mat[0, 0] = v.x;
             mat[1, 0] = v.y;
             mat[2, 0] = v.z;
@@ -37,6 +51,12 @@ namespace MatrixTransformations
 
         public static Matrix ZeroMatrix()
         {
+            /*  Should look like this:
+             *  0, 0, 0, 0
+             *  0, 0, 0, 0
+             *  0, 0, 0, 0
+             *  0, 0, 0, 0
+             */
             Matrix matrix = new Matrix();
             matrix.mat[0, 0] = 0; matrix.mat[0, 1] = 0; matrix.mat[0, 2] = 0; matrix.mat[0, 3] = 0;
             matrix.mat[1, 0] = 0; matrix.mat[1, 1] = 0; matrix.mat[1, 2] = 0; matrix.mat[1, 3] = 0;
@@ -128,17 +148,29 @@ namespace MatrixTransformations
 
         public static Matrix Identity()
         {
+            /*  Should look like this:
+             *  1, 0, 0, 0
+             *  0, 1, 0, 0
+             *  0, 0, 1, 0
+             *  0, 0, 0, 1
+             */
             return new Matrix();
         }
 
         public Vector ToVector()
         {
+            /*  Should look like this:
+             *  mat[0, 0],
+             *  mat[1, 0],
+             *  mat[2, 0],
+             *  mat[3, 0],
+             */
             Vector vector = new Vector
             {
                 x = mat[0, 0],
                 y = mat[1, 0],
                 z = mat[2, 0],
-                w = mat[2, 0]
+                w = mat[3, 0]
             };
             return vector;
         }
@@ -164,6 +196,13 @@ namespace MatrixTransformations
         // For lecture 3
         public static Matrix ScaleMatrix(float s)
         {
+            // Scale the matrix, so that the cube/square becomes bigger/smaller.
+            /*  Should look like this:
+             *  s, 0, 0, 0
+             *  0, s, 0, 0
+             *  0, 0, s, 0
+             *  0, 0, 0, 1
+             */
             Matrix m = new Matrix();
             m.mat[0, 0] = s;
             m.mat[1, 1] = s;
@@ -173,6 +212,12 @@ namespace MatrixTransformations
 
         public static Matrix RotateMatrix(float degrees)
         {
+            /*  Should look like this:
+             *  cos, -sin, 0, 0
+             *  sin,  cos, 0, 0
+             *  0,    0,   1, 0
+             *  0,    0,   0, 1
+             */
             // Turn degrees into radians, radians is used by cos and sin.
             double radians = degrees * Math.PI / 180;
             float cos = (float)Math.Cos(radians);
@@ -187,6 +232,12 @@ namespace MatrixTransformations
 
         public static Matrix TranslateMatrix(Vector t)
         {
+            /*  Should look like this:
+             *  1, 0, 0, t.x
+             *  0, 1, 0, t.y
+             *  0, 0, 1, t.z
+             *  0, 0, 0, t.w
+             */
             Matrix matrix = new Matrix();
 
             matrix.mat[0,3] += t.x;
@@ -205,6 +256,12 @@ namespace MatrixTransformations
 
         public static Matrix RotateMatrixX(float degrees)
         {
+            /*  Should look like this:
+             *  1, 0,    0,   0
+             *  0, cos, -sin, 0
+             *  0, sin,  cos, 0
+             *  0, 0,    0,   1
+             */
             // Turn degrees into radians, radians is used by cos and sin.
             double radians = degrees * Math.PI / 180;
             float cos = (float)Math.Cos(radians);
@@ -218,6 +275,12 @@ namespace MatrixTransformations
 
         public static Matrix RotateMatrixY(float degrees)
         {
+            /*  Should look like this:
+             *   cos, 0, sin, 0
+             *   0,   0, 0,   0
+             *  -sin, 0, cos, 0
+             *   0,   0, 0,   0
+             */
             // Turn degrees into radians, radians is used by cos and sin.
             double radians = degrees * Math.PI / 180;
             float cos = (float)Math.Cos(radians);
@@ -231,6 +294,12 @@ namespace MatrixTransformations
 
         public static Matrix ViewMatrix(float r, float theta, float phi)
         {
+            /*  Should look like this:
+             *  -sinThetha, cosThetha, 0,                  0,       0
+             *  -cosThetha * cosPhi,  -cosPhi * sinThetha, sinPhi,  0
+             *  cosThetha * sinPhi,    sinThetha * sinPhi, cosPhi, -r
+             *  0,                     0,                  0,       1
+             */
             // Phi looks like this: φ.
             // Theta looks like this: θ.
             Matrix viewMatrix = new Matrix();
@@ -253,6 +322,12 @@ namespace MatrixTransformations
 
         public static Matrix ProjectionMatrix(float distance, Vector vector)
         {
+            /*  Should look like this:
+             *  distance / vector.z, 0,                   0, 0
+             *  0,                   distance / vector.z, 0, 0
+             *  0,                   0,                   0, 0
+             *  0,                   0,                   0, 0
+             */
             float projection = distance / vector.z;
             float[,] projMat = new float[4, 4];
 
@@ -269,6 +344,12 @@ namespace MatrixTransformations
 
         public static Matrix CameraMatrix(Vector vector)
         {
+            /*  Should look like this:
+             *  1, 0, 0, vector.x
+             *  0, 1, 0, vector.y
+             *  0, 0, 1, vector.z
+             *  0, 0, 0, 1
+             */
             // Insert the camera positions into a matrix.
             Matrix projMatrix = new Matrix();
 
