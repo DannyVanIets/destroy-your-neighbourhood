@@ -14,7 +14,7 @@ namespace MatrixTransformations
         // Axes
         AxisX x_axis;
         AxisY y_axis;
-        AxisZ z_axis; // TODO: does not work yet.
+        AxisZ z_axis;
 
         // Objects
         Cube cube;
@@ -196,20 +196,6 @@ namespace MatrixTransformations
             return result;
         }
 
-        public static List<Vector> ViewingAxis(List<Vector> vb)
-        {
-            List<Vector> result = new List<Vector>();
-            Matrix viewMatrix = Matrix.ViewMatrix(variables.r, variables.theta, variables.phi);
-
-            vb.ForEach(v =>
-            {
-                Vector vp = viewMatrix * v;
-                result.Add(vp);
-            });
-
-            return ViewportTransformation(result);
-        }
-
         public static List<Vector> ViewportTransformation(List<Vector> vb)
         {
             List<Vector> result = new List<Vector>();
@@ -224,6 +210,20 @@ namespace MatrixTransformations
             }
 
             return result;
+        }
+
+        public static List<Vector> ViewingAxis(List<Vector> vb)
+        {
+            List<Vector> result = new List<Vector>();
+            Matrix viewMatrix = Matrix.ViewMatrix(variables.r, variables.theta, variables.phi);
+
+            vb.ForEach(v =>
+            {
+                Vector vp = viewMatrix * v;
+                result.Add(vp);
+            });
+
+            return ViewportTransformation(result);
         }
 
         public static List<Vector> ViewingPipeline(List<Vector> vb)
