@@ -100,8 +100,8 @@ namespace NUnitTestsMatrixTransformations
         }
 
         [TestCase(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
-        [TestCase(5, 4, 3, 2, 10, 8, 6, 4, 82, -4, -3, -2)]
-        [TestCase(-5, 32, 88, 99, -15, -16, 34, 46, 10, 48, 54, 53)]
+        [TestCase(5, 4, 3, 2,             10, 8, 6, 4,              82, 46, 6, 4)]
+        [TestCase(-5, 32, 88, 99,        -15, -16, 34, 46,          -437, -2904, 34, 46)]
         public void Test_Matrix_Times_Vector(int m11, int m12, int m21, int m22, int x, int y, int z, int w, int expectedX, int expectedY, int expectedZ, int expectedW)
         {
             // Arrange
