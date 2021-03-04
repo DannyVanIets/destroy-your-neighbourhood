@@ -39,7 +39,7 @@ namespace MatrixTransformations
 
             //Timer
             timer.Interval = 50;
-            timer.Tick += TimerOnTick;
+            timer.Tick += Animate;
 
             // Define axes
             x_axis = new AxisX(200);
@@ -50,7 +50,7 @@ namespace MatrixTransformations
             cube = new Cube(Color.Purple);
         }
 
-        private void TimerOnTick(object sender, EventArgs e)
+        private void Animate(object sender, EventArgs e)
         {
             if (variables.phase == 1)
             {
