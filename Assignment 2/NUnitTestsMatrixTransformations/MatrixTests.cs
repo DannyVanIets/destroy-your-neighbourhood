@@ -77,5 +77,24 @@ namespace NUnitTestsMatrixTransformations
             // Assert
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
+
+        [TestCase(1, 1, 1, 1, 1, 1, 1, 1, 1)]
+        [TestCase(5, 10, 12, 50, 2, 10, 20, 24, 100)]
+        [TestCase(560, 301, 123, 502, 5, 2800, 1505, 615, 2510)]
+        public void Test_Matrix_Multiplication_Float(int m11, int m12, int m21, int m22, float multi, int expectedm11, int expectedm12, int expectedm21, int expectedm22)
+        {
+            // Arrange
+            Matrix m1 = new Matrix(m11, m12, m21, m22);
+
+            Matrix expected = new Matrix(expectedm11, expectedm12, expectedm21, expectedm22);
+            expected.mat[2, 2] = 1 * multi;
+            expected.mat[3, 3] = 1 * multi;
+
+            // Act
+            Matrix actual = m1 * multi;
+
+            // Assert
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
     }
 }
