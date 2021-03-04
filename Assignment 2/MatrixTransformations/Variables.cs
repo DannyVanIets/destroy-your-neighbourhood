@@ -11,9 +11,9 @@
         public float scale { get; set; } = 1;
 
         // Translate the cube, should always be done after scaling and rotating!
-        public double translateX { get; set; } = 0.0;
-        public double translateY { get; set; } = 0.0;
-        public double translateZ { get; set; } = 0.0;
+        public float translateX { get; set; } = 0.0f;
+        public float translateY { get; set; } = 0.0f;
+        public float translateZ { get; set; } = 0.0f;
 
         // Rotate the cube.
         public float rotateX { get; set; } = 0;

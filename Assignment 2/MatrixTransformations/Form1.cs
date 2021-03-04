@@ -156,7 +156,7 @@ namespace MatrixTransformations
 
             // Update the all the labels.
             UpdateLabels();
-            
+
             // Draw axes.
             vb = ViewingAxis(x_axis.vb);
             x_axis.Draw(e.Graphics, vb);
@@ -169,15 +169,15 @@ namespace MatrixTransformations
             vb = cube.vertexbuffer;
 
             // Scale the cube.
-            Matrix scaled = Matrix.ScaleMatrix((float)variables.scale);
+            Matrix scaled = Matrix.ScaleMatrix(variables.scale);
 
             // Rotate the cube.
-            Matrix rotateX = Matrix.RotateMatrixX((float)variables.rotateX);
-            Matrix rotateY = Matrix.RotateMatrixX((float)variables.rotateY);
-            Matrix rotateZ = Matrix.RotateMatrixX((float)variables.rotateZ);
+            Matrix rotateX = Matrix.RotateMatrixX(variables.rotateX);
+            Matrix rotateY = Matrix.RotateMatrixX(variables.rotateY);
+            Matrix rotateZ = Matrix.RotateMatrixX(variables.rotateZ);
 
             // Translate the cube, should always be last!
-            Matrix translate = Matrix.TranslateMatrix(new Vector((float)variables.translateX, (float)variables.translateY, (float)variables.translateZ, 0));
+            Matrix translate = Matrix.TranslateMatrix(new Vector(variables.translateX, variables.translateY, variables.translateZ, 0));
 
             // Multiple them all up.
             Matrix total = scaled * rotateX * rotateY * rotateZ * translate;
@@ -260,7 +260,16 @@ namespace MatrixTransformations
             labelPhi.Text = Math.Round(variables.phi, decimalamount).ToString();
             labelTheta.Text = Math.Round(variables.theta, decimalamount).ToString();
 
-            labelPhase.Text = $"Phase: {variables.phase}";
+            string phasetext = "";
+
+            if (subphase > 0)
+            {
+                phasetext = " -";
+            }
+
+            phasetext += variables.phase;
+
+            labelPhase.Text = $"Phase: {phasetext}";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -300,29 +309,29 @@ namespace MatrixTransformations
 
                 // If arrows left/right are pressed, change translateX.
                 case Keys.Right:
-                    variables.translateX += 0.1;
+                    variables.translateX += 0.1f;
                     break;
 
                 case Keys.Left:
-                    variables.translateX -= 0.1;
+                    variables.translateX -= 0.1f;
                     break;
 
                 // If arrows down/up are pressed, change translateY.
                 case Keys.Up:
-                    variables.translateY += 0.1;
+                    variables.translateY += 0.1f;
                     break;
 
                 case Keys.Down:
-                    variables.translateY -= 0.1;
+                    variables.translateY -= 0.1f;
                     break;
 
                 // If arrows PageDown/PageUp are pressed, change translateZ.
                 case Keys.PageUp:
-                    variables.translateZ += 0.1;
+                    variables.translateZ += 0.1f;
                     break;
 
                 case Keys.PageDown:
-                    variables.translateZ -= 0.1;
+                    variables.translateZ -= 0.1f;
                     break;
 
                 // If X/x is pressed, change RotateX.
