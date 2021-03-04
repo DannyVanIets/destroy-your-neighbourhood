@@ -136,5 +136,65 @@ namespace NUnitTestsMatrixTransformations
             // Assert
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
+
+        [TestCase(1, 0.9998477f, -0.0174524058f, 0.0174524058f, 0.9998477f)]
+        [TestCase(45, 0.707106769f, -0.707106769f, 0.707106769f, 0.707106769f)]
+        public void Test_Matrix_RotateMatrixZ(float degrees, float expectedm11, float expectedm12, float expectedm21,
+            float expectedm22)
+        {
+            // Arrange
+            Matrix expected = new Matrix(expectedm11, expectedm12, expectedm21, expectedm22);
+            Matrix actual = Matrix.RotateMatrixZ(degrees);
+
+            // Act
+
+
+            // Assert
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [TestCase(1, 0.9998477f, -0.0174524058f, 0.0174524058f, 0.9998477f)]
+        [TestCase(45, 0.707106769f, -0.707106769f, 0.707106769f, 0.707106769f)]
+        public void Test_Matrix_RotateMatrixX(float degrees, float expectedm22, float expectedm23, float expectedm32,
+            float expectedm33)
+        {
+            // Arrange
+            Matrix expected = new Matrix();
+            expected.mat[1, 1] = expectedm22;
+            expected.mat[1, 2] = expectedm23;
+            expected.mat[2, 1] = expectedm32;
+            expected.mat[2, 2] = expectedm33;
+
+
+            Matrix actual = Matrix.RotateMatrixX(degrees);
+
+            // Act
+
+
+            // Assert
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [TestCase(1, 0.9998477f, 0.0174524058f, -0.0174524058f, 0.9998477f)]
+        [TestCase(45, 0.707106769f, 0.707106769f, -0.707106769f, 0.707106769f)]
+        public void Test_Matrix_RotateMatrixY(float degrees, float expectedm11, float expectedm13, float expectedm31,
+            float expectedm33)
+        {
+            // Arrange
+            Matrix expected = new Matrix();
+            expected.mat[0, 0] = expectedm11;
+            expected.mat[0, 2] = expectedm13;
+            expected.mat[2, 0] = expectedm31;
+            expected.mat[2, 2] = expectedm33;
+
+
+            Matrix actual = Matrix.RotateMatrixY(degrees);
+
+            // Act
+
+
+            // Assert
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
     }
 }
