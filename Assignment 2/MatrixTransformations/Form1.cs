@@ -52,77 +52,99 @@ namespace MatrixTransformations
 
         private void Animate(object sender, EventArgs e)
         {
-            //Nee
+            //Phase 1: Scale until 1.5x and shrink (stepsize 0.01).
             if (variables.phase == 1)
             {
+                //Check if the scale needs to shrink or grow.
                 if (variables.scale < 1.5 && subphase == 0)
                 {
+                    //Increase the scale.
                     variables.scale += 0.01f;
                 }
                 else if (variables.scale > 1 && subphase == 1)
                 {
+                    //Decrease the scale.
                     variables.scale -= 0.01f;
                 }
                 else if (variables.scale >= 1.5f)
                 {
+                    //Check if the scale reached the stage where it needs to shrink.
                     subphase = 1;
                 }
                 else
                 {
+                    //The shrink animation is done reset subphase to 0 and start next phase.
                     subphase = 0;
                     variables.phase = 2;
                 }
 
+                //During phase 1-2, decrease theta
                 variables.theta -= 1f;
             }
+            //Phase 2: Rotate 45° over X-axis and back
             else if (variables.phase == 2)
             {
+                //Check in which way the x rotation needs to go.
                 if (variables.rotateX < 45 && subphase == 0)
                 {
+                    //Increase the rotate x.
                     variables.rotateX += 1f;
                 }
                 else if (variables.rotateX > 0 && subphase == 1)
                 {
+                    //Decrease the rotate x.
                     variables.rotateX -= 1f;
                 }
                 else if (variables.rotateX >= 45)
                 {
+                    //Check if the x rotation reached the 45 so it can rotate back.
                     subphase = 1;
                 }
                 else
                 {
+                    //The rotate X animation is done reset subphase to 0 and start next phase.
                     subphase = 0;
                     variables.phase = 3;
                 }
 
+                //During phase 1-2, decrease theta
                 variables.theta -= 1;
             }
+            //Phase 3: Rotate 45° over Y-axis and back.
             else if (variables.phase == 3)
             {
+                //Check in which way the y rotation needs to go.
                 if (variables.rotateY < 45 && subphase == 0)
                 {
+                    //Increase the rotate y.
                     variables.rotateY += 1f;
                 }
                 else if (variables.rotateY > 0 && subphase == 1)
                 {
+                    //Decrease the rotate y.
                     variables.rotateY -= 1f;
                 }
                 else if (variables.rotateY >= 45)
                 {
+                    //Check if the y rotation reached the 45 so it can rotate back.
                     subphase = 1;
                 }
                 else
                 {
+                    //The rotate y animation is done reset subphase to 0 and start next phase.
                     subphase = 0;
                     variables.phase = 4;
                 }
 
+                //During phase 3, increase phi.
                 variables.phi += 1;
             }
+            //After phase 3, increase theta and decrease phi until starting values. Then start with phase 1.
             else if (variables.phase == 4)
             {
                 bool phidone = false;
 
+                //Check if phi reached -10.
                 if (variables.phi > -10)
                 {
                     variables.phi -= 1;
@@ -132,15 +154,18 @@ namespace MatrixTransformations
                     phidone = true;
                 }
 
+                //Check if phi reached -100.
                 if (variables.theta < -100)
                 {
                     variables.theta += 1;
                 }
+                //If both rotations are done set the phase to 1, so it can start over.
                 else if (phidone)
                 {
                     variables.phase = 1;
                 }
             }
+            //When the stage is anything other than 1,2,3 or 4 reset the stage to 1.
             else
             {
                 variables.phase = 1;
