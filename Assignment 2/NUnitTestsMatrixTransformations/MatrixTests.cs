@@ -46,7 +46,9 @@ namespace NUnitTestsMatrixTransformations
         [TestCase(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
         [TestCase(5, 4, 3, 2, 5, 4, 3, 2, 10, 8, 6, 4)]
         [TestCase(-5, 32, 88, 99, -15, -16, 34, 46, -20, 16, 122, 145)]
-        public void Test_Matrix_Plus_Matrix(int m11, int m12, int m21, int m22, int secondm11, int secondm12, int secondm21, int secondm22, int expectedm11, int expectedm12, int expectedm21, int expectedm22)
+        public void Test_Matrix_Plus_Matrix(int m11, int m12, int m21, int m22, 
+            int secondm11, int secondm12, int secondm21, int secondm22, 
+            int expectedm11, int expectedm12, int expectedm21, int expectedm22)
         {
             // Arrange
             Matrix matrix = new Matrix(m11, m12, m21, m22);
@@ -65,7 +67,9 @@ namespace NUnitTestsMatrixTransformations
         [TestCase(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
         [TestCase(5, 4, 3, 2, 10, 8, 6, 4, -5, -4, -3, -2)]
         [TestCase(-5, 32, 88, 99, -15, -16, 34, 46, 10, 48, 54, 53)]
-        public void Test_Matrix_Minus_Matrix(int m11, int m12, int m21, int m22, int secondm11, int secondm12, int secondm21, int secondm22, int expectedm11, int expectedm12, int expectedm21, int expectedm22)
+        public void Test_Matrix_Minus_Matrix(int m11, int m12, int m21, int m22, 
+            int secondm11, int secondm12, int secondm21, int secondm22,
+            int expectedm11, int expectedm12, int expectedm21, int expectedm22)
         {
             // Arrange
             Matrix matrix = new Matrix(m11, m12, m21, m22);
@@ -102,7 +106,9 @@ namespace NUnitTestsMatrixTransformations
         [TestCase(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
         [TestCase(5, 4, 3, 2,             10, 8, 6, 4,              82, 46, 6, 4)]
         [TestCase(-5, 32, 88, 99,        -15, -16, 34, 46,          -437, -2904, 34, 46)]
-        public void Test_Matrix_Times_Vector(int m11, int m12, int m21, int m22, int x, int y, int z, int w, int expectedX, int expectedY, int expectedZ, int expectedW)
+        public void Test_Matrix_Times_Vector(int m11, int m12, int m21, int m22, 
+            int x, int y, int z, int w, 
+            int expectedX, int expectedY, int expectedZ, int expectedW)
         {
             // Arrange
             Matrix matrix = new Matrix(m11, m12, m21, m22);
@@ -135,6 +141,41 @@ namespace NUnitTestsMatrixTransformations
 
             // Assert
             Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [TestCase(0, 0, 0)]
+        [TestCase(5, 4, 3)]
+        [TestCase(-5, 32, 88)]
+        [TestCase(20, 66, 99)]
+        [TestCase(-20, -300, -500)]
+        [TestCase(500, 123456, -8834343)]
+        public void Test_ViewMatrix(float r, float theta, float phi)
+        {
+            // Arrange
+            Matrix matrix = Matrix.ViewMatrix(r, theta, phi);
+
+            // Act
+            float radiansTheta = theta * (float)Math.PI / 180;
+            float radiansPhi = phi * (float)Math.PI / 180;
+
+            float cosThetha = (float)Math.Cos(radiansTheta);
+            float sinThetha = (float)Math.Sin(radiansTheta);
+
+            float cosPhi = (float)Math.Cos(radiansPhi);
+            float sinPhi = (float)Math.Sin(radiansPhi);
+
+            // Assert
+            Assert.AreEqual(-sinThetha, matrix.mat[0,0]);
+            Assert.AreEqual(cosThetha, matrix.mat[0,1]);
+
+            Assert.AreEqual(-cosThetha * cosPhi, matrix.mat[1,0]);
+            Assert.AreEqual(-cosPhi * sinThetha, matrix.mat[1,1]);
+            Assert.AreEqual(sinPhi, matrix.mat[1,2]);
+
+            Assert.AreEqual(cosThetha * sinPhi, matrix.mat[2,0]);
+            Assert.AreEqual(sinThetha * sinPhi, matrix.mat[2,1]);
+            Assert.AreEqual(cosPhi, matrix.mat[2,2]);
+            Assert.AreEqual(-r, matrix.mat[2,3]);
         }
     }
 }
