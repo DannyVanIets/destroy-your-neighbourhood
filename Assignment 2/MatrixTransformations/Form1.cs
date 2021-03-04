@@ -199,8 +199,8 @@ namespace MatrixTransformations
 
             // Rotate the cube.
             Matrix rotateX = Matrix.RotateMatrixX(variables.rotateX);
-            Matrix rotateY = Matrix.RotateMatrixX(variables.rotateY);
-            Matrix rotateZ = Matrix.RotateMatrixX(variables.rotateZ);
+            Matrix rotateY = Matrix.RotateMatrixY(variables.rotateY);
+            Matrix rotateZ = Matrix.RotateMatrixZ(variables.rotateZ);
 
             // Translate the cube, should always be last!
             Matrix translate = Matrix.TranslateMatrix(new Vector(variables.translateX, variables.translateY, variables.translateZ, 0));
