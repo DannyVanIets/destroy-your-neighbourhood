@@ -184,11 +184,11 @@ namespace MatrixTransformations
             UpdateLabels();
 
             // Draw axes.
-            vb = ViewingAxis(x_axis.vb);
+            vb = ViewingPipeline(x_axis.vb, false);
             x_axis.Draw(e.Graphics, vb);
-            vb = ViewingAxis(y_axis.vb);
+            vb = ViewingPipeline(y_axis.vb, false);
             y_axis.Draw(e.Graphics, vb);
-            vb = ViewingAxis(z_axis.vb);
+            vb = ViewingPipeline(z_axis.vb, false);
             z_axis.Draw(e.Graphics, vb);
 
             // Time for cube.
@@ -238,7 +238,7 @@ namespace MatrixTransformations
             return result;
         }
 
-        public static List<Vector> ViewingAxis(List<Vector> vb)
+        public static List<Vector> ViewingPipeline(List<Vector> vb, bool AddProjMatrix = true)
         {
             List<Vector> result = new List<Vector>();
             Matrix viewMatrix = Matrix.ViewMatrix(variables.r, variables.theta, variables.phi);
@@ -246,21 +246,10 @@ namespace MatrixTransformations
             vb.ForEach(v =>
             {
                 Vector vp = viewMatrix * v;
-                result.Add(vp);
-            });
-
-            return ViewportTransformation(result);
-        }
-
-        public static List<Vector> ViewingPipeline(List<Vector> vb)
-        {
-            List<Vector> result = new List<Vector>();
-            Matrix viewMatrix = Matrix.ViewMatrix(variables.r, variables.theta, variables.phi);
-
-            vb.ForEach(v =>
-            {
-                Vector vp = viewMatrix * v;
-                vp = Matrix.ProjectionMatrix(variables.distance, vp) * vp;
+                if (AddProjMatrix)
+                {
+                    vp = Matrix.ProjectionMatrix(variables.distance, vp) * vp;
+                }
                 result.Add(vp);
             });
 
