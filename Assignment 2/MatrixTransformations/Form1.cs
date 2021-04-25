@@ -354,29 +354,29 @@ namespace MatrixTransformations
 
                 // If X/x is pressed, change RotateX.
                 case Keys.X when e.Shift:
-                    variables.rotateX += 0.1f;
+                    variables.rotateX += 1f;
                     break;
 
                 case Keys.X:
-                    variables.rotateX -= 0.1f;
+                    variables.rotateX -= 1f;
                     break;
 
                 // If Y/y is pressed, change RotateY.
                 case Keys.Y when e.Shift:
-                    variables.rotateY += 0.1f;
+                    variables.rotateY += 1f;
                     break;
 
                 case Keys.Y:
-                    variables.rotateY -= 0.1f;
+                    variables.rotateY -= 1f;
                     break;
 
                 // If Z/z is pressed, change RotateZ.
                 case Keys.Z when e.Shift:
-                    variables.rotateZ += 0.1f;
+                    variables.rotateZ += 1f;
                     break;
 
                 case Keys.Z:
-                    variables.rotateZ -= 0.1f;
+                    variables.rotateZ -= 1f;
                     break;
 
                 // If R/r is pressed, change r.
