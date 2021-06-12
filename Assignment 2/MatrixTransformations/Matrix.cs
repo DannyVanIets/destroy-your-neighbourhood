@@ -214,7 +214,7 @@ namespace MatrixTransformations
              *  0,    0,   0, 1
              */
             // Turn degrees into radians, radians is used by cos and sin.
-            double radians = degrees * Math.PI / 180;
+            double radians = Math.PI / 180 * degrees;
             float cos = (float)Math.Cos(radians);
             float sin = (float)Math.Sin(radians);
 
@@ -259,7 +259,7 @@ namespace MatrixTransformations
              *  0, 0,    0,   1
              */
             // Turn degrees into radians, radians is used by cos and sin.
-            double radians = degrees * Math.PI / 180;
+            double radians = Math.PI / 180 * degrees;
             float cos = (float)Math.Cos(radians);
             float sin = (float)Math.Sin(radians);
 
@@ -278,7 +278,7 @@ namespace MatrixTransformations
              *   0,   0, 0,   0
              */
             // Turn degrees into radians, radians is used by cos and sin.
-            double radians = degrees * Math.PI / 180;
+            double radians = Math.PI / 180 * degrees;
             float cos = (float)Math.Cos(radians);
             float sin = (float)Math.Sin(radians);
 

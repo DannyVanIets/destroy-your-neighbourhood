@@ -206,7 +206,7 @@ namespace MatrixTransformations
             Matrix translate = Matrix.TranslateMatrix(new Vector(variables.translateX, variables.translateY, variables.translateZ, 0));
 
             // Multiple them all up.
-            Matrix total = scaled * translate * rotateX * rotateY * rotateZ;
+            Matrix total = translate * rotateX * rotateY * rotateZ * scaled;
             vb = Transform(vb, total);
 
             // Draw cube.
